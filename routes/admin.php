@@ -43,6 +43,11 @@ Route::prefix('admin')->name('admin.')->group(function (){
     Route::delete('/tuition-wire-transer/{id}/delete', [PageController::class, 'tuitionDeleteWireView'])->name('tuition-wire-transfer-delete');
     Route::delete('/tuition-payment/{id}/delete', [PageController::class, 'tuitionDeView'])->name('tuition-payment-delete');
 
+    // Visa Application
+    Route::get('/visa-application', [PageController::class, 'visaApplicationView'])->name('visa-application-page');
+    Route::get('/visa-application/canada', [PageController::class, 'visaApplicationCanadaView'])->name('visa-application-canada-page');
+    Route::delete('/visa-application/{id}/delete', [PageController::class, 'visaApplicationDelete'])->name('visa-application-delete');
+
     // TransactionCharge
     Route::get('/transaction-charge', [PageController::class, 'TransactionCharges'])->name('transaction-charge-page');
     Route::get('/transaction-charge/create', [PageController::class, 'TransactionchargesCreate'])->name('transaction-charge-create');

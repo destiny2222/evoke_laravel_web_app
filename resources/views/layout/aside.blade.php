@@ -112,10 +112,10 @@
                             class="fe fe-chevron-right side-menu__angle"></i></a>
                     <ul class="slide-menu child2">
                         <li class="slide">
-                            <a href="" class="side-menu__item">Tuition Payment</a>
+                            <a href="{{ route('admin.visa-application-canada-page') }}" class="side-menu__item">Canada Visa Application</a>
                         </li>
                         <li class="slide">
-                            <a href="" class="side-menu__item">Tuition Payment wire transfer</a>
+                            <a href="{{ route('admin.visa-application-page') }}" class="side-menu__item">USA Visa Application</a>
                         </li>
                     </ul>
                 </li>

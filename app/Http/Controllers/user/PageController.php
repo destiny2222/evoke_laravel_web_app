@@ -326,7 +326,10 @@ class PageController extends Controller
 
 
     public function tuitionviaTransferStore(WireTransfer $request){
-        return redirect()->route('wire-transfer-paymentView');
+        if ($request->createStore()) {
+            return redirect()->route('wire-transfer-paymentView');
+        }
+        return back()->with('error', 'Oops something went worry. Please refresh the page and try again');
     }
 
 

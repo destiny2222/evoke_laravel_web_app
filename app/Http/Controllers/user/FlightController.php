@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Flight\InternationalFlightRequest;
 use App\Models\FLightBooking;
 use App\Models\FLightCustomerDetails;
 use App\Models\Payment;
@@ -24,54 +25,11 @@ class FlightController extends Controller
     }
 
 
-    public function  flightBooking(Request $request){
-        try {
-         $request->validate([
-             'airport_location_from' =>['nullable','string'],
-             'airport_location_to' =>['nullable','string'],
-             'flight_date' =>['nullable', 'date'],
-             'flight_return_date' =>['nullable', 'date'],
-             'flight_class' =>['nullable', 'string'],
-             'flight_time' =>['nullable', 'time'],
-             'flight_passenger_number' =>['nullable', 'string'],
-             'passenger_name' =>['nullable', 'string'],
-         ]);
- 
- 
-         $flightBooking = FLightBooking::create([
-             'airport_location_from' => $request->airport_location_from,
-             'airport_location_to' => $request->airport_location_to,
-             'flight_date' => $request->flight_date,
-             'flight_return_date' => $request->flight_return_date,
-             'flight_class' => $request->flight_class,
-             'flight_time' => $request->flight_time,
-             'flight_passenger_number' => $request->flight_passenger_number,
-             'passenger_name' => $request->passenger_name,
-             'user_id'=>auth()->user()->id,
-         ]);
-         
-         $customerDetails = FLightCustomerDetails::create([
-             'flightbooking_id'=>$flightBooking->id,
-             'first_name'=>$request->first_name,
-             'middle_name'=>$request->middle_name,
-             'last_name'=>$request->last_name,
-             'email'=>$request->email,
-             'phone'=>$request->phone,
-             'address'=>$request->address,
-             'city'=>$request->city,
-             'state'=>$request->state,
-             'zip'=>$request->zip,
-             'country'=>$request->country,
-             'user_id'=>auth()->user()->id,
-         ]);
- 
-         $flightBooking->flightcustomerDetails()->save($customerDetails);
-         // Alert::success('Success', 'Flight Booking Successfully');
+    public function  flightBooking(InternationalFlightRequest $request){
+        if ($request->createFlightBooking()) {
+           return redirect()->route()->with('success', 'Flight Booking Successfully!! Proceed to payment');
+        }
          return redirect(route('flightpayment-page'))->with('success', 'Flight Booking Successfully!! Proceed to payment');
-        } catch (\Exception $exception) {
-           Log::error($exception->getMessage());
-           return back()->with('error', 'Oops Something went worry');
-        } 
      }
 
 

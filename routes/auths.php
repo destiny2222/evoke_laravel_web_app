@@ -72,9 +72,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified', 'che
     
     // payment 
     Route::get('/pay', [VisaApplicationController::class, 'usPay'])->name('pay-page');
-    Route::post('application', [VisaApplicationController::class, 'storeApplication'])->name('application-page');
+    Route::post('/application', [VisaApplicationController::class, 'storeApplication'])->name('application-store');
     Route::post('/payment/initiate', [VisaApplicationController::class, 'initiatePayment'])->name('initiate-page');
-    Route::post('/payment/webhook', [VisaApplicationController::class, 'handleWebhook'])->name('paystack.webhook');
+    Route::get('/payment/webhook', [VisaApplicationController::class, 'handleWebhook'])->name('paystack.webhook');
+
+    //  
     Route::post('/deposit/payment', [DepositController::class, 'depositPayment'])->name('deposit.payment');
     Route::get('/deposit/callback', [DepositController::class, 'handlecallback'])->name('callback');
 

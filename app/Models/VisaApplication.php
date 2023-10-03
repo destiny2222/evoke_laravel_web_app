@@ -15,7 +15,6 @@ class VisaApplication extends Model
        'case_number',
        'invoice_id',
        'visa_fee_amount',
-       'service_fee' ,
        'total_charge',
        'visa_website_link',
        'user_password',

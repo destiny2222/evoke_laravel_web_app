@@ -54,5 +54,6 @@ class WireTransfer extends FormRequest
               'amount'=>$this->amount,
               'user_id'=>$this->user_id
             ]);
+            return true;
     }
 }

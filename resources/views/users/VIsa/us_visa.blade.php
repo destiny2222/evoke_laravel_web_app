@@ -3,7 +3,7 @@
     <div class="continer p-t-5">
         <div class="card  shadow-lg p-l-4 p-t-4 p-r-4 p-b-4">
             <div class="card-body">
-                <form action="{{ route('application-page') }}" id="your-form-id" method="post" class="visa_form">
+                <form action="{{ route('application-store') }}" id="your-form-id" method="post" class="visa_form">
                     @csrf
                     <input type="hidden" name="visa_type" value="usa">
                     <div class="row">

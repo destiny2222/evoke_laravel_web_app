@@ -13,6 +13,7 @@ use App\Models\TransactionCharges;
 use App\Models\TuitionPayment;
 use App\Models\TuitionPaymentWire;
 use App\Models\User;
+use App\Models\VisaApplication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -137,6 +138,33 @@ class PageController extends Controller
             }
     }
 
+    // visa transactions
+
+    public function visaApplicationView(){
+        $visaapplication = VisaApplication::where('visa_type', 'usa')->paginate(10);
+        return view('admin.visaapplication.visa', [
+            'visaapplication' => $visaapplication,
+        ]);
+    }
+    public function visaApplicationCanadaView(){
+        $visaapplication = VisaApplication::where('visa_type', 'canada')->paginate(10);
+        return view('admin.visaapplication.canada', [
+            'visaapplication' => $visaapplication,
+        ]);
+    }
+
+
+    public function visaApplicationDelete($id){
+        $visaapplication =  VisaApplication::findOrFail($id);
+        if ($visaapplication) {
+            $visaapplication->delete();
+            Alert::success('success', 'Deleted successfully');
+            return back();
+        } else {
+            Alert::error('error', 'Failed to delete');
+            return back();
+        }
+    }
 
 
 
