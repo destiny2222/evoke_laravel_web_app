@@ -3,12 +3,12 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <!-- Grid Card -->
     <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-        <h1 class="page-title fw-semibold fs-18 mb-0">Mail</h1>
+        <h1 class="page-title fw-semibold fs-18 mb-0">Charges</h1>
         <div class="ms-md-1 ms-0">
             <nav>
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="#">Mail</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Mail</li>
+                    <li class="breadcrumb-item"><a href="#">Charges</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Charges</li>
                 </ol>
             </nav>
         </div>
@@ -39,6 +39,7 @@
                                     <th scope="col">Corporate Charge Amount</th>
                                     <th scope="col">Merchant Charge Amount</th>
                                     <th scope="col">Flights Charge Amount</th>
+                                    <th scope="col">BDC Charge Amount</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -51,6 +52,7 @@
                                     <td>{{  $charges['corporate_charge_amount']   }}</td>
                                     <td>{{  $charges['merchant_charge_amount']   }}</td>
                                     <td>{{  $charges['flights_charge_amount']  }}</td>
+                                    <td>{{  $charges['bdc_charge']  }}</td>
                                         
                                     </td>
                                     <td>

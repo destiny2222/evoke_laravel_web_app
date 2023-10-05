@@ -319,33 +319,33 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <ul class="nav navbar-nav notification-center">
-                                        <li>
-                                            <button type="button" id="notification"
-                                                class="nui-round-button btn-unstyled notification-center-toggle">
-                                                <div
-                                                    class="tw-avatar nui-icon-avatar clickable tw-avatar--48 tw-avatar--icon">
-                                                    <div class="tw-avatar__content">
-                                                        <span class="sr-only">Toggle inbox</span>
-                                                        <div class="notification-center__icon-container">
-                                                            <span class="unread-dot"></span>
-                                                            <span class="tw-icon tw-icon-notification "
-                                                                aria-hidden="true" role="presentation"
-                                                                data-testid="notification-icon">
-                                                                <svg width="24" height="24"
-                                                                    fill="currentColor" focusable="false"
-                                                                    viewBox="0 0 24 24">
-                                                                    <path
-                                                                        d="M20.572 15c-1.543 0-1.715-1.2-1.715-1.715V9c0-3.772-3.085-6.857-6.857-6.857C8.23 2.143 5.143 5.228 5.143 9v4.285C5.143 13.8 4.972 15 3.429 15a.86.86 0 0 0-.857.857v2.571a.86.86 0 0 0 .857.857h6A2.579 2.579 0 0 0 12 21.857a2.579 2.579 0 0 0 2.572-2.572h6a.86.86 0 0 0 .857-.857v-2.571a.86.86 0 0 0-.857-.857ZM12 20.143a.86.86 0 0 1-.857-.858h1.714a.86.86 0 0 1-.857.858Zm7.714-2.572H4.286v-.943c1.757-.343 2.571-1.843 2.571-3.343V9c0-2.829 2.315-5.143 5.143-5.143 2.829 0 5.143 2.314 5.143 5.143v4.285c0 1.5.814 3 2.571 3.343v.943Z">
-                                                                    </path>
-                                                                </svg>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </button>
-                                        </li>
-                                    </ul>
+                                    <!--<ul class="nav navbar-nav notification-center">-->
+                                    <!--    <li>-->
+                                    <!--        <button type="button" id="notification"-->
+                                    <!--            class="nui-round-button btn-unstyled notification-center-toggle">-->
+                                    <!--            <div-->
+                                    <!--                class="tw-avatar nui-icon-avatar clickable tw-avatar--48 tw-avatar--icon">-->
+                                    <!--                <div class="tw-avatar__content">-->
+                                    <!--                    <span class="sr-only">Toggle inbox</span>-->
+                                    <!--                    <div class="notification-center__icon-container">-->
+                                    <!--                        <span class="unread-dot"></span>-->
+                                    <!--                        <span class="tw-icon tw-icon-notification "-->
+                                    <!--                            aria-hidden="true" role="presentation"-->
+                                    <!--                            data-testid="notification-icon">-->
+                                    <!--                            <svg width="24" height="24"-->
+                                    <!--                                fill="currentColor" focusable="false"-->
+                                    <!--                                viewBox="0 0 24 24">-->
+                                    <!--                                <path-->
+                                    <!--                                    d="M20.572 15c-1.543 0-1.715-1.2-1.715-1.715V9c0-3.772-3.085-6.857-6.857-6.857C8.23 2.143 5.143 5.228 5.143 9v4.285C5.143 13.8 4.972 15 3.429 15a.86.86 0 0 0-.857.857v2.571a.86.86 0 0 0 .857.857h6A2.579 2.579 0 0 0 12 21.857a2.579 2.579 0 0 0 2.572-2.572h6a.86.86 0 0 0 .857-.857v-2.571a.86.86 0 0 0-.857-.857ZM12 20.143a.86.86 0 0 1-.857-.858h1.714a.86.86 0 0 1-.857.858Zm7.714-2.572H4.286v-.943c1.757-.343 2.571-1.843 2.571-3.343V9c0-2.829 2.315-5.143 5.143-5.143 2.829 0 5.143 2.314 5.143 5.143v4.285c0 1.5.814 3 2.571 3.343v.943Z">-->
+                                    <!--                                </path>-->
+                                    <!--                            </svg>-->
+                                    <!--                        </span>-->
+                                    <!--                    </div>-->
+                                    <!--                </div>-->
+                                    <!--            </div>-->
+                                    <!--        </button>-->
+                                    <!--    </li>-->
+                                    <!--</ul>-->
                                     <nav class="profile-menu nav navbar-nav navbar-right">
                                         <button type="button" role="button"
                                             class="profile-name btn-unstyled close-nav">

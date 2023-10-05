@@ -25,7 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'referrence_id',
         'image',
         'email',
-        // 'last_name',
+        'is_banned',
         'state',
         'city',
         'password',
@@ -54,13 +54,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->kyc !== null; 
     }
 
-    public function flightbooking(){
-        return $this->hasMany(FlightBooking::class);
-    }
 
-    public function flightcustomer(){
-        return $this->hasMany(FlightCustomer::class);
-    }
 
     /**
      * The attributes that should be hidden for serialization.

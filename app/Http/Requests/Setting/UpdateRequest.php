@@ -30,6 +30,7 @@ class UpdateRequest extends FormRequest
             'flight_booking' =>'nullable|boolean',
             'corporate_service' =>'nullable|boolean',
             'merchandise_payment' =>'nullable|boolean',
+            'other_service' =>'nullable|boolean',
         ];
     }
 
@@ -41,6 +42,7 @@ class UpdateRequest extends FormRequest
             'flight_booking' => (bool) $this->flight_booking,
             'corporate_service' => (bool) $this->corporate_service,
             'merchandise_payment' => (bool) $this->merchandise_payment,
+            'other_service' => (bool) $this->other_service,
         ]);
     }
 }

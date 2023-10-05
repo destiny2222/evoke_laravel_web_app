@@ -29816,14 +29816,43 @@ input, button, select, optgroup, textarea {
   margin-top: 0.1875rem;
 }
 
+.radio-buttons-w3-agileits li input[type="radio"] {
+  cursor: pointer;
+  outline: none !important;
+}
+
+.radio-buttons-w3-agileits li label {
+  color: #000;
+  font-size: 13.5px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-family: 'Raleway', sans-serif;
+}
 
 
+ul.radio-buttons-w3-agileits li {
+  display: inline-block;
+  margin: 0em 2em;
+}
 
-
+input[type="radio"] {
+  cursor: pointer;
+  outline: none !important;
+}
 
 @media screen and (max-width: 768px) {
   #display-inline{
     width: 100%;
     margin: auto auto;
+  }
+  ul.radio-buttons-w3-agileits li {
+    margin: 0em 1em;
+  }
+  ul.radio-buttons-w3-agileits li {
+    margin: 0em 0.5em;
+  }
+  ul.radio-buttons-w3-agileits li {
+    margin: 1em 0em 0em 0.2em;
+    display: block;
   }
 }

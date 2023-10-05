@@ -1,8 +1,15 @@
 @extends('layout.master')
 @section('content')
-    <div class="continer p-t-5">
+    <div class="continer  p-t-5">
         <div class="row">
+            
             <div class="row">
+                <div class="col-lg-12 m-b-2">
+                    <a href="{{ route('initiator-page') }}" style="text-decoration:none;">
+                        <i class="bi bi-arrow-left"></i>                         
+                        Go Back  
+                    </a>
+                </div>
                 <div class="col-lg-12 col-12">
                    <div class="select_country_visa shadow-lg p-4">
                         <h3>Select country of choice.</h3>

@@ -48,12 +48,6 @@
                     </ul>
                 </li>
                 <!-- End::slide -->
-                <!-- Start::slide__category -->
-                <li class="slide__category">
-                    <span class="category-name">Pages</span>
-                </li>
-                
-                <!-- End::slide__category -->
                 <!-- Start::slide -->
                 <li class="slide">
                     <a href="{{ route('admin.kyc.index') }}" class="side-menu__item">
@@ -62,6 +56,13 @@
                     </a>
                 </li>
                 <!-- End::slide -->
+                <!-- Start::slide__category -->
+                <li class="slide__category">
+                    <span class="category-name">Transactions</span>
+                </li>
+                
+                <!-- End::slide__category -->
+                
                 <li class="slide has-sub">
                     <a href="javascript:void(0);" class="side-menu__item">
                         Flight  Transactions   
@@ -69,13 +70,10 @@
                     </a>
                     <ul class="slide-menu child2">
                         <li class="slide">
-                            <a href="#" class="side-menu__item">Flight Booking</a>
+                            <a href="{{  route('admin.local-flight-page') }}" class="side-menu__item">Local Flight </a>
                         </li>
                         <li class="slide">
-                            <a href="#" class="side-menu__item">Flight Customer Details</a>
-                        </li>
-                        <li class="slide">
-                            <a href="#" class="side-menu__item">Flight Payment</a>
+                            <a href="{{  route('admin.international-flight-page') }}" class="side-menu__item">International Flight</a>
                         </li>
                     </ul>
                 </li>

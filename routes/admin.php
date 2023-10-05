@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\FlightController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\KycContainer;
 use App\Http\Controllers\Admin\ManagementController;
@@ -27,6 +28,9 @@ Route::prefix('admin')->name('admin.')->group(function (){
     Route::put('/users/{id}/update', [ManagementController::class, 'updateUser'])->name('update-user-page');
     Route::get('/users',[ManagementController::class ,'UserManagement'])->name('user-page');
     Route::delete('/user/{id}/delete', [ManagementController::class, 'deleteUser'])->name('user-delete');
+    Route::put('/user/{user}/ban', [ManagementController::class, 'banUser'])->name('users.ban');
+    Route::put('/user/{user}/unban', [ManagementController::class, 'unbanUser'])->name('users.unban');
+
 
     Route::get('/post/{post}', [PageController::class, 'detailPost'])->name('blog-details');
 
@@ -35,6 +39,12 @@ Route::prefix('admin')->name('admin.')->group(function (){
     Route::get('/send-mail/create', [PageController::class, 'sendMail'])->name('send-mail-create');
     Route::post('/send-mail/store', [PageController::class, 'storeMail'])->name('send-mail-store');
     Route::delete('/send-mail/{id}/delete/', [PageController::class, 'mailDelete'])->name('send-mail-delete');
+
+    // flight controller
+    Route::get('/flight/local', [FlightController::class, 'localflight'])->name('local-flight-page');
+    Route::get('/flight/international', [FlightController::class, 'InternationalFLight'])->name('international-flight-page');
+    Route::delete('/flight/local/{id}/delete/', [FlightController::class, 'LocalFlightDelete'])->name('Local-delete');
+    Route::delete('/flight/international/{id}/delete/', [FlightController::class, 'InternationalFlightDelete'])->name('international-delete');
 
 
     // Tuition Payment

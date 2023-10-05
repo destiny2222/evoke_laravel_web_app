@@ -65,10 +65,27 @@
                                                 <a href="{{ route('admin.edit-user-page', $usering->id) }}"
                                                     class="btn btn-primary btn-sm btn-info-transparent"><i
                                                         class="ri-edit-line"></i></a>
+                                                
+                                                <a href="{{ route('admin.users.ban', $usering->id) }}" onclick="event.preventDefault(); document.getElementById('delete-ban').submit();"
+                                                    class="btn btn-sm btn-info-transparent btn-wave">
+                                                    Ban User
+                                                </a>
+                                                <a href="{{ route('admin.users.unban', $usering->id) }}" onclick="event.preventDefault(); document.getElementById('delete-unban').submit();"
+                                                    class="btn btn-sm btn-warning-transparent btn-wave">
+                                                    Unban User
+                                                </a>
                                                 <a href="{{ route('admin.user-delete', $usering->id) }}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"
                                                     class="btn btn-sm btn-danger-transparent btn-wave"><i
                                                         class="ri-delete-bin-line"></i>
                                                 </a>
+                                                <form id="delete-ban" clas="d-none" action="{{ route('admin.users.ban', $usering->id) }}" method="post">
+                                                    @method('put')
+                                                    @csrf
+                                                </form>
+                                                <form id="delete-unban" clas="d-none" action="{{ route('admin.users.unban', $usering->id) }}" method="post">
+                                                    @method('put')
+                                                    @csrf
+                                                </form>
                                                 <form id="delete-form" clas="d-none" action="{{ route('admin.user-delete', $usering->id) }}" method="post">
                                                     @method('delete')
                                                     @csrf

@@ -3,8 +3,16 @@
 <div class="container" style="padding-top: 40px">
     <div class="shadow-lg p-l-4 p-r-4 p-t-3 p-b-4 m-b-4">
         <div class="row">
+            <div class="col-lg-12 m-b-2">
+                <a href="{{ route('initiator-page') }}" style="text-decoration:none;">
+                    <i class="bi bi-arrow-left"></i>                         
+                    Go Back  
+                </a>
+            </div>
             <div class="col-lg-12">
-                <h2 class="m-b-4 " style="color: #28005F;">Tuition Payment</h2>
+                <h2 class="m-b-4 " style="color: #28005F;">
+                    Tuition Payment
+                </h2>
             </div>
         </div>
     

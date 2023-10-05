@@ -47,7 +47,8 @@ class PageController extends Controller
     }
 
     public function OthersPayment() {
-        return view('users.settings.OthersPayment');
+        $charges = TransactionCharges::where('other_service', 'id')->first();
+        return view('users.otherservice.OthersPayment', compact('charges'));
     }
 
    public function Vise(){
@@ -453,6 +454,8 @@ class PageController extends Controller
             return redirect()->route('wire-transfer-paymentView')->with('error', 'Payment failed');
         }
      }
+
+
 
 
      

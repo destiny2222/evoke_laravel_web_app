@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Charge\ChargesRequest;
 use App\Http\Requests\Setting\UpdateRequest;
 use App\Mail\Email;
 use App\Models\EmailMail;
@@ -180,26 +181,13 @@ class PageController extends Controller
     }
 
 
-    public function TransactionchargesStore(Request $request){
-          $request->validate([
-             'flights_charge_amount'=>['required','string'],
-             'tuition_charge_amount'=>['required','string'],
-             'visa_charge_amount'=>['required','string'],
-             'corporate_charge_amount'=>['required','string'],
-             'merchant_charge_amount'=>['required','string'],
-          ]);
-
-
-          try {
-            TransactionCharges::create($request->all());
+    public function TransactionchargesStore(ChargesRequest $request){
+          if ($request->createCharge()) {
             Alert::success('Transaction charges have been created successfully');
             return redirect()->route('admin.transaction-charge-page');
-          } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
-            Alert::error('Something went wrong');
-            return back();
           }
-          
+          Alert::error('Transaction charges have not been created successfully');
+          return back();
     }
 
 
@@ -217,15 +205,20 @@ class PageController extends Controller
 
     public function TransactionChargesUpdate(Request $request, $id){
             $charge = TransactionCharges::find($id);
-            $charge->update([
-                'flights_charge_amount'=>$request->flights_charge_amount,
-                'tuition_charge_amount'=>$request->tuition_charge_amount,
-                'visa_charge_amount'=>$request->visa_charge_amount,
-                'corporate_charge_amount'=>$request->corporate_charge_amount,
-                'merchant_charge_amount'=>$request->merchant_charge_amount,
-            ]);
-            Alert::info('Updated Successfully');
-            return redirect()->route('admin.transaction-charge-page');
+            if ($charge) {
+                $charge->update([
+                    'flights_charge_amount'=>$request->flights_charge_amount,
+                    'tuition_charge_amount'=>$request->tuition_charge_amount,
+                    'visa_charge_amount'=>$request->visa_charge_amount,
+                    'corporate_charge_amount'=>$request->corporate_charge_amount,
+                    'merchant_charge_amount'=>$request->merchant_charge_amount,
+                    'bdc_charge'=>$request->bdc_charge
+                ]);
+                Alert::info('Updated Successfully');
+                return redirect()->route('admin.transaction-charge-page');
+            }
+            Alert::error('Something went wrong');
+            return back();
     }
 
 

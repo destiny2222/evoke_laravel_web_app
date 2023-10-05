@@ -63,8 +63,8 @@
                                                     <div
                                                         class="d-flex align-items-center justify-content-between flex-wrap">
                                                         <div>
-                                                            <p class="text-muted mb-0">Total Revenue</p>
-                                                            <h4 class="fw-semibold mt-1">$56,562</h4>
+                                                            <p class="text-muted mb-0">Flight Booking</p>
+                                                            <h4 class="fw-semibold mt-1">{{  $localflight  }}</h4>
                                                         </div>
                                                         <div id="crm-total-revenue"></div>
                                                     </div>
@@ -77,7 +77,7 @@
                                                         </div>
                                                         <div class="text-end">
                                                             <p class="mb-0 text-success fw-semibold">
-                                                                +25%
+                                                                {{ sprintf("%.2f%%", $FlightIncrease) }}
                                                             </p>
                                                             <span class="text-muted op-7 fs-11">this month</span>
                                                         </div>
@@ -101,9 +101,9 @@
                                                         class="d-flex align-items-center justify-content-between flex-wrap">
                                                         <div>
                                                             <p class="text-muted mb-0">
-                                                                Conversion Ratio
+                                                                Visa Fee
                                                             </p>
-                                                            <h4 class="fw-semibold mt-1">12.08%</h4>
+                                                            <h4 class="fw-semibold mt-1">{{   $visafee  }}</h4>
                                                         </div>
                                                         <div id="crm-conversion-ratio"></div>
                                                     </div>
@@ -116,7 +116,7 @@
                                                         </div>
                                                         <div class="text-end">
                                                             <p class="mb-0 text-danger fw-semibold">
-                                                                -12%
+                                                                {{ sprintf("%.2f%%", $visafee) }}
                                                             </p>
                                                             <span class="text-muted op-7 fs-11">this month</span>
                                                         </div>
@@ -139,7 +139,7 @@
                                                     <div
                                                         class="d-flex align-items-center justify-content-between flex-wrap">
                                                         <div>
-                                                            <p class="text-muted mb-0">Total Deals</p>
+                                                            <p class="text-muted mb-0">Merchandise Payment</p>
                                                             <h4 class="fw-semibold mt-1">2,543</h4>
                                                         </div>
                                                         <div id="crm-total-deals"></div>
@@ -163,40 +163,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-12">
-                                    <div class="card custom-card">
-                                        <div class="card-header justify-content-between">
-                                            <div class="card-title">Revenue Analytics</div>
-                                            <div class="dropdown">
-                                                <a href="javascript:void(0);" class="p-2 fs-12 text-muted"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    View All<i
-                                                        class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
-                                                </a>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li>
-                                                        <a class="dropdown-item"
-                                                            href="javascript:void(0);">Today</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="javascript:void(0);">This
-                                                            Week</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="javascript:void(0);">Last
-                                                            Week</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div id="crm-revenue-analytics"></div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                        <div class="col-xl-12">
+                        {{-- <div class="col-xl-12">
                             <div class="card custom-card">
                                 <div class="card-header justify-content-between">
                                     <div class="card-title">Transaction History</div>
@@ -394,7 +363,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 

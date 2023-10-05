@@ -14,6 +14,7 @@ class Setting extends Model
         'tuition_payment',
         'flight_booking',
         'corporate_service',
-        'merchandise_payment'
+        'merchandise_payment',
+        'other_service'
     ];
 }

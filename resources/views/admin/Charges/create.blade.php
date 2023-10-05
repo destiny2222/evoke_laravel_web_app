@@ -47,6 +47,13 @@
                             <span class="invalid-feedback" role="alert">{{  $message  }}</span>
                             @enderror
                         </div>
+                        <div class="col-12 mb-3">
+                            <label class="form-label" for="basic-default-company">{{  __('BDC Charge Amount') }}</label>
+                            <input type="text"   name="bdc_charge" class="form-control  @error('bdc_charge') is-invalid @enderror" id="basic-default-company" placeholder="" />
+                            @error('bdc_charge')
+                            <span class="invalid-feedback" role="alert">{{  $message  }}</span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="row g-2">
                         <div class="col mb-0 text-center">

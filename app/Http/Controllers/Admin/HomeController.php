@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\LocalFlight;
 use App\Models\User;
+use App\Models\VisaApplication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -22,21 +24,44 @@ class HomeController extends Controller
     public function home(){
         $admin = Admin::where('id', 1)->first();
         $user_count = User::count();
+        $localflight = LocalFlight::count();
+        $visafee = VisaApplication::count();
 
-        // Calculate the user count for the previous month
         $previousMonthUserCount = User::whereYear('created_at', Carbon::now()->subMonth()->year)
             ->whereMonth('created_at', Carbon::now()->subMonth()->month)
             ->count();
 
-        // Calculate the percentage increase
-        $percentageIncrease = 0; // Default value if previous month count is zero
+        $percentageIncrease = 0; 
         if ($previousMonthUserCount > 0) {
             $percentageIncrease = (($user_count - $previousMonthUserCount) / $previousMonthUserCount) * 100;
+        }
+
+        $previousMonthLocalFlightCount = LocalFlight::whereYear('created_at', Carbon::now()->subMonth()->year)
+        ->whereMonth('created_at', Carbon::now()->subMonth()->month)
+        ->count();
+
+        $FlightIncrease = 0; 
+        if ($previousMonthLocalFlightCount > 0) {
+            $FlightIncrease = (($localflight - $previousMonthLocalFlightCount) / $previousMonthLocalFlightCount) * 100;
+        }
+
+
+        $previousMonthvisafeeCount = LocalFlight::whereYear('created_at', Carbon::now()->subMonth()->year)
+        ->whereMonth('created_at', Carbon::now()->subMonth()->month)
+        ->count();
+
+        $visafeeIncrease = 0; 
+        if ($previousMonthvisafeeCount > 0) {
+            $visafeeIncrease = (($visafee - $previousMonthvisafeeCount) / $previousMonthvisafeeCount) * 100;
         }
 
         return view('admin.index', [
             'admin' => $admin,
             'user_count' => $user_count,
+            'localflight' => $localflight,
+            'visafee' => $visafee,
+            'FlightIncrease' => $FlightIncrease,
+            'visafeeIncrease' => $visafeeIncrease,
             'percentageIncrease' => $percentageIncrease,
         ]);
     }

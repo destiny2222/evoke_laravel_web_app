@@ -15,5 +15,7 @@ class TransactionCharges extends Model
         'corporate_charge_amount',
         'merchant_charge_amount',
         'flights_charge_amount',
+        'bdc_charge',
+        'other_service',
     ];
 }

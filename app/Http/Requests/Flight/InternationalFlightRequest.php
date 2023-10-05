@@ -26,22 +26,21 @@ class InternationalFlightRequest extends FormRequest
     {
         return [
             //
-            'airport_location_from' =>'required|string',
-            'airport_location_to' =>'required|string',
-            'flight_date' =>'required|date',
-            'flight_return_date' =>'required|date',
-            'flight_class' =>'required|string',
-            'flight_time' =>'required|time',
-            'number_passenger' =>'required|string',
-            'passenger_name' =>'required|string',
-            'baggage_weight' =>'required|string',
-            'passenger_title' =>'required|string',
-            'passenger_fname_onpassport' =>'required|string',
-            'passenger_lastname_onpassport' =>'required|string',
-            'passenger_gender_onpassport' =>'required|string',
-            'date_of_birth' =>'required|date',
-            'passenger_email' =>'required|string',
-            'passenger_phone' =>'required|string',
+            'airport_location_from' =>'nullable|string',
+            'airport_location_to' =>'nullable|string',
+            'flight_date' =>'nullable|date',
+            'flight_return_date' =>'nullable|date',
+            'flight_class' =>'nullable|string',
+            // 'flight_time' =>'nullable|time',
+            'number_passenger' =>'nullable|string',
+            'baggage_weight' =>'nullable|string',
+            'passenger_title' =>'nullable|string',
+            'passenger_fname_onpassport' =>'nullable|string',
+            'passenger_lastname_onpassport' =>'nullable|string',
+            'passenger_gender_onpassport' =>'nullable|string',
+            'date_of_birth' =>'nullable|date',
+            'passenger_email' =>'nullable|string',
+            'passenger_phone' =>'nullable|string',
         ];
     }
 
@@ -53,13 +52,18 @@ class InternationalFlightRequest extends FormRequest
             'flight_date' => $this->flight_date,
             'flight_return_date' => $this->flight_return_date,
             'flight_class' => $this->flight_class,
-            'flight_time' => $this->flight_time,
+            // 'flight_time' => $this->flight_time,
+            'round_trip' => $this->round_trip,
             'user_id' => $this->user_id,
             'number_passenger' => $this->number_passenger,
-            'passenger_name' => $this->passenger_name,
             'baggage_weight' => $this->baggage_weight,
             'passenger_title' => $this->passenger_title,
             'passenger_fname_onpassport' => $this->passenger_fname_onpassport,
+            'passenger_lastname_onpassport' => $this->passenger_lastname_onpassport,
+            'passenger_gender_onpassport' => $this->passenger_gender_onpassport,
+            'date_of_birth' => $this->date_of_birth,
+            'passenger_email' => $this->passenger_email,
+
         ]);
         return true;
     }

@@ -18,25 +18,25 @@
                                 </div>
                             </div> 
                         </div>
-                        <input type="hidden" name="referrence_id" value="{{ $user->referrence_id  }}">
+                        <input type="hidden" name="referrence_id" readonly value="{{ $user->referrence_id  }}">
                         <input type="hidden" name="address" value="{{ $user->address  }}">
                         <div class="col-lg-6 col-12">
-                            <input type="text" class="profile-input"  name="name" value="{{ $user->name }}" placeholder="Full Name">
+                            <input type="text" class="profile-input" readonly  name="name" value="{{ $user->name }}" placeholder="Full Name">
                         </div>
                         <div class="col-lg-6 col-12" >
-                            <input type="email" class="profile-input"  name="email" value="{{ $user->email  }}" placeholder="Email Address">
+                            <input type="email" class="profile-input"  readonly name="email" value="{{ $user->email  }}" placeholder="Email Address">
                         </div>
                         <div class="col-lg-6 col-12">
-                            <input type="phone" class="profile-input"  name="phone" id=""  value="{{ $user->phone }}" placeholder="Enter Phone">
+                            <input type="phone" class="profile-input" readonly name="phone" id=""  value="{{ $user->phone }}" placeholder="Enter Phone">
                         </div>
                         <div  class="col-lg-6 col-12">
-                            <input type="text" class="profile-input" name="country" value="{{ $user->country }}" placeholder="Enter Country"> 
+                            <input type="text" class="profile-input" readonly name="country" value="{{ $user->country }}" placeholder="Enter Country"> 
                         </div>
                         <div class="col-lg-6 col-12">
-                            <input type="text" class="profile-input" name="state"  value="{{ $user->state }}" placeholder="Enter State"> 
+                            <input type="text" class="profile-input" readonly name="state"  value="{{ $user->state }}" placeholder="Enter State"> 
                         </div>
                         <div class="col-lg-6 col-12">
-                            <input type="text" class="profile-input"  name="city" value="{{ $user->city }}" placeholder="Enter City"> 
+                            <input type="text" class="profile-input"  readonly name="city" value="{{ $user->city }}" placeholder="Enter City"> 
                         </div>
                         <div class="col-lg-12 col-12 text-center">
                             <button type="submit" class="profile-button">Save</button>
@@ -44,9 +44,9 @@
                     </div>
                 </form>      
             </div>
-            <div class="col-lg-12 col-12 text-center" style="margin-top: 20px">
+            {{-- <div class="col-lg-12 col-12 text-center" style="margin-top: 20px">
                 <a href="/user/kyc" class="proceed_kyc">Proceed with KYC verification</a>
-            </div>    
+            </div>     --}}
         </div>
     </div>
 @endsection    

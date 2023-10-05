@@ -1,9 +1,16 @@
 @extends('layout.master')
 @section('content')
     <div class="continer">
+        <div class="row">
+            <div class="col-lg-12 m-b-2">
+                <a href="{{ route('initiator-page') }}" style="text-decoration:none;">
+                    <i class="bi bi-arrow-left"></i>                         
+                    Go Back  
+                </a>
+            </div>
+        </div>
         <div class="bdc_container ">
             <div class="bdc_title tab-link active">BDC</div>
-            <div class="bdc_title tab-link">Lottery</div>
         </div>
        <div class="row">
         <div class="col-lg-12 col-12">
@@ -17,7 +24,7 @@
             
                         <div class="col-lg-6 col-12 p-t-2">
                             <label for="exampleInputBankName" class="form-label">Bank Name</label>
-                            <input type="email" class="applicant-input" id="exampleInputBankName" placeholder="Enter Bank Name">
+                            <input type="text" class="applicant-input" id="exampleInputBankName" placeholder="Enter Bank Name">
                         </div>
             
                         <div class="col-lg-6 col-12 p-t-2">
@@ -45,16 +52,6 @@
                             </div>
                         </div>
                     </form>
-               </div>
-               <div class="bdc_content tab-item">
-                    <ul class="lotteryTabs" id="lotteryTabs">
-                        <a href="/user/mega-millions">
-                            <li class="mega-millions mega" >Mega Millions</li>
-                        </a>
-                        <a href="/user/power-ball">
-                            <li class="power-ball mega" >Power Ball</li>
-                        </a>
-                    </ul>
                </div>
           </div>
         </div>

@@ -35,7 +35,6 @@ class ManagementController extends Controller
 
 
     public function updateUser(Request $request, $id){
-        try {
             $user = User::find($id);
     
             if(!$user) {
@@ -77,26 +76,35 @@ class ManagementController extends Controller
             }
             Alert::info('success', 'Edited Successfully') ;
             return redirect()->route('admin.user-page');
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            Alert::error('error', 'Something went wrong');
-            return back();
-        }
+        
     }
     
 
 
 
     public function deleteUser($id){
-        try {
             $user = User::findOrFail($id);
-            $user->delete();
-            Alert::success('success', 'Successfuly Delete');
-            return back();
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
-            Alert::error('error', 'Oops Something went worry!');
-            return back();
-        }
+            if ($user) {
+                $user->delete();
+                Alert::success('success', 'Successfuly Delete');
+                return back();
+            } else {
+                Alert::error('error', 'Oops Something went worry!');
+                return back();
+            }
+    }
+
+    public function banUser(User $user)
+    {
+        $user->update(['is_banned' => true]);
+        Alert::success('success', 'Successfuly Banned');
+        return redirect()->route('admin.user-page');
+    }
+
+    public function unbanUser(User $user)
+    {
+        $user->update(['is_banned' => false]);
+        Alert::success('success', 'Successfuly Unbanned');
+        return redirect()->route('admin.user-page');
     }
 }

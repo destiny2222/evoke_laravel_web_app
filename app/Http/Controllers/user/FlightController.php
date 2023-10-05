@@ -4,6 +4,8 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Flight\InternationalFlightRequest;
+use App\Http\Requests\Flight\LocalFlightRequest;
+use App\Models\Baggage;
 use App\Models\FLightBooking;
 use App\Models\FLightCustomerDetails;
 use App\Models\Payment;
@@ -20,18 +22,33 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class FlightController extends Controller
 {
-    public function flightsPayment(){
-        return view('users.Flight.flightpayment');
+    public function InternationalFlight(){
+        $baggage = Baggage::all();
+        foreach($baggage as $baggages)
+        return view('users.Flight.international', compact('baggages'));
     }
 
 
-    public function  flightBooking(InternationalFlightRequest $request){
+    public function LocalFlight(){
+        return view('users.Flight.local');
+    }
+
+
+    public function  flightInternationalBooking(InternationalFlightRequest $request){
         if ($request->createFlightBooking()) {
-           return redirect()->route()->with('success', 'Flight Booking Successfully!! Proceed to payment');
+           return redirect()->route('international-flight-page')->with('success','Sent Successfully!! We get back to you soon');
         }
-         return redirect(route('flightpayment-page'))->with('success', 'Flight Booking Successfully!! Proceed to payment');
+         return redirect(route('international-flight-page'))->with('error','Something went wrong');
      }
 
+
+    public function flightLocalBooking(LocalFlightRequest $request){
+        if ($request->createLocal()) {
+            return redirect()->route('local-flight-page')->with('success', 'Sent Successfully!! We get back to you soon');
+        }else{
+            return redirect()->route('local-flight-page')->with('error', 'Something went wrong');
+        }
+    }
 
 
     public function flightsPaymentAction(Request $request){

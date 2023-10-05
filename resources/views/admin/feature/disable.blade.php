@@ -31,6 +31,10 @@
                     <input class="form-check-input" type="checkbox" role="switch" name="merchandise_payment" id="switch-merchandise" {{  $setting->merchandise_payment ? 'checked' : '' }}> 
                     <label class="form-check-label" for="switch-merchandise">Merchandise Payment</label> 
                 </div>
+                <div class="form-check form-switch mb-2"> 
+                    <input class="form-check-input" type="checkbox" role="switch" name="other_service" id="switch-other" {{  $setting->other_service ? 'checked' : '' }}> 
+                    <label class="form-check-label" for="switch-other">other_service</label> 
+                </div>
                 <div class="mb-3 text-center">
                     <button type="submit" class="btn btn-primary">Update Service</button>
                 </div>
