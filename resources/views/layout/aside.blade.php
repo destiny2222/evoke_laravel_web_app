@@ -20,141 +20,174 @@
                 </svg>
             </div>
             <ul class="main-menu">
-                <!-- Start::slide__category -->
-                <li class="slide__category">
-                    <span class="category-name">Main</span>
-                </li>
-                <!-- End::slide__category -->
                 <!-- Start::slide -->
-                
-                <li class="slide ">
-                    <a href="{{  route('admin.home')  }}" class="side-menu__item">
+                <li class="slide has-sub open">
+                    <a href="javascript:void(0);" class="side-menu__item">
                         <i class="bx bx-home side-menu__icon"></i>
-                        <span class="side-menu__label">Dashboard</span>
-                    </a>
-                </li>
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">
-                        Account  
+                        <span class="side-menu__label">Main</span>
                         <i class="fe fe-chevron-right side-menu__angle"></i>
                     </a>
-                    <ul class="slide-menu child2">
-                        <li class="slide">
-                            <a href="{{  route('admin.profile-page') }}" class="side-menu__item">Account Setting</a>
+                    <ul class="slide-menu child1" style="position: relative; left: 0px; top: 0px; margin: 0px; transform: translate3d(239.5px, 1233.5px, 0px); display: block; box-sizing: border-box;" data-popper-placement="bottom" data-popper-escaped="" data-popper-reference-hidden="">
+                        <li class="slide ">
+                            <a href="{{  route('admin.home')  }}" class="side-menu__item">
+                                
+                                <span class="side-menu__label">Dashboard</span>
+                            </a>
                         </li>
-                        <li class="slide">
-                            <a href="{{  route('admin.user-page') }}" class="side-menu__item">Users</a>
+                        <li class="slide has-sub">
+                            <a href="javascript:void(0);" class="side-menu__item">
+                                Account  
+                                <i class="fe fe-chevron-right side-menu__angle"></i>
+                            </a>
+                            <ul class="slide-menu child2">
+                                <li class="slide">
+                                    <a href="{{  route('admin.profile-page') }}" class="side-menu__item">Account Setting</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="{{  route('admin.user-page') }}" class="side-menu__item">Users</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- End::slide -->
+                        
+                    </ul>
+                </li>    
+                <li class="slide has-sub open">
+                    <a href="javascript:void(0);" class="side-menu__item">
+                        <i class="bx bx-file side-menu__icon"></i>
+                        <span class="side-menu__label">Transactions</span>
+                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                    </a>
+                    <ul class="slide-menu child1" style="position: relative; left: 0px; top: 0px; margin: 0px; transform: translate3d(239.5px, 1233.5px, 0px); display: block; box-sizing: border-box;" data-popper-placement="bottom" data-popper-escaped="" data-popper-reference-hidden="">
+                        <li class="slide has-sub">
+                            <a href="javascript:void(0);" class="side-menu__item">
+                                Flight  Transactions   
+                                <i class="fe fe-chevron-right side-menu__angle"></i>
+                            </a>
+                            <ul class="slide-menu child2">
+                                <li class="slide">
+                                    <a href="{{  route('admin.local-flight-page') }}" class="side-menu__item">Local Flight </a>
+                                </li>
+                                <li class="slide">
+                                    <a href="{{  route('admin.international-flight-page') }}" class="side-menu__item">International Flight</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Start::slide -->
+                        <li class="slide has-sub">
+                            <a href="javascript:void(0);" class="side-menu__item">Tuition  Transactions <i
+                                    class="fe fe-chevron-right side-menu__angle"></i></a>
+                            <ul class="slide-menu child2">
+                                <li class="slide">
+                                    <a href="{{ route('admin.tuition-payment-page') }}" class="side-menu__item">Tuition Payment</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="{{ route('admin.tuition-wire-transfer-page') }}" class="side-menu__item">Tuition Payment wire transfer</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Start::slide -->
+                        <li class="slide has-sub">
+                            <a href="javascript:void(0);" class="side-menu__item">Merchandise  Transactions <i
+                                    class="fe fe-chevron-right side-menu__angle"></i></a>
+                            <ul class="slide-menu child2">
+                                <li class="slide">
+                                    <a href="{{  route('admin.merchandise-page') }}" class="side-menu__item">Merchandise Payment</a>
+                                </li>
+                            </ul>
+                        </li>
+                         <!-- Start::slide -->
+                        <!-- Start::slide -->
+                        <li class="slide has-sub">
+                            <a href="javascript:void(0);" class="side-menu__item">Visa  Transactions <i
+                                    class="fe fe-chevron-right side-menu__angle"></i></a>
+                            <ul class="slide-menu child2">
+                                <li class="slide">
+                                    <a href="{{ route('admin.visa-application-canada-page') }}" class="side-menu__item">Canada Visa Application</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="{{ route('admin.visa-application-page') }}" class="side-menu__item">USA Visa Application</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="slide has-sub">
+                            <a href="javascript:void(0);" class="side-menu__item">
+                                Otherservice  Transactions <i
+                                    class="fe fe-chevron-right side-menu__angle"></i></a>
+                            <ul class="slide-menu child2">
+                                <li class="slide">
+                                    <a href="{{  route('admin.otherservices-page') }}" class="side-menu__item">Otherservice </a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li class="slide has-sub">
+                            <a href="javascript:void(0);" class="side-menu__item">Corporate Transactions <i
+                                    class="fe fe-chevron-right side-menu__angle"></i></a>
+                            <ul class="slide-menu child2">
+                                <li class="slide">
+                                    <a href="#" class="side-menu__item">BDC </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </li>
-                <!-- End::slide -->
-                <!-- Start::slide -->
-                <li class="slide">
-                    <a href="{{ route('admin.kyc.index') }}" class="side-menu__item">
-                        <i class="bx bx-file side-menu__icon"></i>
-                        <span class="side-menu__label">Kyc</span>
-                    </a>
-                </li>
-                <!-- End::slide -->
-                <!-- Start::slide__category -->
-                <li class="slide__category">
-                    <span class="category-name">Transactions</span>
-                </li>
-                
                 <!-- End::slide__category -->
                 
-                <li class="slide has-sub">
+                
+                
+                <li class="slide has-sub open">
                     <a href="javascript:void(0);" class="side-menu__item">
-                        Flight  Transactions   
+                        <i class="bx bx-file-blank side-menu__icon"></i>
+                        <span class="side-menu__label">Settings</span>
                         <i class="fe fe-chevron-right side-menu__angle"></i>
                     </a>
-                    <ul class="slide-menu child2">
+                    <ul class="slide-menu child1" style="position: relative; left: 0px; top: 0px; margin: 0px; transform: translate3d(239.5px, 1233.5px, 0px); display: block; box-sizing: border-box;" data-popper-placement="bottom" data-popper-escaped="" data-popper-reference-hidden="">
+                        <!-- Start::slide -->
                         <li class="slide">
-                            <a href="{{  route('admin.local-flight-page') }}" class="side-menu__item">Local Flight </a>
+                            <a href="{{ route('admin.kyc.index') }}" class="side-menu__item">
+                                <span class="side-menu__label">Kyc</span>
+                            </a>
+                        </li>
+                        <!-- End::slide -->
+                        <!-- Start::slide -->
+                        <li class="slide has-sub">
+                            <a href="javascript:void(0);" class="side-menu__item">Blog <i
+                                    class="fe fe-chevron-right side-menu__angle"></i></a>
+                            <ul class="slide-menu child2">
+                                <li class="slide">
+                                    <a href="{{ route('admin.Post.index') }}" class="side-menu__item">Blog</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="{{ route('admin.Post.create') }}" class="side-menu__item">Create Blog</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Start::slide__category -->
+                        <!-- Start::slide -->
+                        <li class="slide has-sub">
+                            <a href="javascript:void(0);" class="side-menu__item">Mail <i
+                                    class="fe fe-chevron-right side-menu__angle"></i></a>
+                            <ul class="slide-menu child2">
+                                <li class="slide">
+                                    <a href="{{ route('admin.send-mail-page') }}" class="side-menu__item">Mail</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="{{ route('admin.send-mail-create') }}" class="side-menu__item">Send Mail</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="slide">
-                            <a href="{{  route('admin.international-flight-page') }}" class="side-menu__item">International Flight</a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">Tuition  Transactions <i
-                            class="fe fe-chevron-right side-menu__angle"></i></a>
-                    <ul class="slide-menu child2">
-                        <li class="slide">
-                            <a href="{{ route('admin.tuition-payment-page') }}" class="side-menu__item">Tuition Payment</a>
+                            <a href="{{ route('admin.transaction-charge-page') }}" class="side-menu__item">Services Charges</a>
                         </li>
                         <li class="slide">
-                            <a href="{{ route('admin.tuition-wire-transfer-page') }}" class="side-menu__item">Tuition Payment wire transfer</a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">Merchandise  Transactions <i
-                            class="fe fe-chevron-right side-menu__angle"></i></a>
-                    <ul class="slide-menu child2">
-                        <li class="slide">
-                            <a href="" class="side-menu__item">Tuition Payment</a>
-                        </li>
-                        <li class="slide">
-                            <a href="" class="side-menu__item">Tuition Payment wire transfer</a>
-                        </li>
-                    </ul>
-                </li>
-                 <!-- Start::slide -->
-                <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">Visa  Transactions <i
-                            class="fe fe-chevron-right side-menu__angle"></i></a>
-                    <ul class="slide-menu child2">
-                        <li class="slide">
-                            <a href="{{ route('admin.visa-application-canada-page') }}" class="side-menu__item">Canada Visa Application</a>
-                        </li>
-                        <li class="slide">
-                            <a href="{{ route('admin.visa-application-page') }}" class="side-menu__item">USA Visa Application</a>
+                            <a href="{{  route('admin.features-page') }}" class="side-menu__item">
+                            Features
+                            </a>
                         </li>
                     </ul>
                 </li>
-                 <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">Blog <i
-                            class="fe fe-chevron-right side-menu__angle"></i></a>
-                    <ul class="slide-menu child2">
-                        <li class="slide">
-                            <a href="{{ route('admin.Post.index') }}" class="side-menu__item">Blog</a>
-                        </li>
-                        <li class="slide">
-                            <a href="{{ route('admin.Post.create') }}" class="side-menu__item">Create Blog</a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- Start::slide__category -->
-                <li class="slide__category">
-                    <span class="category-name">Settings</span>
-                </li>
-                 <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">Mail <i
-                            class="fe fe-chevron-right side-menu__angle"></i></a>
-                    <ul class="slide-menu child2">
-                        <li class="slide">
-                            <a href="{{ route('admin.send-mail-page') }}" class="side-menu__item">Mail</a>
-                        </li>
-                        <li class="slide">
-                            <a href="{{ route('admin.send-mail-create') }}" class="side-menu__item">Send Mail</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="slide">
-                    <a href="{{ route('admin.transaction-charge-page') }}" class="side-menu__item">Services Charges</a>
-                </li>
-                <li class="slide">
-                    <a href="{{  route('admin.features-page') }}" class="side-menu__item">
-                        Enable/Disable Features
-                    </a>
-                </li>
+                 
             </ul>
             <div class="slide-right" id="slide-right">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24"

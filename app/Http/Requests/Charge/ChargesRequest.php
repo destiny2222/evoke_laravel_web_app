@@ -31,6 +31,7 @@ class ChargesRequest extends FormRequest
              'corporate_charge_amount'=>['required','string'],
              'merchant_charge_amount'=>['required','string'],
              'bdc_charge'=>['required','string'],
+             'other_service'=>['required','string'],
         ];
     }
 

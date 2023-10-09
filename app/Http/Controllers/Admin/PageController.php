@@ -127,6 +127,41 @@ class PageController extends Controller
     }
 
 
+
+
+    public function TuitionCompleted(Request $request, $id){
+        $tuitionPayment = TuitionPayment::find($id);
+        if ($tuitionPayment) {
+            $done = $request->input('done');
+            $tuitionPayment->update(['done'=> $done]);
+            Alert::success('Aply Successful');
+            return back();
+        } else {
+            Alert::error('Something went wrong');
+            return back();
+        }
+        
+    }
+
+
+
+    public function TuitionwireProcess(Request $request, $id){
+        $tuitionPaymentWire = TuitionPaymentWire::find($id);
+        if ($tuitionPaymentWire) {
+            $done = $request->input('done'); 
+            $tuitionPaymentWire->update(['done'=> $done]);
+          Alert::success('Aply Successfully');
+          return back();
+        } else {
+           Alert::error('Something went wrong');
+           return back();
+        }
+        
+
+  }
+
+
+
     public function tuitionDeleteWireView($id){
             $tuition =  TuitionPaymentWire::findOrFail($id);
             if ($tuition) {
@@ -154,6 +189,20 @@ class PageController extends Controller
         ]);
     }
 
+    public function visaApplicationCanadaEdit(Request $request, $id){
+        $visaapplication = VisaApplication::find($id);
+        if ($visaapplication) {
+            $done = $request->input('done');
+            $visaapplication->update(['done'=> $done]);
+            Alert::success('Aply Successful');
+            return back();
+        } else {
+            Alert::error('Something went wrong');
+            return back();
+        }
+        
+
+    }
 
     public function visaApplicationDelete($id){
         $visaapplication =  VisaApplication::findOrFail($id);

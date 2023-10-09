@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Carbon;
-
+use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
 {
@@ -75,20 +75,20 @@ class HomeController extends Controller
 
     public function update(Request $request, $id)
     {
-        try {
+        $admin = Admin::findOrFail($id);
+        if ($admin) {
             // $admin = Admin::where('id', $id)->first();
-            $admin = Admin::findOrFail($id);
             $admin->update([
                 // 'image'=>$image_file ?? $users->image,
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
             ]);
-            // dd($admin);
-            return response()->json(['Success'=> 'Updated Successfull'], 200);
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
-            return response()->json(['Error'=> 'Something went Wrong'], 400);
+            Alert::success('Updated Successfully');
+            return back();
+        } else {
+            Alert::error('Something went Wrong');
+            return back();
         }
     }
 
@@ -109,13 +109,15 @@ class HomeController extends Controller
                     'password' => Hash::make(session('new_password'))
                 ]);
                 // dd($adminpassword);
-                return response()->json(['success'=>'Password Change Successful'], 200);
-                //  redirect(route('admin.profile-page'));
+                Alert::success('Password Change Successfully');
+                return back();
             } else {
-                return response()->json(['error' => 'Error! Password Mismatch', 400]);
+                Alert::error('Error! Password Mismatch');
+                return back();
             }
         } else {
-            return response()->json(['error'=> 'Error! The password does not match the current password?'], 500);
+            Alert::error('Error! The password does not match the current password?');
+            return back();
         }
     }
 }

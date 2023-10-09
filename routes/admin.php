@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\FlightController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\KycContainer;
 use App\Http\Controllers\Admin\ManagementController;
+use App\Http\Controllers\Admin\MerchandiseController;
+use App\Http\Controllers\Admin\OtherServiceController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +42,18 @@ Route::prefix('admin')->name('admin.')->group(function (){
     Route::post('/send-mail/store', [PageController::class, 'storeMail'])->name('send-mail-store');
     Route::delete('/send-mail/{id}/delete/', [PageController::class, 'mailDelete'])->name('send-mail-delete');
 
+
+    // // Merchanndise controller
+    Route::get('/merchandise', [MerchandiseController::class,'indexMerchandise'])->name('merchandise-page');
+    Route::put('/merchandise/{id}/completed', [MerchandiseController::class,'MerchandiseCompleted'])->name('merchandise-complete');
+    Route::delete('/merchandise/{id}/delete', [MerchandiseController::class,'MerchandiseDelete'])->name('merchandise-delete');
+
+
+    // otherservices otherService
+    Route::get('/otherservices', [OtherServiceController::class, 'otherServicepage'])->name('otherservices-page');
+    Route::put('/otherservices/{id}/completed', [OtherServiceController::class,'otherServiceCompleted'])->name('otherservices-complete');
+    Route::delete('/otherservices/{id}/delete', [OtherServiceController::class,'otherServiceDelete'])->name('otherservices-delete');
+
     // flight controller
     Route::get('/flight/local', [FlightController::class, 'localflight'])->name('local-flight-page');
     Route::get('/flight/international', [FlightController::class, 'InternationalFLight'])->name('international-flight-page');
@@ -52,11 +66,14 @@ Route::prefix('admin')->name('admin.')->group(function (){
     Route::get('/tuition-wire-transer', [PageController::class, 'tuitionWireView'])->name('tuition-wire-transfer-page');
     Route::delete('/tuition-wire-transer/{id}/delete', [PageController::class, 'tuitionDeleteWireView'])->name('tuition-wire-transfer-delete');
     Route::delete('/tuition-payment/{id}/delete', [PageController::class, 'tuitionDeView'])->name('tuition-payment-delete');
+    Route::put('/tuition-payment/{id}/process', [PageController::class, 'TuitionCompleted'])->name('tuition-payment-complete');
+    Route::put('/tuition-paymentwire/{id}/process', [PageController::class, 'TuitionwireProcess'])->name('tuition-payment-wire-processing');
 
     // Visa Application
     Route::get('/visa-application', [PageController::class, 'visaApplicationView'])->name('visa-application-page');
     Route::get('/visa-application/canada', [PageController::class, 'visaApplicationCanadaView'])->name('visa-application-canada-page');
     Route::delete('/visa-application/{id}/delete', [PageController::class, 'visaApplicationDelete'])->name('visa-application-delete');
+    Route::put('/visa-application/{id}/process', [PageController::class, 'visaApplicationCanadaEdit'])->name('visa-application-process');
 
     // TransactionCharge
     Route::get('/transaction-charge', [PageController::class, 'TransactionCharges'])->name('transaction-charge-page');

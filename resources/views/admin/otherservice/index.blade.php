@@ -3,12 +3,12 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <!-- Grid Card -->
     <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-        <h1 class="page-title fw-semibold fs-18 mb-0">Tuition Payment via Transfer</h1>
+        <h1 class="page-title fw-semibold fs-18 mb-0">OtherService</h1>
         <div class="ms-md-1 ms-0">
             <nav>
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="#">Tuition Payment via Transfer</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Tuition Payment via Transfer</li>
+                    <li class="breadcrumb-item"><a href="#">OtherService</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">OtherService</li>
                 </ol>
             </nav>
         </div>
@@ -22,54 +22,52 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th scope="col">College name</th>
-                                    <th scope="col">Type Service</th>
-                                    <th scope="col">Student Name</th>
-                                    <th scope="col">Student Email </th>
-                                    <th scope="col">Student ID Number</th>
-                                    <th scope="col">School Acount Number</th>
-                                    <th scope="col">School Routing Number</th>
-                                    <th scope="col">School Bank Swift Code</th>
-                                    <th scope="col">School Address</th>
-                                    <th scope="col">School IBAN (Optional)</th>
-                                    <th scope="col">Amount</th>
+                                    <th>User Name</th>
+                                    <th scope="">Reasons for sending funds?</th>
+                                    <th scope="">Beneficiary Name</th>
+                                    <th scope="">Full Name of account holder</th>
+                                    <th scope="">IBAN/Account number</th>
+                                    <th scope="">SWIFT/BIC code</th>
+                                    <th scope="">Routine Number (US & CAD only)</th>
+                                    <th scope="">Reference</th>
+                                    <th scope="">Payment Method</th>
+                                    <th scope="">Total Amount</th>
+                                    <th scope="">Amount</th>
                                     <th scope="col">Deposit</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody> 
-                                @foreach ($tuition as $key => $tuitions)
+                                @foreach ($otherservice as $key => $otherservices)
                                 <tr scope="row">
                                     <th>{{  $key + 1 }}</th>
-                                    <td>{{  $tuitions['college_name'] }}</td>
-                                    <td>{{  $tuitions['service_type'] }}</td>
-                                    <td>{{  $tuitions['legal_name'] }}</td>
-                                    <td>{{  $tuitions['student_email'] }}</td>
-                                    <td>{{  $tuitions['student_id'] }}</td>
-                                    <td>{{  $tuitions['account_number'] }}</td>
-                                    <td>{{  $tuitions['routing_number'] }}</td>
-                                    <td>{{  $tuitions['bank_swift_code'] }}</td>
+                                    <th>{{  $otherservices->user->name }}</th>
+                                    <td>{{  $otherservices['funds'] }}</td>
+                                    <td>{{  $otherservices['beneficiary'] }}</td>
+                                    <td>{{  $otherservices['holder'] }}</td>
+                                    <td>{{  $otherservices['account_number'] }}</td>
+                                    <td>{{  $otherservices['swift_code'] }}</td>
+                                    <td>{{  $otherservices['route_number'] }}</td>
+                                    <td>{{  $otherservices['reference_number'] }}</td>
+                                    <td>{{  $otherservices['payment_method']  }}</td>
                                     <td>
-                                        {{  $tuitions['school_address']  }}
+                                        {{  number_format($otherservices['total_amount'])  }}
                                     </td>
                                     <td>
-                                        {{  $tuitions['school_iban']  }}
+                                        {{  number_format( $otherservices['amount'] ) }}
                                     </td>
                                     <td>
-                                        {{  number_format( $tuitions['amount'] ) }}
-                                    </td>
-                                    <td>
-                                        @if ($tuitions['paid'] == '1') 
+                                        @if ($otherservices['paid'] == '1') 
                                           <span class="badge bg-success-transparent">paid</span>
                                         @else
                                           <span class="badge bg-danger-transparent">Not paid </span>
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($tuitions['done'] == 'completed')
+                                        @if ($otherservices['done'] == '2')
                                            <span class="badge bg-success-transparent">Completed</span>
-                                        @elseif($tuitions['done'] == 'processing')
+                                        @elseif($otherservices['done'] == '1')
                                            <span class="badge bg-warning-transparent">Processing</span>   
                                         @else
                                           <span class="badge bg-danger-transparent">Pending</span>
@@ -77,11 +75,11 @@
                                     </td>
                                     <td>
                                         <div class="d-flex">
-                                            <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $tuitions->id }}" class="btn btn-sm btn-info btn-wave">
+                                            <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $otherservices->id }}" class="btn btn-sm btn-info btn-wave">
                                                 <i class="ri-edit-line"></i>
                                                 Edit
                                             </button>
-                                            {{-- <form action="{{   route('admin.tuition-wire-transfer-delete', $tuitions->id) }}" method="post">
+                                            {{-- <form action="{{   route('admin.merchandise-delete', $otherservices->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-sm btn-danger btn-wave">
@@ -91,7 +89,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                @include('admin.tuition.editwire')
+                                @include('admin.otherservice.edit')
                                 @endforeach
                             </tbody>
                         </table>
@@ -100,9 +98,9 @@
                 <div class="card-footer">
                     <div class="d-flex align-items-center">
                         <div>
-                            Showing {{ $tuition->firstItem() }} to {{ $tuition->lastItem() }} of {{ $tuition->total() }} Entries
-                            @if($tuition->hasMorePages())
-                                <a href="{{ $tuition->nextPageUrl() }}">
+                            Showing {{ $otherservice->firstItem() }} to {{ $otherservice->lastItem() }} of {{ $otherservice->total() }} Entries
+                            @if($otherservice->hasMorePages())
+                                <a href="{{ $otherservice->nextPageUrl() }}">
                                     <i class="bi bi-arrow-right ms-2 fw-semibold"></i>
                                 </a>
                             @endif
@@ -110,7 +108,7 @@
                         <div class="ms-auto">
                             <nav aria-label="Page navigation" class="pagination-style-4">
                                 <ul class="pagination mb-0">
-                                    @if($tuition->onFirstPage())
+                                    @if($otherservice->onFirstPage())
                                         <li class="page-item disabled">
                                             <a class="page-link" href="javascript:void(0);">
                                                 Prev
@@ -118,21 +116,21 @@
                                         </li>
                                     @else
                                         <li class="page-item">
-                                            <a class="page-link" href="{{ $tuition->previousPageUrl() }}">
+                                            <a class="page-link" href="{{ $otherservice->previousPageUrl() }}">
                                                 Prev
                                             </a>
                                         </li>
                                     @endif
                 
-                                    @foreach($tuition->getUrlRange(1, $tuition->lastPage()) as $page => $url)
-                                        <li class="page-item {{ $tuition->currentPage() == $page ? 'active' : '' }}">
+                                    @foreach($otherservice->getUrlRange(1, $otherservice->lastPage()) as $page => $url)
+                                        <li class="page-item {{ $otherservice->currentPage() == $page ? 'active' : '' }}">
                                             <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                                         </li>
                                     @endforeach
                 
-                                    @if($tuition->hasMorePages())
+                                    @if($otherservice->hasMorePages())
                                         <li class="page-item">
-                                            <a class="page-link" href="{{ $tuition->nextPageUrl() }}">Next</a>
+                                            <a class="page-link" href="{{ $otherservice->nextPageUrl() }}">Next</a>
                                         </li>
                                     @else
                                         <li class="page-item disabled">

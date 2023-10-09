@@ -3,12 +3,12 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <!-- Grid Card -->
     <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-        <h1 class="page-title fw-semibold fs-18 mb-0">Tuition Payment via Transfer</h1>
+        <h1 class="page-title fw-semibold fs-18 mb-0">Merchandise </h1>
         <div class="ms-md-1 ms-0">
             <nav>
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="#">Tuition Payment via Transfer</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Tuition Payment via Transfer</li>
+                    <li class="breadcrumb-item"><a href="#">Merchandise </a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Merchandise </li>
                 </ol>
             </nav>
         </div>
@@ -22,76 +22,91 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th scope="col">College name</th>
-                                    <th scope="col">Type Service</th>
-                                    <th scope="col">Student Name</th>
-                                    <th scope="col">Student Email </th>
-                                    <th scope="col">Student ID Number</th>
-                                    <th scope="col">School Acount Number</th>
-                                    <th scope="col">School Routing Number</th>
-                                    <th scope="col">School Bank Swift Code</th>
-                                    <th scope="col">School Address</th>
-                                    <th scope="col">School IBAN (Optional)</th>
-                                    <th scope="col">Amount</th>
+                                    <th scope="">User Name</th>
+                                    <th scope="">Describtion</th>
+                                    <th scope="">Currency</th>
+                                    <th scope="">Seller Name</th>
+                                    <th scope="">Email Supplier</th>
+                                    <th scope="">Bank Amount Name</th>
+                                    <th scope="">Bank Account Number</th>
+                                    <th scope="">Bank Swift Code</th>
+                                    <th scope="">Bank Route Number</th>
+                                    <th scope="">Bank Reference Number</th>
+                                    <th scope="">Recipient</th> 
+                                    <th scope="">Country</th>
+                                    <th scope="">City</th>
+                                    <th scope="">Payment Method</th>
+                                    <th scope="">Postcode</th>
+                                    <th scope="">Total Amount</th>
+                                    <th scope="">Amount</th>
                                     <th scope="col">Deposit</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody> 
-                                @foreach ($tuition as $key => $tuitions)
+                                @foreach ($merchandise as $key => $merchandiser)
                                 <tr scope="row">
                                     <th>{{  $key + 1 }}</th>
-                                    <td>{{  $tuitions['college_name'] }}</td>
-                                    <td>{{  $tuitions['service_type'] }}</td>
-                                    <td>{{  $tuitions['legal_name'] }}</td>
-                                    <td>{{  $tuitions['student_email'] }}</td>
-                                    <td>{{  $tuitions['student_id'] }}</td>
-                                    <td>{{  $tuitions['account_number'] }}</td>
-                                    <td>{{  $tuitions['routing_number'] }}</td>
-                                    <td>{{  $tuitions['bank_swift_code'] }}</td>
+                                    <th>{{  $merchandiser->user->name }}</th>
+                                    <td>{{  $merchandiser['description'] }}</td>
+                                    <td>{{  $merchandiser['currency'] }}</td>
+                                    <td>{{  $merchandiser['seller_name'] }}</td>
+                                    <td>{{  $merchandiser['email_supplier'] }}</td>
+                                    <td>{{  $merchandiser['bank_amount_name'] }}</td>
+                                    <td>{{  $merchandiser['bank_account_number'] }}</td>
+                                    <td>{{  $merchandiser['bank_swift_code'] }}</td>
                                     <td>
-                                        {{  $tuitions['school_address']  }}
+                                        {{  $merchandiser['bank_route_number']  }}
                                     </td>
                                     <td>
-                                        {{  $tuitions['school_iban']  }}
+                                        {{  $merchandiser['bank_reference_number']  }}
+                                    </td>
+                                    <td>{{  $merchandiser['recipient']  }}</td>
+                                    <td>{{  $merchandiser['country']  }}</td>
+                                    <td>{{  $merchandiser['city']  }}</td>
+                                    <td>{{  $merchandiser['payment_method']  }}</td>
+                                    <td>{{  $merchandiser['postcode']  }}</td>
+                                    <td>
+                                        {{  number_format($merchandiser['total_amount'])  }}
                                     </td>
                                     <td>
-                                        {{  number_format( $tuitions['amount'] ) }}
+                                        {{  number_format( $merchandiser['amount'] ) }}
                                     </td>
                                     <td>
-                                        @if ($tuitions['paid'] == '1') 
+                                        @if ($merchandiser['paid'] == '1') 
                                           <span class="badge bg-success-transparent">paid</span>
                                         @else
                                           <span class="badge bg-danger-transparent">Not paid </span>
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($tuitions['done'] == 'completed')
-                                           <span class="badge bg-success-transparent">Completed</span>
-                                        @elseif($tuitions['done'] == 'processing')
-                                           <span class="badge bg-warning-transparent">Processing</span>   
+                                        @if ($merchandiser['done'] == '2')
+                                           <span class="badge bg-outline-primary">Completed</span>
+                                        @elseif($merchandiser['done'] == '1')
+                                           <span class="badge bg-outline-success">Processing</span>   
                                         @else
-                                          <span class="badge bg-danger-transparent">Pending</span>
+                                          <span class="badge bg-outline-secondary">Pending</span>
                                         @endif
                                     </td>
                                     <td>
                                         <div class="d-flex">
-                                            <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $tuitions->id }}" class="btn btn-sm btn-info btn-wave">
+                                            <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $merchandiser->id }}" class="btn btn-sm btn-info btn-wave">
                                                 <i class="ri-edit-line"></i>
                                                 Edit
                                             </button>
-                                            {{-- <form action="{{   route('admin.tuition-wire-transfer-delete', $tuitions->id) }}" method="post">
+                                            {{-- <form action="{{   route('admin.merchandise-delete', $merchandiser->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-sm btn-danger btn-wave">
                                                     <i class="ri-delete-bin-line align-middle  d-inline-block"></i>Delete
                                                 </button>
                                             </form> --}}
+                                            
                                         </div>
                                     </td>
                                 </tr>
-                                @include('admin.tuition.editwire')
+                                @include('admin.merchandise.edit')
                                 @endforeach
                             </tbody>
                         </table>
@@ -100,9 +115,9 @@
                 <div class="card-footer">
                     <div class="d-flex align-items-center">
                         <div>
-                            Showing {{ $tuition->firstItem() }} to {{ $tuition->lastItem() }} of {{ $tuition->total() }} Entries
-                            @if($tuition->hasMorePages())
-                                <a href="{{ $tuition->nextPageUrl() }}">
+                            Showing {{ $merchandise->firstItem() }} to {{ $merchandise->lastItem() }} of {{ $merchandise->total() }} Entries
+                            @if($merchandise->hasMorePages())
+                                <a href="{{ $merchandise->nextPageUrl() }}">
                                     <i class="bi bi-arrow-right ms-2 fw-semibold"></i>
                                 </a>
                             @endif
@@ -110,7 +125,7 @@
                         <div class="ms-auto">
                             <nav aria-label="Page navigation" class="pagination-style-4">
                                 <ul class="pagination mb-0">
-                                    @if($tuition->onFirstPage())
+                                    @if($merchandise->onFirstPage())
                                         <li class="page-item disabled">
                                             <a class="page-link" href="javascript:void(0);">
                                                 Prev
@@ -118,21 +133,21 @@
                                         </li>
                                     @else
                                         <li class="page-item">
-                                            <a class="page-link" href="{{ $tuition->previousPageUrl() }}">
+                                            <a class="page-link" href="{{ $merchandise->previousPageUrl() }}">
                                                 Prev
                                             </a>
                                         </li>
                                     @endif
                 
-                                    @foreach($tuition->getUrlRange(1, $tuition->lastPage()) as $page => $url)
-                                        <li class="page-item {{ $tuition->currentPage() == $page ? 'active' : '' }}">
+                                    @foreach($merchandise->getUrlRange(1, $merchandise->lastPage()) as $page => $url)
+                                        <li class="page-item {{ $merchandise->currentPage() == $page ? 'active' : '' }}">
                                             <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                                         </li>
                                     @endforeach
                 
-                                    @if($tuition->hasMorePages())
+                                    @if($merchandise->hasMorePages())
                                         <li class="page-item">
-                                            <a class="page-link" href="{{ $tuition->nextPageUrl() }}">Next</a>
+                                            <a class="page-link" href="{{ $merchandise->nextPageUrl() }}">Next</a>
                                         </li>
                                     @else
                                         <li class="page-item disabled">

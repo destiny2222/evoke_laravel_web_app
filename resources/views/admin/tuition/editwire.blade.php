@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin.tuition-payment-complete', $tuitions->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.tuition-payment-wire-processing', $tuitions->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="row">

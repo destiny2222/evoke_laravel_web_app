@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="bdc_container ">
-            <div class="bdc_title tab-link active">BDC</div>
+            <div class="bdc_title tab-link active">Corporate Service</div>
         </div>
        <div class="row">
         <div class="col-lg-12 col-12">

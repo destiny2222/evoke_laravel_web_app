@@ -20,7 +20,8 @@ class VisaApplication extends Model
        'user_password',
        'username',
        'visa_type',
-       'user_id'
+       'user_id',
+       'done',
     ];
 
    public function user(){

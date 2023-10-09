@@ -33,7 +33,6 @@ class StoreRequest extends FormRequest
             'swift_code' =>'nullable|string',
             'route_number' =>'nullable|numeric',
             'reference_number' =>'nullable|string',
-            'total_amount' =>'nullable|numeric',
         ];
     }
 
@@ -47,8 +46,8 @@ class StoreRequest extends FormRequest
            'swift_code'=>$this->swift_code,
             'route_number'=>$this->route_number,
            'reference_number'=>$this->reference_number,
-            'total_amount'=>$this->total_amount,
             'user_id'=>$this->user_id,
         ]);
+        return true;
     }
 }

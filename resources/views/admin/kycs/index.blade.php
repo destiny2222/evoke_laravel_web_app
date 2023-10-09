@@ -7,8 +7,7 @@
                 <h6 class="pb-1 mb-4 text-muted">Approve User</h6>
             </div>
         </div>
-
-
+                    
         <div class="row">
 
             <!-- Hoverable Table rows -->
@@ -104,9 +103,9 @@
                                 </td>
                                 <td>
                                     <div class="hstack d-flex gap-2 ">
-                                        <a href="#modaldemo8" class="fs-14 lh-1" data-bs-effect="effect-scale" data-bs-toggle="modal">
+                                        <a href="{{ route('admin.kyc.edit', $events->id) }}" class="fs-14 lh-1" >
                                             <button class="btn btn-primary-gradient btn-wave btn-sm waves-effect waves-light">
-                                                <i class="ri-edit-line"></i>{{ __('Approve') }} 
+                                                <i class="ri-edit-line"></i>{{ __('Edit') }} 
                                             </button>
                                         </a>
                                         <a href="javascript:void(0);" class="fs-14 lh-1">
@@ -121,7 +120,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            @include('admin.kycs.edit')
+                            {{-- @include('admin.kycs.edit') --}}
                             @endforeach
                           @endif  
                             

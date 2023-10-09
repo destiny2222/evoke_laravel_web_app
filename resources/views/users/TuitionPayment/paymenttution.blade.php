@@ -10,17 +10,16 @@
                         <h2>Application Fee</h2>
                         <span class='msg' style="color: red; font-size: 13px;"></span>
                         <br>
-                        <p>Amount: <input type="text" name="amount" value="{{ $pay->amount }}" disabled style="border: none" id=""> </p>
-                        <p>Service Charge: <input type="text" name="serviceCharge" value="{{ $charges->tuition_charge_amount }}" disabled style="border:none"  id=""> </p>
-                        <p>
-                            Total amount: 
-                            <input type="text" name="total" class="total-amount" id="" value="{{  $totalPay  }}" disabled style="border:none">  
-                        </p>
+                        <p>Amount: ${{ $pay->amount }} </p>
+                        <p>Service Charge: {{ $charges->tuition_charge_amount }}%</p>
+                        <p>Total amount: <span id="total">${{  $totalPay  }}</span></p>
                         <div>
                             <button type="button"  class="submit-form w-100 next">Confirm and Continue</button>
                         </div>
                     </div>
-    
+                    <input type="text" name="amount" value="{{ $pay->amount }}" hidden style="border: none" id="">
+                    <input type="text" name="serviceCharge" value="{{ $charges->tuition_charge_amount }}" hidden style="border:none"  id=""> 
+                    <input type="text" name="total" class="total-amount" id="" hidden value="{{  $totalPay  }}"  style="border:none">  
                     <div class="slide-two">
                         <span class='msg2' style="color: red; font-size: 13px;"></span><br>
                         <p id='back'><i class="fa fa-arrow-left"></i> <span id='name' style="color: #383838;"></span></p><br>
@@ -34,7 +33,7 @@
                                 <div class="col-lg-12">
                                     <ul class="card-payment-ul">
                                         <li  class="card-payment m-b-1" style="display: flex;">
-                                            <h4>Make payment with Balance: </h4>
+                                            <h4>Make payment with Balance: ${{ number_format(auth()->user()->userwallet->amount,2 ) }} </h4>
                                         </li>
                                         <li class="card-payment m-b-1" style="display: flex;">
                                             <img src="{{ asset('assets/img/local.jpg') }}" alt="">   
@@ -94,12 +93,12 @@
         slide_two.classList.remove('slide-two-toggle')
     });
 
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     var amount = parseFloat(document.querySelector('input[name="amount"]').value);
-    //     var serviceCharge = parseFloat(document.querySelector('input[name="serviceCharge"]').value);
-    //     var total = amount + serviceCharge;
-    //     document.getElementById('total').value = total;
-    // });
+    document.addEventListener('DOMContentLoaded', function() {
+        var amount = parseFloat(document.querySelector('input[name="amount"]').value);
+        var serviceCharge = parseFloat(document.querySelector('input[name="serviceCharge"]').value);
+        var total = amount + serviceCharge;
+        document.getElementById('total').value = total;
+    });
 
 
     document.querySelector('form').addEventListener('submit', function(event) {

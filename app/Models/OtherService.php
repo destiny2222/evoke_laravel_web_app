@@ -20,5 +20,11 @@ class OtherService extends Model
         'reference_number',
         'total_amount',
         'user_id',
+        'payment_method',
+        'done'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+     }
 }

@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Kyc;
+use App\Models\User;
+use App\Notifications\KycNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KycContainer extends Controller
 {
@@ -87,16 +90,32 @@ class KycContainer extends Controller
     public function update(Request $request, $id)
     {
         $kyc = Kyc::findOrFail($id);
-        try {
+        $useremail = $kyc->user->email;
+        $user = User::where('email', $useremail)->first();
+        if($kyc){
             $userid = $request->input('user_id');
             $kyc->update([
+                'gender'=>$request->input('gender'),
+                'marital_status'=>$request->input('marital_status'),
+                'date_birth'=>$request->input('date_birth'),
+                'nationality'=>$request->input('nationality'),
+                'street_address'=>$request->input('street_address'),
+                'street_address_2'=>$request->input('street_address_2'),
+                'proof_of_address'=>$request->input('proof_of_address'),
+                'documents'=>$request->input('documents'),
+                'data_sign'=>$request->input('data_sign'),
                 'approve_status' => $request->has('approve_status') ? 1 : 0,
                 'user_id' => $userid,
             ]);
-            return redirect(route('admin.kyc.index'))->with('success', 'Approved Successfuly');
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
-            return redirect(route('admin.kyc.index'))->with('error', 'Oops',  'Something went worry');
+
+            Alert::success('success', 'Approved Successfuly');
+            if ($kyc->approve_status == 1){
+                $user->notify(new KycNotification($kyc));
+            }
+            return redirect(route('admin.kyc.index'));
+        } else{
+            Alert::success('error', 'Oops Something went worry');
+            return redirect(route('admin.kyc.index'));
         }
     }
 
@@ -108,13 +127,14 @@ class KycContainer extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $kyc = Kyc::findOrFail($id);
+        $kyc = Kyc::findOrFail($id);
+        if($kyc) {
             $kyc->delete();
-            return redirect(route('admin.kyc.index'))->with('success', 'Successfuly Deleted');
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
-            return redirect(route('admin.kyc.index'))->with('error', 'Oops',  'Something went worry');
+            Alert::success('success', 'Successfuly Deleted');
+            return redirect(route('admin.kyc.index'));
+        } else {
+            Alert::error('error', 'Oops',  'Something went worry');
+            return redirect(route('admin.kyc.index'));
         }
     }
 }

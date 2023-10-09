@@ -3,46 +3,46 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\OtherService\StoreRequest;
-use App\Models\OtherService;
+use App\Http\Requests\Merchandise\MerchandiseRequest;
+use App\Models\Merchandise;
 use App\Models\TransactionCharges;
 use App\Models\UserWallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redirect;
 
-class OtherserviceController extends Controller
+class MerchandiseController extends Controller
 {
 
-
-    
-    public function storeOtherservice(StoreRequest  $request){
-        if ($request->storeService()) {
-            return  redirect()->route('otherservice-pay');
-        }
-        return back()->with('error', 'Something went wrong');
-    }
-
-    public function otherPay(){
-        $otherservice = OtherService::where('user_id', auth()->user()->id)->latest()->first();
+    public function MerchandisePay(){
+        $merchandise = Merchandise::where('user_id', auth()->user()->id)->latest()->first();
         $charge = TransactionCharges::all();
         foreach($charge as $charges)
-        $chargesAmount =  $charges->other_service + $otherservice->amount;
-        if ($otherservice) {
-            $otherservice->update([
+        $chargesAmount =  $charges->merchant_charge_amount + $merchandise->amount;
+        if ($merchandise) {
+            $merchandise->update([
                 'total_amount'=>$chargesAmount,
             ]);
         }
-      
-        return view('users.otherservice.pay', compact('otherservice', 'charges'));
+        return view('users.merchandise.pay', compact('merchandise', 'charges'));
+    }
+    public function merchandiseStore(MerchandiseRequest $request){
+        if ($request->createMerhance()) {
+            return redirect()->route('merchandise-pay');
+        }else{
+            return back()->with('error', 'Something went wrong');
+        }
     }
 
-    public function otherservicePayment(Request $request){
+
+    public function MerchandisePayment(Request $request){
+
         $reference = 'VS_' . uniqid();
         $authnication = getenv('SECRET_KEY');
         
         // Get the selected payment method from the form submission
         $selectedPaymentMethod = $request->input('paymentMethod');
-        $totalamount = OtherService::where('user_id', auth()->user()->id)->latest()->first();
+        $totalamount = Merchandise::where('user_id', auth()->user()->id)->latest()->first();
         $requestData = [];
         if ($selectedPaymentMethod == 'balance') {
             $userWallet = UserWallet::where('user_id', auth()->user()->id)->first();
@@ -55,7 +55,7 @@ class OtherserviceController extends Controller
                     'amount' => $userbalance,
                 ]);
 
-                $payment = OtherService::where('user_id', auth()->user()->id)->latest()->first();
+                $payment = Merchandise::where('user_id', auth()->user()->id)->latest()->first();
                 $payment->paid = 1;
                 $payment->payment_method = $selectedPaymentMethod;
                 $payment->save();   
@@ -76,7 +76,7 @@ class OtherserviceController extends Controller
                 'payment_options'=> "card, bank, ussd,bank transfer",
                 'tx_ref' => $reference,
                 'currency' => "NGN",
-                'redirect_url' => route('otherservice-pay-callback'),
+                'redirect_url' => route('merchandise-cellback'),
 
                 'customer' => [
                     'email' => auth()->user()->email,
@@ -108,17 +108,19 @@ class OtherserviceController extends Controller
             return view('frontend.checkout')->with('paymentLink', $paymentLink); 
         } else {
             return back()->with('error', 'Oops something went wrong. Please refresh the page and try again');
-        }  
+        }   
     }
 
-    public function otherservicePayCallback(Request $request){
+
+    public function handlecallback(Request $request)
+    {
         $status = $request->input('status');
 
         if ($status == 'successful') {
             $paymentData = session('pay_merchandise');
     
             if ($paymentData) {
-                $payment = OtherService::where('user_id', auth()->user()->id)->latest()->first();
+                $payment = Merchandise::where('user_id', auth()->user()->id)->latest()->first();
                 $payment->paid = 1;
                 $payment->payment_method = $paymentData['payment_method'];
                 $payment->save();   
@@ -127,14 +129,12 @@ class OtherserviceController extends Controller
                 $request->session()->forget('pay_merchandise');
                 return redirect()->route('initiator-page')->with('success', 'Payment payed successful');
             } else {
-                return redirect()->route('otherservice-page')->with('error', 'Payment data not found');
+                return redirect()->route('merchandise-page')->with('error', 'Payment data not found');
             }
         } elseif ($status == 'cancelled') {
-            return redirect()->route('otherservice-page')->with('error', 'Payment cancelled');
+            return redirect()->route('merchandise-page')->with('error', 'Payment cancelled');
         } else {
-            return redirect()->route('otherservice-page')->with('error', 'Payment failed');
+            return redirect()->route('merchandise-page')->with('error', 'Payment failed');
         }
     }
 }
-
-

@@ -20,7 +20,8 @@ class TuitionPayment extends Model
         'portal_link',
         'service_type',
         'college_name',
-        'paid'
+        'paid',
+        'done'
     ];
 
     public function user(){

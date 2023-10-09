@@ -86,7 +86,7 @@
                                                     @method('put')
                                                     @csrf
                                                 </form>
-                                                <form id="delete-form" clas="d-none" action="{{ route('admin.user-delete', $usering->id) }}" method="post">
+                                                <form id="delete-form" clas="d-none" onclick="return confirm('Are you sure?');" action="{{ route('admin.user-delete', $usering->id) }}" method="post">
                                                     @method('delete')
                                                     @csrf
                                                 </form>        

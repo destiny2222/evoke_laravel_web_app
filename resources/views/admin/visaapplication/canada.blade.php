@@ -28,6 +28,7 @@
                                     <th scope="col">User Password</th>
                                     <th scope="col">Visa Fee Amount</th>
                                     <th scope="col">Total charge</th>
+                                    <th scope="col">Deposit</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -46,21 +47,37 @@
                                             </td>
                                             <td>
                                                 @if ($visaapplications['paid'] == '1') 
-                                                <span class="badge bg-success-transparent">Completed</span>
+                                                  <span class="badge bg-success-transparent">paid</span>
                                                 @else
-                                                <span class="badge bg-danger-transparent">padding</span>
+                                                  <span class="badge bg-danger-transparent">Not paid </span>
                                                 @endif
                                             </td>
                                             <td>
-                                                <form action="{{   route('admin.visa-application-delete', $visaapplications->id) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" class="btn btn-sm btn-danger btn-wave">
-                                                        <i class="ri-delete-bin-line align-middle  d-inline-block"></i>Delete
+                                                @if ($visaapplications['done'] == 'completed')
+                                                   <span class="badge bg-success-transparent">Completed</span>
+                                                @elseif($visaapplications['done'] == 'processing')
+                                                   <span class="badge bg-warning-transparent">Processing</span>   
+                                                @else
+                                                  <span class="badge bg-danger-transparent">Pending</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <div class="d-flex gap-2">
+                                                    <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $visaapplications->id }}" class="btn btn-sm btn-info btn-wave">
+                                                        <i class="ri-edit-line"></i>
+                                                        Edit
                                                     </button>
-                                                </form>
+                                                    <form action="{{   route('admin.visa-application-delete', $visaapplications->id) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-sm btn-danger btn-wave">
+                                                            <i class="ri-delete-bin-line align-middle  d-inline-block"></i>Delete
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
+                                        @include('admin.visaapplication.edit')
                                 @endforeach
                             </tbody>
                         </table>

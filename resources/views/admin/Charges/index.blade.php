@@ -39,6 +39,7 @@
                                     <th scope="col">Corporate Charge Amount</th>
                                     <th scope="col">Merchant Charge Amount</th>
                                     <th scope="col">Flights Charge Amount</th>
+                                    <th scope="col">OtherService Amount</th>
                                     <th scope="col">BDC Charge Amount</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -52,6 +53,7 @@
                                     <td>{{  $charges['corporate_charge_amount']   }}</td>
                                     <td>{{  $charges['merchant_charge_amount']   }}</td>
                                     <td>{{  $charges['flights_charge_amount']  }}</td>
+                                    <td>{{  $charges['other_service']  }}</td>
                                     <td>{{  $charges['bdc_charge']  }}</td>
                                         
                                     </td>

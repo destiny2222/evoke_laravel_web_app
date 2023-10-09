@@ -44,6 +44,13 @@
                         @enderror
                     </div>
                     <div class="col-12 mb-3">
+                        <label class="form-label" for="basic-default-company">{{  __('OtherService Amount') }}</label>
+                        <input type="text"   name="other_service" value="{{ $charges->other_service }}" class="form-control  @error('other_service') is-invalid @enderror" id="basic-default-company" placeholder="" />
+                        @error('other_service')
+                        <span class="invalid-feedback" role="alert">{{  $message  }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-12 mb-3">
                         <label class="form-label" for="basic-default-company">{{  __('Flights Charge Amount') }}</label>
                         <input type="text"   name="flights_charge_amount" value="{{ $charges->flights_charge_amount }}" class="form-control  @error('flights_charge_amount') is-invalid @enderror" id="basic-default-company" placeholder="" />
                         @error('flights_charge_amount')

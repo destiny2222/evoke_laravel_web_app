@@ -23,7 +23,8 @@ class TuitionPaymentWire extends Model
         'service_type',
         'college_name',
         'amount',
-        'paid'
+        'paid',
+        'done'
     ];
 
     public function user(){

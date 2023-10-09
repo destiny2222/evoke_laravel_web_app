@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('merchandises', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('visa_applications', function (Blueprint $table) {
+            $table->set('done', ['pending','processing', 'completed'])->default('pending');
         });
     }
 
@@ -26,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('merchandises');
+        Schema::table('visa_applications', function (Blueprint $table) {
+            $table->set('done', ['pending','processing', 'completed'])->default('pending');
+        });
     }
 };

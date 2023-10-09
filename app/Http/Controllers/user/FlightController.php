@@ -51,110 +51,110 @@ class FlightController extends Controller
     }
 
 
-    public function flightsPaymentAction(Request $request){
+    // public function flightsPaymentAction(Request $request){
 
-        $request->validate([
-            'firstname' =>'required',
-            'lastname' =>'required',
-            'email' =>'required',
-            'amount' =>'required',
-            'bookinglink' =>'required',
-            'other_information' =>'nullable',
-        ]);
-        try{
-        $reference = 'VS_' . uniqid();
-        $authnication = getenv('SECRET_KEY');
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer '  .$authnication,
-            'Content-Type' => 'application/json'
-        ])->post('https://api.flutterwave.com/v3/payments', [
-                'amount' => $request->amount,
-                'email' => $request->email,
-                'payment_options'=> "card, bank, ussd,bank transfer",
-                'tx_ref' => $reference,
-                'currency' => "USD",
-                'redirect_url' => route('callback'),
+    //     $request->validate([
+    //         'firstname' =>'required',
+    //         'lastname' =>'required',
+    //         'email' =>'required',
+    //         'amount' =>'required',
+    //         'bookinglink' =>'required',
+    //         'other_information' =>'nullable',
+    //     ]);
+    //     try{
+    //     $reference = 'VS_' . uniqid();
+    //     $authnication = getenv('SECRET_KEY');
+    //     $response = Http::withHeaders([
+    //         'Authorization' => 'Bearer '  .$authnication,
+    //         'Content-Type' => 'application/json'
+    //     ])->post('https://api.flutterwave.com/v3/payments', [
+    //             'amount' => $request->amount,
+    //             'email' => $request->email,
+    //             'payment_options'=> "card, bank, ussd,bank transfer",
+    //             'tx_ref' => $reference,
+    //             'currency' => "USD",
+    //             'redirect_url' => route('callback'),
 
-                'customer' => [
-                    'email' => $request->email,
-                    "phone_number" => $request->phone,
-                    "name" => $request->name
-                ],
+    //             'customer' => [
+    //                 'email' => $request->email,
+    //                 "phone_number" => $request->phone,
+    //                 "name" => $request->name
+    //             ],
 
-                "customizations" => [
-                    "title" => 'Movie Ticket',
-                    "description" => "20th October"
-                ]
-        ]);
-        $responseData = $response->json();
+    //             "customizations" => [
+    //                 "title" => 'Movie Ticket',
+    //                 "description" => "20th October"
+    //             ]
+    //     ]);
+    //     $responseData = $response->json();
 
-            if (isset($responseData['status']) && $responseData['status'] === 'success') {
-                session(['flightpayment_data' => [
-                    'user_id' => $request->input('user_id'),
-                    'firstname' => $request->input('firstname'),
-                    'lastname' => $request->input('lastname'),
-                    'email' => $request->input('email'),
-                    'reference_id' => $reference,
-                    'bookinglink' => $request->input('bookinglink'),
-                    'other_information' => $request->input('other_information'),
-                    'amount' => $request->input('amount'),
-                ]]);
-                $paymentLink = $responseData['data']['link'];
-                return view('frontend.checkout')->with('paymentLink', $paymentLink); 
-            } else {
-                return back()->with('error', 'Oops something went wrong. Please refresh the page and try again');
-            }
-         }catch(\Exception $exception) {
-            Log::error($exception->getMessage());
-            return Redirect::back()->with(['Page Expired' => 'The token has expired. Please refresh the page and try again.',
-            'type' => 'error']);
-         }
-    }
+    //         if (isset($responseData['status']) && $responseData['status'] === 'success') {
+    //             session(['flightpayment_data' => [
+    //                 'user_id' => $request->input('user_id'),
+    //                 'firstname' => $request->input('firstname'),
+    //                 'lastname' => $request->input('lastname'),
+    //                 'email' => $request->input('email'),
+    //                 'reference_id' => $reference,
+    //                 'bookinglink' => $request->input('bookinglink'),
+    //                 'other_information' => $request->input('other_information'),
+    //                 'amount' => $request->input('amount'),
+    //             ]]);
+    //             $paymentLink = $responseData['data']['link'];
+    //             return view('frontend.checkout')->with('paymentLink', $paymentLink); 
+    //         } else {
+    //             return back()->with('error', 'Oops something went wrong. Please refresh the page and try again');
+    //         }
+    //      }catch(\Exception $exception) {
+    //         Log::error($exception->getMessage());
+    //         return Redirect::back()->with(['Page Expired' => 'The token has expired. Please refresh the page and try again.',
+    //         'type' => 'error']);
+    //      }
+    // }
 
 
-    public function handlecallback(Request $request)
-    {
-        $status = $request->input('status');
+    // public function handlecallback(Request $request)
+    // {
+    //     $status = $request->input('status');
 
-        if ($status == 'successful') {
-            $paymentData = session('flightpayment_data');
+    //     if ($status == 'successful') {
+    //         $paymentData = session('flightpayment_data');
 
-            if ($paymentData) {
-                $user_id = $paymentData['user_id'];
-                $firstname = $paymentData['firstname'];
-                $lastname = $paymentData['lastname'];
-                $email = $paymentData['email'];
-                $other_information = $paymentData['other_information'];
-                $reference_id = $paymentData['reference_id'];
-                $bookinglink = $paymentData['bookinglink'];
-                $amount = $paymentData['amount'];
+    //         if ($paymentData) {
+    //             $user_id = $paymentData['user_id'];
+    //             $firstname = $paymentData['firstname'];
+    //             $lastname = $paymentData['lastname'];
+    //             $email = $paymentData['email'];
+    //             $other_information = $paymentData['other_information'];
+    //             $reference_id = $paymentData['reference_id'];
+    //             $bookinglink = $paymentData['bookinglink'];
+    //             $amount = $paymentData['amount'];
 
-                $pay = Payment::create([
-                    'user_id' => $user_id,
-                    'firstname' => $firstname,
-                    'lastname' => $lastname,
-                    'email' => $email,
-                    'amount' => $amount,
-                    'other_information' => $other_information,
-                    'reference_id' => $reference_id,
-                    'bookinglink' => $bookinglink,
-                    'payment_status'=>true
-                ]);
-                $pay->save();
-                $request->session()->forget('flightpayment_data');
-                $adminmail = 'admin@gmail.com';   
-                $user = User::where('email', auth()->user()->id);
-                Notification::sendNow($user, $adminmail  , new InvoicePaid($pay));
-                return back()->with('success', 'Payment payed successful');
-            } else {
-                return redirect()->route('flightpayment')->with('error', 'Payment data not found');
-            }
-        } elseif ($status == 'cancelled') {
-            return redirect()->route('flightpayment')->with('error', 'Payment cancelled');
-        } else {
-            return redirect()->route('flightpayment')->with('error', 'Payment failed');
-        }
-    }
+    //             $pay = Payment::create([
+    //                 'user_id' => $user_id,
+    //                 'firstname' => $firstname,
+    //                 'lastname' => $lastname,
+    //                 'email' => $email,
+    //                 'amount' => $amount,
+    //                 'other_information' => $other_information,
+    //                 'reference_id' => $reference_id,
+    //                 'bookinglink' => $bookinglink,
+    //                 'payment_status'=>true
+    //             ]);
+    //             $pay->save();
+    //             $request->session()->forget('flightpayment_data');
+    //             $adminmail = 'admin@gmail.com';   
+    //             $user = User::where('email', auth()->user()->id);
+    //             Notification::sendNow($user, $adminmail  , new InvoicePaid($pay));
+    //             return back()->with('success', 'Payment payed successful');
+    //         } else {
+    //             return redirect()->route('flightpayment')->with('error', 'Payment data not found');
+    //         }
+    //     } elseif ($status == 'cancelled') {
+    //         return redirect()->route('flightpayment')->with('error', 'Payment cancelled');
+    //     } else {
+    //         return redirect()->route('flightpayment')->with('error', 'Payment failed');
+    //     }
+    // }
 
 
 

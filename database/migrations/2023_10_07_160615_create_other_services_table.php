@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('route_number')->nullable();
             $table->string('reference_number')->nullable();
             $table->integer('total_amount')->nullable();
+            $table->string('payment_method')->nullable();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

@@ -12,7 +12,7 @@
                 <div class="others_serice_payment_title">
                     <h2 class="">
                         </span>
-                        Other Services Payments
+                        Other Services Payments 
                     </h2>
                     <h5>Provide your payment instruments.</h5>
                 </div>
@@ -69,10 +69,10 @@
                                 <div class="col-lg-6 col-12 ">
                                     <div class="form-group">
                                         <label> Amount*</label>
-                                        <input type="number" name="amount" class="applicant-input" id="amount" oninput="calculate()">
+                                        <input type="number" name="amount" class="applicant-input" id="amount">
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-12" id="chargeDiv" style="display:none;">
+                                {{-- <div class="col-lg-6 col-12" id="chargeDiv" style="display:none;">
                                     <div class="form-group">
                                         <label>Service Charge*</label>
                                         <input type="number" value="{{ $charges->other_service  }}" readonly class="applicant-input" id="charge" oninput="calculate()">
@@ -83,7 +83,7 @@
                                         <label>Total Amount*</label>
                                         <input type="number" name="total_amount" class="applicant-input" id="total" readonly>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                 {{-- <div class="col-lg-12 col-12 ">
                                     <div class="form-body-checkbox">
