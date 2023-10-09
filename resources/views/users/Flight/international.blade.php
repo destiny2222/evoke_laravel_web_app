@@ -28,22 +28,26 @@
                         </div>
                         <div class="col-lg-12 m-b-3">
                             <label for="">Round Trip or One Way</label>
-                            <ul class="radio-buttons-w3-agileits">
-                                <li >
-                                   <div onclick="OpenDate()">
-                                        <input type="checkbox" id="a-option">
-                                        <label for="a-option" >Return</label>
-                                   </div>
-                                </li>
-                                <li>
-                                   <input type="checkbox" id="b-option" value="round trip" name="round_trip">
-                                   <label for="b-option" >One Way</label>
-                                </li>
-                            </ul>
-                            <div class="col-lg-6 m-b-3" id="flight_return_date" style="display: none">
-                                <label for="">Return Date</label>
-                                <input type="date" class="applicant-input"  name="flight_return_date" placeholder="Choose date for return" >
+                            <div>
+                                <input type="radio"
+                                    id="Netflix"
+                                    name="round_trip"
+                                    value="Netflix" class="open">
+                                <label onclick="()" for="Netflix">Round Trip</label>
                             </div>
+                        
+                            <div>
+                                <input type="radio"
+                                    id="Audi"
+                                    name="round_trip"
+                                    value="One Way">
+                                <label for="Audi">One Way</label>
+                            </div>
+                            
+                        </div>
+                        <div class="col-lg-12 m-b-3" id="flight_return_date" style="display: none">
+                            <label for="">Return Date</label>
+                            <input type="date" class="applicant-input"  name="flight_return_date" placeholder="Choose date for return" >
                         </div>
                         <div class="col-lg-6 m-b-3">
                             <label for="">Date of Departure</label>
@@ -146,10 +150,22 @@
 
 @push('scripts')
     <script>
-        function OpenDate(){
+        // function OpenDate(){
+        //     document.getElementById("flight_return_date").style.display = "block";
+        //     console.log('working');
+        // }
+
+        const open_date = document.querySelector("#Netflix");
+        const close_date = document.querySelector("#Audi");
+
+        open_date.addEventListener("click", function(){
             document.getElementById("flight_return_date").style.display = "block";
-            console.log('working');
-        }
+        });
+
+        close_date.addEventListener("click", function(){
+            document.getElementById("flight_return_date").style.display = "none";
+        });
+
     </script>
 @endpush
 

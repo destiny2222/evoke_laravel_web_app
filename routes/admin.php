@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\CorporateController;
 use App\Http\Controllers\Admin\FlightController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\KycContainer;
@@ -47,6 +48,11 @@ Route::prefix('admin')->name('admin.')->group(function (){
     Route::get('/merchandise', [MerchandiseController::class,'indexMerchandise'])->name('merchandise-page');
     Route::put('/merchandise/{id}/completed', [MerchandiseController::class,'MerchandiseCompleted'])->name('merchandise-complete');
     Route::delete('/merchandise/{id}/delete', [MerchandiseController::class,'MerchandiseDelete'])->name('merchandise-delete');
+
+    // Corporate service
+    Route::get('/corporate-service', [CorporateController::class,'corporatePage'])->name('corporate-service-page');
+    Route::put('/corporate-service/{id}/update', [CorporateController::class,'corporateUpdate'])->name('corporate-service-update');
+    Route::delete('/corporate-service/{id}/delete', [CorporateController::class,'corporateDelete'])->name('corporate-service-delete');
 
 
     // otherservices otherService

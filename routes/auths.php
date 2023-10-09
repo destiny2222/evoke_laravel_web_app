@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\user\CorporateController;
 use App\Http\Controllers\user\DepositController;
 use App\Http\Controllers\user\FlightController;
 use App\Http\Controllers\user\HomeController;
@@ -62,8 +63,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified', 'che
     Route::get('/tuition/pay/callback', [PageController::class, 'handlecallback'])->name('tuition-callback');
     
     // corporate service subtitle
-    Route::get('/mega-millions', [PageController::class, 'Megamill'])->name('mega-page');  
-    Route::get('/power-ball', [PageController::class, 'Powerball'])->name('power-page');
+    Route::post('/corporate/store', [CorporateController::class, 'store'])->name('store-page');  
+
 
 
     // Merchanndise controller

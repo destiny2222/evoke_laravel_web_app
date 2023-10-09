@@ -126,7 +126,7 @@
                                     class="fe fe-chevron-right side-menu__angle"></i></a>
                             <ul class="slide-menu child2">
                                 <li class="slide">
-                                    <a href="#" class="side-menu__item">BDC </a>
+                                    <a href="{{ route('admin.corporate-service-page')  }}" class="side-menu__item">Corporate </a>
                                 </li>
                             </ul>
                         </li>
