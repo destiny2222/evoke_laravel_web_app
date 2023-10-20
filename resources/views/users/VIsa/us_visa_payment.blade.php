@@ -8,8 +8,8 @@
                 <div class="card shadow-lg p-l-4 p-t-4 p-r-4 p-b-4">
                     <div class="card-body">
                         @if ($visaApplication)
-                        <p class="pay_p">Service Fee: <span  class="visa_span">{{ $charge->sum('visa_charge_amount') }}</span></p>
-                        <p class="pay_p">Total Charge: <span  class="visa_span">{{ $visaApplication->total_charge }}</span></p>
+                        <p class="pay_p">Service Fee: <span  class="visa_span">{{ $charge->sum('visa_charge_amount') }}%</span></p>
+                        <p class="pay_p">Total Charge: <span  class="visa_span">$ {{ $visaApplication->total_charge }}</span></p>
                         @endif
                         <form action="{{  route('initiate-page') }}" method="post" class="visa_form">
                             @csrf

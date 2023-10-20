@@ -17,9 +17,9 @@
                             <button type="button"  class="submit-form w-100 next">Confirm and Continue</button>
                         </div>
                     </div>
-                    <input type="text" name="amount" value="{{ $otherservice->amount }}" hidden style="border: none" id="">
-                    <input type="text" name="serviceCharge" value="{{ $charges->other_service }}" hidden style="border:none"  id=""> 
-                    <input type="text" name="total" class="total-amount" id="" hidden value="{{  $otherservice->total_amount  }}"  style="border:none">  
+                    <input type="text" name="amount" value="{{ $otherservice->amount }}" hidden  id="">
+                    <input type="text" name="serviceCharge" value="{{ $charges->other_service }}" hidden  id=""> 
+                    <input type="text" name="total" class="total-amount" id="" hidden value="{{  $otherservice->total_amount  }}">  
                     <div class="slide-two">
                         <span class='msg2' style="color: red; font-size: 13px;"></span><br>
                         <p id='back'><i class="fa fa-arrow-left"></i> <span id='name' style="color: #383838;"></span></p><br>

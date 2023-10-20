@@ -34,7 +34,7 @@
                                     <th scope="col">Email</th>
                                     <th scope="col">Subject</th>
                                     <th scope="col">Message</th>
-                                    <th scope="col">Action</th>
+                                    {{-- <th scope="col">Action</th> --}}
                                 </tr>
                             </thead>
                             <tbody> 
@@ -47,7 +47,7 @@
                                     <td>
                                         {{  $mail['message']  }}
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         <form action="{{ route('admin.send-mail-delete', $mail->id) }}" method="post">
                                             @csrf
                                             @method('delete')
@@ -55,7 +55,7 @@
                                                 <i class="ri-delete-bin-line align-middle  d-inline-block"></i>Delete
                                             </button>
                                         </form>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>

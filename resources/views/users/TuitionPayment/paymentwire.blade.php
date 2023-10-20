@@ -10,17 +10,19 @@
                         <h2>Application Fee</h2>
                         <span class='msg' style="color: red; font-size: 13px;"></span>
                         <br>
-                        <p>Amount: <input type="text" name="amount" value="{{  number_format( $wirefransfer->amount) }}" disabled style="border: none" id=""> </p>
-                        <p>Service Charge: <input type="text" name="serviceCharge" value="{{ number_format($charges->tuition_charge_amount) }}" disabled style="border:none"  id=""> </p>
+                        <p>Amount: ${{  number_format( $wirefransfer->amount) }}  </p>
+                        <p>Service Charge: {{ number_format($charges->tuition_charge_amount) }}% </p>
                         <p>
                             Total amount: 
-                            <input type="text" name="total" class="total-amount" id="" value="{{  number_format($totalPay)  }}" disabled style="border:none">  
+                            ${{  number_format($totalPay)  }}
                         </p>
                         <div>
                             <button type="button"  class="submit-form w-100 next">Confirm and Continue</button>
                         </div>
                     </div>
-    
+                    <input type="text" name="amount" value="{{  number_format( $wirefransfer->amount) }}" hidden id="">
+                    <input type="text" name="total" class="total-amount" id="" value="{{  number_format($totalPay)  }}"  hidden> 
+                    <input type="text" name="serviceCharge" hidden value="{{ number_format($charges->tuition_charge_amount) }}"  hidden  id="">
                     <div class="slide-two">
                         <span class='msg2' style="color: red; font-size: 13px;"></span><br>
                         <p id='back'><i class="fa fa-arrow-left"></i> <span id='name' style="color: #383838;"></span></p><br>

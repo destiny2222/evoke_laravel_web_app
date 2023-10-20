@@ -25,12 +25,17 @@ class OtherserviceController extends Controller
     public function otherPay(){
         $otherservice = OtherService::where('user_id', auth()->user()->id)->latest()->first();
         $charge = TransactionCharges::all();
-        foreach($charge as $charges)
+        foreach($charge as $charges){}
         $chargesAmount =  $charges->other_service + $otherservice->amount;
-        if ($otherservice) {
+        
+        if ($otherservice->amount == null) {
+           return back()->with('error', 'Amount must be provided');
+        }elseif($otherservice){
             $otherservice->update([
                 'total_amount'=>$chargesAmount,
             ]);
+        }else{
+            return back()->with('error', 'An error occurred');
         }
       
         return view('users.otherservice.pay', compact('otherservice', 'charges'));
@@ -42,13 +47,17 @@ class OtherserviceController extends Controller
         
         // Get the selected payment method from the form submission
         $selectedPaymentMethod = $request->input('paymentMethod');
+
         $totalamount = OtherService::where('user_id', auth()->user()->id)->latest()->first();
+       
+
         $requestData = [];
+
         if ($selectedPaymentMethod == 'balance') {
             $userWallet = UserWallet::where('user_id', auth()->user()->id)->first();
             if ($userWallet->amount < $totalamount->total_amount) {
-                return back()->withError('Insufficient wallet balance. Please choose another payment method.');
-            } else {
+                return back()->with('error', 'Insufficient wallet balance. Please choose another payment method.');
+            }else {
                 $userbalance = $userWallet->amount - $totalamount->total_amount;
 
                 $userWallet->update([

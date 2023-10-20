@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\user\CorporateController;
 use App\Http\Controllers\user\DepositController;
+use App\Http\Controllers\user\FeedBackController;
 use App\Http\Controllers\user\FlightController;
 use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\MerchandiseController;
 use App\Http\Controllers\user\OtherserviceController;
 use App\Http\Controllers\user\PageController;
+use App\Http\Controllers\user\TransactionsController;
 use App\Http\Controllers\user\VisaApplicationController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,9 +23,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified', 'che
     
     // user editing
     Route::put('/profile_update/{id}', [HomeController::class, 'update_profile'])->name('update-profile-page');
+    Route::post('/feedback', [FeedBackController::class, 'StoreFeedBack'])->name('feedback');
 
     //  pages j
-    Route::get('/manage', [PageController::class, 'Manage'])->name('manage-page');
+    Route::get('/manage', [TransactionsController::class, 'TransactionHistory'])->name('manage-page');
     Route::get('/initiator', [PageController::class, 'Initiator'])->name('initiator-page');
     Route::get('/help', [PageController::class, 'helps'])->name('help-page');
     Route::get('/setting', [HomeController::class, 'Setting'])->name('setting-page');
@@ -53,7 +56,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified', 'che
     Route::post('/tuition/store', [PageController::class, 'tuitionviaTransferStore'])->name('wire-transferstore');
     Route::get('/tuition/wire-transfer/payment', [PageController::class, 'tuitionPaymentWireView'])->name('wire-transfer-paymentView');
     Route::post('/tuition/wiretransfer/payment', [PageController::class, 'getPaymentWire'])->name('wire-transfer-payment');
-    Route::get('/tuition/pay/callback', [PageController::class, 'paymentCallback'])->name('tuition-wiretransfer-callback');
+    Route::get('/tuition/payment/callback', [PageController::class, 'paymentCallback'])->name('tuition-wiretransfer-callback');
 
     Route::get('/tuition/school-portal', [PageController::class, 'payschoolPortal'])->name('school-portal');
     Route::post('/tuition/portal', [PageController::class, 'payschoolPortalStore'])->name('store-portal');
@@ -64,6 +67,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified', 'che
     
     // corporate service subtitle
     Route::post('/corporate/store', [CorporateController::class, 'store'])->name('store-page');  
+
+    
 
 
 

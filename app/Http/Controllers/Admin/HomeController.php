@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\CorporateService;
 use App\Models\LocalFlight;
+use App\Models\Merchandise;
+use App\Models\OtherService;
 use App\Models\User;
 use App\Models\VisaApplication;
 use Illuminate\Http\Request;
@@ -26,6 +29,9 @@ class HomeController extends Controller
         $user_count = User::count();
         $localflight = LocalFlight::count();
         $visafee = VisaApplication::count();
+        $merchandise = Merchandise::count();
+        $corporateservice = CorporateService::count();
+        $otherservice = OtherService::count();
 
         $previousMonthUserCount = User::whereYear('created_at', Carbon::now()->subMonth()->year)
             ->whereMonth('created_at', Carbon::now()->subMonth()->month)
@@ -46,7 +52,7 @@ class HomeController extends Controller
         }
 
 
-        $previousMonthvisafeeCount = LocalFlight::whereYear('created_at', Carbon::now()->subMonth()->year)
+        $previousMonthvisafeeCount = VisaApplication::whereYear('created_at', Carbon::now()->subMonth()->year)
         ->whereMonth('created_at', Carbon::now()->subMonth()->month)
         ->count();
 
@@ -55,13 +61,46 @@ class HomeController extends Controller
             $visafeeIncrease = (($visafee - $previousMonthvisafeeCount) / $previousMonthvisafeeCount) * 100;
         }
 
+        $previousMonthmerchandiseCount = Merchandise::whereYear('created_at', Carbon::now()->subMonth()->year)
+        ->whereMonth('created_at', Carbon::now()->subMonth()->month)
+        ->count();
+
+        $merchandiseIncrease = 0; 
+        if ($previousMonthmerchandiseCount > 0) {
+            $merchandiseIncrease = (($merchandise - $previousMonthmerchandiseCount) / $previousMonthmerchandiseCount) * 100;
+        }
+
+        $previousMonthcorporateserviceCount = CorporateService::whereYear('created_at', Carbon::now()->subMonth()->year)
+        ->whereMonth('created_at', Carbon::now()->subMonth()->month)
+        ->count();
+
+        $corporateserviceIncrease = 0; 
+        if ($previousMonthcorporateserviceCount > 0) {
+            $corporateserviceIncrease = (($corporateservice - $previousMonthcorporateserviceCount) / $previousMonthcorporateserviceCount) * 100;
+        }
+
+        $previousMonthotherserviceCount = OtherService::whereYear('created_at', Carbon::now()->subMonth()->year)
+        ->whereMonth('created_at', Carbon::now()->subMonth()->month)
+        ->count();
+
+        $otherserviceIncrease = 0; 
+        if ($previousMonthotherserviceCount > 0) {
+            $otherserviceIncrease = (($otherservice - $previousMonthotherserviceCount) / $previousMonthotherserviceCount) * 100;
+        }
+
         return view('admin.index', [
             'admin' => $admin,
             'user_count' => $user_count,
             'localflight' => $localflight,
-            'visafee' => $visafee,
             'FlightIncrease' => $FlightIncrease,
+            'visafee' => $visafee,
+            'otherservice' => $otherservice,
+            'corporateservice' => $corporateservice,
+            'merchandise' => $merchandise,
             'visafeeIncrease' => $visafeeIncrease,
+            'otherserviceIncrease' => $otherserviceIncrease,
+            'merchandiseIncrease' => $merchandiseIncrease,
+            'corporateserviceIncrease' => $corporateserviceIncrease,
             'percentageIncrease' => $percentageIncrease,
         ]);
     }

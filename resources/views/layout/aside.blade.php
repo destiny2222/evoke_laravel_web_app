@@ -169,9 +169,9 @@
                             <a href="javascript:void(0);" class="side-menu__item">Mail <i
                                     class="fe fe-chevron-right side-menu__angle"></i></a>
                             <ul class="slide-menu child2">
-                                <li class="slide">
+                                {{-- <li class="slide">
                                     <a href="{{ route('admin.send-mail-page') }}" class="side-menu__item">Mail</a>
-                                </li>
+                                </li> --}}
                                 <li class="slide">
                                     <a href="{{ route('admin.send-mail-create') }}" class="side-menu__item">Send Mail</a>
                                 </li>

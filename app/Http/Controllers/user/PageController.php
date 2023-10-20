@@ -408,7 +408,7 @@ class PageController extends Controller
                 ]
             ];
         } else {
-            return back()->with(['error' => 'Invalid payment option']);
+            return back()->with('error', 'Invalid payment option');
         }
         
         $response = Http::withHeaders([

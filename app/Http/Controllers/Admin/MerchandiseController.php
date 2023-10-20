@@ -21,8 +21,8 @@ class MerchandiseController extends Controller
     $merchandise = Merchandise::find($id);
       if ($merchandise) {
         // $merchandise->update(['done' => $request->has('done') ? 1 : 0]);
-        $done = $request->input('done'); 
-        $merchandise->update(['done'=> $done]);
+          $done = $request->input('done'); 
+          $merchandise->update(['done'=> $done]);
           Alert::success('Aply Successful');
           return back();
       } else {

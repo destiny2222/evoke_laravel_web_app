@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="row">
-                                <div class="col-xxl-6 col-lg-6 col-md-6 col-12">
+                                <div class="col-xxl-4 col-lg-4 col-md-4 col-12">
                                     <div class="card custom-card overflow-hidden">
                                         <div class="card-body">
                                             <div class="d-flex align-items-top justify-content-between">
@@ -50,13 +50,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xxl-6 col-lg-6 col-md-6 col-12">
+                                <div class="col-xxl-4 col-lg-4 col-md-4 col-12">
                                     <div class="card custom-card overflow-hidden">
                                         <div class="card-body">
                                             <div class="d-flex align-items-top justify-content-between">
                                                 <div>
                                                     <span class="avatar avatar-md avatar-rounded bg-secondary">
-                                                        <i class="ti ti-wallet fs-16"></i>
+                                                        <i class="ti ti-plane-inflight fs-16"></i>
                                                     </span>
                                                 </div>
                                                 <div class="flex-fill ms-3">
@@ -72,7 +72,7 @@
                                                         class="d-flex align-items-center justify-content-between mt-1">
                                                         <div>
                                                             <a class="text-secondary"
-                                                                href="javascript:void(0);">View All<i
+                                                                href="{{ route('admin.international-flight-page')  }}">View All<i
                                                                     class="ti ti-arrow-narrow-right ms-2 fw-semibold d-inline-block"></i></a>
                                                         </div>
                                                         <div class="text-end">
@@ -87,13 +87,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xxl-6 col-lg-6 col-md-6 col-12">
+                                <div class="col-xxl-4 col-lg-4 col-md-4 col-12">
                                     <div class="card custom-card overflow-hidden">
                                         <div class="card-body">
                                             <div class="d-flex align-items-top justify-content-between">
                                                 <div>
                                                     <span class="avatar avatar-md avatar-rounded bg-success">
-                                                        <i class="ti ti-wave-square fs-16"></i>
+                                                        <i class='bx bxl-visa fs-30'></i>
                                                     </span>
                                                 </div>
                                                 <div class="flex-fill ms-3">
@@ -110,7 +110,7 @@
                                                     <div
                                                         class="d-flex align-items-center justify-content-between mt-1">
                                                         <div>
-                                                            <a class="text-success" href="javascript:void(0);">View
+                                                            <a class="text-success" href="{{ route('admin.visa-application-page')  }}">View
                                                                 All<i
                                                                     class="ti ti-arrow-narrow-right ms-2 fw-semibold d-inline-block"></i></a>
                                                         </div>
@@ -126,7 +126,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xxl-6 col-lg-6 col-md-6 col-12">
+                                <div class="col-xxl-4 col-lg-4 col-md-4 col-12">
                                     <div class="card custom-card overflow-hidden">
                                         <div class="card-body">
                                             <div class="d-flex align-items-top justify-content-between">
@@ -140,20 +140,100 @@
                                                         class="d-flex align-items-center justify-content-between flex-wrap">
                                                         <div>
                                                             <p class="text-muted mb-0">Merchandise Payment</p>
-                                                            <h4 class="fw-semibold mt-1">2,543</h4>
+                                                            <h4 class="fw-semibold mt-1">{{   $merchandise  }}</h4>
                                                         </div>
                                                         <div id="crm-total-deals"></div>
                                                     </div>
                                                     <div
                                                         class="d-flex align-items-center justify-content-between mt-1">
                                                         <div>
-                                                            <a class="text-warning" href="javascript:void(0);">View
+                                                            <a class="text-warning" href="{{ route('admin.merchandise-page') }}">View
                                                                 All<i
                                                                     class="ti ti-arrow-narrow-right ms-2 fw-semibold d-inline-block"></i></a>
                                                         </div>
                                                         <div class="text-end">
                                                             <p class="mb-0 text-success fw-semibold">
-                                                                +19%
+                                                                {{ sprintf("%.2f%%", $merchandiseIncrease) }}
+                                                            </p>
+                                                            <span class="text-muted op-7 fs-11">this month</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-4 col-lg-4 col-md-4 col-12">
+                                    <div class="card custom-card overflow-hidden">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <div>
+                                                    <span class="avatar avatar-md p-2 bg-teal"> 
+                                                        <svg class="svg-white" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"> 
+                                                            <g> <rect fill="none" height="24" width="24"></rect> <g>
+                                                                 <path d="M19,5v14H5V5H19 M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3L19,3z"></path> 
+                                                                </g> 
+                                                                <path d="M14,17H7v-2h7V17z M17,13H7v-2h10V13z M17,9H7V7h10V9z"></path> 
+                                                            </g> 
+                                                        </svg> 
+                                                    </span>
+                                                </div>
+                                                <div class="flex-fill ms-3">
+                                                    <div
+                                                        class="d-flex align-items-center justify-content-between flex-wrap">
+                                                        <div>
+                                                            <p class="text-muted mb-0">Corporate Service</p>
+                                                            <h4 class="fw-semibold mt-1">{{  $corporateservice  }}</h4>
+                                                        </div>
+                                                        <div id="crm-total-deals"></div>
+                                                    </div>
+                                                    <div
+                                                        class="d-flex align-items-center justify-content-between mt-1">
+                                                        <div>
+                                                            <a class="text-warning" href="{{ route('admin.corporate-service-page') }}">View
+                                                                All<i
+                                                                    class="ti ti-arrow-narrow-right ms-2 fw-semibold d-inline-block"></i></a>
+                                                        </div>
+                                                        <div class="text-end">
+                                                            <p class="mb-0 text-success fw-semibold">
+                                                                {{ sprintf("%.2f%%", $corporateserviceIncrease) }}
+                                                            </p>
+                                                            <span class="text-muted op-7 fs-11">this month</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-4 col-lg-4 col-md-4 col-12">
+                                    <div class="card custom-card overflow-hidden">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <div>
+                                                    <span class="avatar avatar-md avatar-rounded bg-warning">
+                                                        <i class="ti ti-wave-square fs-16"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="flex-fill ms-3">
+                                                    <div
+                                                        class="d-flex align-items-center justify-content-between flex-wrap">
+                                                        <div>
+                                                            <p class="text-muted mb-0">OtherService Payment</p>
+                                                            <h4 class="fw-semibold mt-1">{{   $otherservice  }}</h4>
+                                                        </div>
+                                                        <div id="crm-total-deals"></div>
+                                                    </div>
+                                                    <div
+                                                        class="d-flex align-items-center justify-content-between mt-1">
+                                                        <div>
+                                                            <a class="text-warning" href="{{ route('admin.otherservices-page') }}">View
+                                                                All<i
+                                                                    class="ti ti-arrow-narrow-right ms-2 fw-semibold d-inline-block"></i></a>
+                                                        </div>
+                                                        <div class="text-end">
+                                                            <p class="mb-0 text-success fw-semibold">
+                                                                {{ sprintf("%.2f%%", $otherserviceIncrease) }}
                                                             </p>
                                                             <span class="text-muted op-7 fs-11">this month</span>
                                                         </div>

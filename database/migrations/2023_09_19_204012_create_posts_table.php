@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('author')->nullable();
             $table->longText('body')->nullable();
             $table->string('image')->nullable();
-            $table->string('slug')->unique(); 
+            $table->string('slug')->unique();
             $table->boolean('publish')->default(false);                   
             $table->timestamps();
         });

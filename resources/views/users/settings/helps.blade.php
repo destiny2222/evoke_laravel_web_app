@@ -126,23 +126,24 @@
             </div>
             <div id="mail" class="contact_info_mail content">
                 <div class="mail_inbox">
-                    <img src="{{ asset('dashboard/assets/mail.png') }}" alt="">
-                    <p>
+                    <img src="{{ asset('assetss/mail.png') }}" alt="">
+                    <p class="p-l-3 p-r-3">
                         If you have a question or just want to get in touch, use the form below. We look forward to
                         hearing from you!
                     </p>
                 </div>
                 <div class="contact_form">
                     <h2>Contact Us</h2>
-                    <form action="" method="post">
+                    <form action="{{ route('feedback') }}" method="post">
+                        @csrf
                         <div>
-                            <input type="text" name="" class="contact_form_input" id="" placeholder="Full Name">
+                            <input type="text" name="name" class="contact_form_input" id="" placeholder="Full Name">
                         </div>
                         <div>
-                            <input type="email" name="" id="" placeholder="Email Address">
+                            <input type="email" name="email" id="" placeholder="Email Address">
                         </div>
                         <div>
-                            <textarea name="" id="" cols="30" rows="10" placeholder="Message"></textarea>
+                            <textarea name="message" id="" cols="30" rows="10" placeholder="Message"></textarea>
                         </div>
                         <div style="text-align: center;">
                             <input type="submit" value="Send">
