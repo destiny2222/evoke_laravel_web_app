@@ -4,11 +4,14 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OtherService\StoreRequest;
+use App\Models\Admin;
 use App\Models\OtherService;
 use App\Models\TransactionCharges;
 use App\Models\UserWallet;
+use App\Notifications\TransctionNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class OtherserviceController extends Controller
 {
@@ -24,21 +27,23 @@ class OtherserviceController extends Controller
 
     public function otherPay(){
         $otherservice = OtherService::where('user_id', auth()->user()->id)->latest()->first();
-        $charge = TransactionCharges::all();
-        foreach($charge as $charges){}
-        $chargesAmount =  $charges->other_service + $otherservice->amount;
+        $charge = TransactionCharges::select('other_service')->first();
+        
+        $totalprecentage = ($charge->other_service / 100) * $otherservice->amount;
+
+        $ToatalAmount =  $otherservice->amount + $totalprecentage;
         
         if ($otherservice->amount == null) {
            return back()->with('error', 'Amount must be provided');
         }elseif($otherservice){
             $otherservice->update([
-                'total_amount'=>$chargesAmount,
+                'total_amount'=>$ToatalAmount,
             ]);
         }else{
             return back()->with('error', 'An error occurred');
         }
       
-        return view('users.otherservice.pay', compact('otherservice', 'charges'));
+        return view('users.otherservice.pay', compact('otherservice', 'charge'));
     }
 
     public function otherservicePayment(Request $request){
@@ -50,7 +55,7 @@ class OtherserviceController extends Controller
 
         $totalamount = OtherService::where('user_id', auth()->user()->id)->latest()->first();
        
-
+        $total_amount = $request->input('total');
         $requestData = [];
 
         if ($selectedPaymentMethod == 'balance') {
@@ -69,22 +74,24 @@ class OtherserviceController extends Controller
                 $payment->payment_method = $selectedPaymentMethod;
                 $payment->save();   
             }
+            $users = $payment->user;
+            if($users){
+                $admin = Admin::where('id', 1)->first();
+                $admin->notify(new TransctionNotification($users));
+            }else{
+                Alert::error('An error occurred');
+                return back();
+            }
 
             return redirect()->route('initiator-page')->with('success', 'Payment Successful');
 
-        } elseif ($selectedPaymentMethod == 'debit') {
-
-            $requestData = [
-                'key3' => 'value3',
-                'key4' => 'value4',
-            ];
         } elseif ($selectedPaymentMethod == 'visa') {
             $requestData = [
-                'amount' => $totalamount->total_amount,
+                'amount' => $total_amount,
                 'email' => auth()->user()->email,
                 'payment_options'=> "card, bank, ussd,bank transfer",
                 'tx_ref' => $reference,
-                'currency' => "NGN",
+                'currency' => "USD",
                 'redirect_url' => route('otherservice-pay-callback'),
 
                 'customer' => [
@@ -131,6 +138,15 @@ class OtherserviceController extends Controller
                 $payment->paid = 1;
                 $payment->payment_method = $paymentData['payment_method'];
                 $payment->save();   
+
+                $users = $payment->user;
+                if($users){
+                    $admin = Admin::where('id', 1)->first();
+                    $admin->notify(new TransctionNotification($users));
+                }else{
+                    Alert::error('An error occurred');
+                    return back();
+                }
                
                 // Clear the session data after using it
                 $request->session()->forget('pay_merchandise');

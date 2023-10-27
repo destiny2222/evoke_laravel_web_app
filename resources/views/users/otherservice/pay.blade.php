@@ -10,16 +10,15 @@
                         <h2>Application Fee</h2>
                         <span class='msg' style="color: red; font-size: 13px;"></span>
                         <br>
-                        <p>Amount: ${{ $otherservice->amount }} </p>
-                        <p>Service Charge: {{ $charges->other_service }}%</p>
-                        <p>Total amount: <span >${{  $otherservice->total_amount  }}</span></p>
+                        <p>Amount: ${{  number_format($otherservice->amount, 2) }} </p>
+                        <p>Service Charge: {{ $charge->other_service }}%</p>
+                        <p>Total amount: <span >${{ number_format($otherservice->total_amount, 2 )  }}</span></p>
                         <div>
                             <button type="button"  class="submit-form w-100 next">Confirm and Continue</button>
                         </div>
                     </div>
-                    <input type="text" name="amount" value="{{ $otherservice->amount }}" hidden  id="">
-                    <input type="text" name="serviceCharge" value="{{ $charges->other_service }}" hidden  id=""> 
-                    <input type="text" name="total" class="total-amount" id="" hidden value="{{  $otherservice->total_amount  }}">  
+                    <input type="text" name="amount" value="{{  number_format( $otherservice->amount, 2) }}" hidden  id="">
+                    <input type="text" name="total" class="total-amount" id="" hidden value="{{  number_format(  $otherservice->total_amount, 2)  }}">  
                     <div class="slide-two">
                         <span class='msg2' style="color: red; font-size: 13px;"></span><br>
                         <p id='back'><i class="fa fa-arrow-left"></i> <span id='name' style="color: #383838;"></span></p><br>
@@ -32,26 +31,25 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <ul class="card-payment-ul">
-                                        <li  class="card-payment m-b-1" style="display: flex;">
-                                            <h4>Make payment with Balance: ${{ number_format(auth()->user()->userwallet->amount,2 ) }} </h4>
+                                        <li class="card-payment d-flex gap-3 m-b-1">
+                                            <input id="payment_method_balance" type="radio" class="input-radio" name="paymentMethod" value="balance">
+                                            <label class="" for="payment_method_balance">
+                                                 Make payment with Balance: ${{ number_format(auth()->user()->userwallet->amount,2 ) }}
+                                            </label>
                                         </li>
-                                        <li class="card-payment m-b-1" style="display: flex;">
-                                            <img src="{{ asset('assets/img/local.jpg') }}" alt="">   
-                                            <h4>Local online <br> banking </h4>
-                                        </li>
-                                        <li class="card-payment m-b-1" style="display: flex;">
-                                            <img width="100" src="{{ asset('visa.png') }}" alt="">  
+                                        {{-- <li class="card-payment d-flex m-b-1">
+                                            <input id="payment_method_local" type="radio" class="input-radio" name="paymentMethod" value="debit">
+                                            <label class="" for="payment_method_local">
+                                                DIRECT BANK TRANSFER
+                                            </label>
+                                        </li> --}}
+                                        <li class="card-payment m-b-1">
+                                            <input id="payment_method_paystack" type="radio" class="input-radio" name="paymentMethod" value="visa">
+                                            <label class="" for="payment_method_paystack">
+                                                <img width="100" src="{{ asset('visa.png') }}" alt="">
+                                            </label>  
                                         </li>
                                     </ul>
-                                </div>
-                                <div class="col-lg-12">
-                                    <h4 class="mb-3">Choose payment method</h4>
-                                     <select name="paymentMethod" class="form-control" id="">
-                                        <option selected>Select</option>
-                                        <option value="balance">Balance</option>
-                                        <option value="debit">Local online banking</option>
-                                        <option value="visa">Visa</option>
-                                     </select>
                                 </div>
                                 <div class="col-lg-12 col-12 text-center">
                                     <input type="submit" value="Proceed to payment" class="submit-form  w-100">

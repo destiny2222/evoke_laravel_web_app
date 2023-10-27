@@ -33,7 +33,7 @@ class ProfileController extends Controller
                 'email' => $request->email,
                 'payment_options'=> "card, bank, ussd,bank transfer",
                 'tx_ref' => $reference,
-                'currency' => "NGN",
+                'currency' => "USD",
                 'redirect_url' => route('callback'),
 
                 'customer' => [

@@ -379,7 +379,7 @@
                             <input type="email" name="email" class="applicant-input" required>
                         </div>
                         <div class="col-lg-12 text-end">
-                            <input type="submit" id="nextPageCustomer"  class="submit-form w-50 w-100" value="Proceed to payment">
+                            <input type="submit" id="nextPageCustomer"  class="submit-form w-50 w-100" value="Submit">
                         </div>
                     </div>   
                 </form>

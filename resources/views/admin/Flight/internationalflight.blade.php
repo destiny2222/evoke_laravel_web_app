@@ -37,6 +37,7 @@
                                     <th scope="col">Date of Birth</th>
                                     <th scope="col">Email Address</th>
                                     <th scope="col">Phone Number</th>
+                                    <th scope="col">Time</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -47,8 +48,20 @@
                                     <th>{{  $internationalflights->user->name }}</th>
                                     <td>{{  $internationalflights['airport_location_from'] }}</td>
                                     <td>{{  $internationalflights['airport_location_to'] }}</td>
-                                    <td>{{  $internationalflights['flight_return_date'] }}</td>
-                                    <td>{{  $internationalflights['round_trip'] }}</td>
+                                    <td>
+                                        @if ($internationalflights['flight_return_date'] == null)
+                                          Not specify  
+                                        @else
+                                           {{  $internationalflights['flight_return_date'] }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($internationalflights['round_trip'] == null)
+                                            Not specify 
+                                        @else
+                                            {{ $internationalflights['round_trip'] }}
+                                        @endif
+                                    </td>
                                     <td>{{  $internationalflights['flight_date'] }}</td>
                                     <td>{{  $internationalflights['number_passenger'] }}</td>
                                     <td>{{  $internationalflights['flight_class'] }}</td>
@@ -69,6 +82,7 @@
                                     </td>
                                     <th>{{  $internationalflights['passenger_email'] }}</th>
                                     <th>{{  $internationalflights['passenger_phone'] }}</th>
+                                    <th>{{  $internationalflights->created_at->format('Y-m-d h:i:s A') }}</th>
                                     <td>
                                         <form action="{{   route('admin.international-delete', $internationalflights->id) }}" method="post">
                                             @csrf

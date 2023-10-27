@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Admin;
+use Illuminate\Support\Facades\DB;
 
     if (!function_exists('update_image')){
         function update_image($folder,$currentImagePath,$key) : String{
@@ -71,4 +72,13 @@ use App\Models\Admin;
             $admin_details = DB::table('admins')->first();
             return $admin_details;
         }
+    }
+
+    if (!function_exists('get_notify_details')){
+        function get_notify_details() {
+            $notify_details = DB::table('notifications')->get();
+            return $notify_details; 
+        }
+
+        
     }

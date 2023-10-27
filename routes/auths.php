@@ -10,6 +10,7 @@ use App\Http\Controllers\user\OtherserviceController;
 use App\Http\Controllers\user\PageController;
 use App\Http\Controllers\user\TransactionsController;
 use App\Http\Controllers\user\VisaApplicationController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -36,8 +37,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified', 'che
 
     // initiator subpage
     Route::get('/pay-school-fee', [PageController::class, 'pay_school_fee'])->name('pay_school_fee-page');
-    Route::get('/corporate-service', [PageController::class, 'Corporate'])->name('corporate-service-page');
-    Route::get('/merchandise-payment', [PageController::class, 'Merchandise'])->name('merchandise-page');    
+    
+     
     Route::get('/others-payment', [PageController::class, 'OthersPayment'])->name('others-page');
 
     // flight controller
@@ -67,12 +68,15 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified', 'che
     
     // corporate service subtitle
     Route::post('/corporate/store', [CorporateController::class, 'store'])->name('store-page');  
-
-    
+    Route::get('/corporate-service', [CorporateController::class, 'Corporate'])->name('corporate-service-page');
+    Route::get('/corporate-service/payment', [CorporateController::class, 'paymentPay'])->name('corporate-payment-page');
+    Route::post('/corporate-service/initiatePayment', [CorporateController::class, 'CorporatePayment'])->name('corporate-payment');
+    Route::get('/corporate-service/Payment/callback', [CorporateController::class, 'handlecallback'])->name('corporate-payment-callback');
 
 
 
     // Merchanndise controller
+    Route::get('/merchandise-payment', [MerchandiseController::class, 'Merchandise'])->name('merchandise-page');   
     Route::get('/merchandise/pay', [MerchandiseController::class,'MerchandisePay'])->name('merchandise-pay');
     Route::post('/merchandise/store', [MerchandiseController::class,'merchandiseStore'])->name('merchandise-store');
     Route::post('/merchandise/initiate', [MerchandiseController::class,'MerchandisePayment'])->name('merchandise-payment');
@@ -88,10 +92,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified', 'che
 
 
     // visa route
-    Route::get('/visa-fee-payment', [PageController::class, 'Vise'])->name('visa-page');    
-    Route::get('/canada_visa', [PageController::class, 'CanadaVisa'])->name('canada-page');
-    Route::get('/us_visa', [PageController::class, 'UsVisa'])->name('us-page');
-    Route::get('/redirect', [PageController::class, 'redirect'])->name('redirect'); 
+    Route::get('/visa-fee-payment', [VisaApplicationController::class, 'Vise'])->name('visa-page');    
+    Route::get('/canada_visa', [VisaApplicationController::class, 'CanadaVisa'])->name('canada-page');
+    Route::get('/us_visa', [VisaApplicationController::class, 'UsVisa'])->name('us-page');
+    Route::get('/redirect', [VisaApplicationController::class, 'redirect'])->name('redirect'); 
     
     
     // payment 

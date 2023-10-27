@@ -32,12 +32,6 @@
                         <div  class="col-lg-6 col-12">
                             <input type="text" class="profile-input" readonly name="country" value="{{ $user->country }}" placeholder="Enter Country"> 
                         </div>
-                        <div class="col-lg-6 col-12">
-                            <input type="text" class="profile-input" readonly name="state"  value="{{ $user->state }}" placeholder="Enter State"> 
-                        </div>
-                        <div class="col-lg-6 col-12">
-                            <input type="text" class="profile-input"  readonly name="city" value="{{ $user->city }}" placeholder="Enter City"> 
-                        </div>
                         <div class="col-lg-12 col-12 text-center">
                             <button type="submit" class="profile-button">Save</button>
                         </div> 

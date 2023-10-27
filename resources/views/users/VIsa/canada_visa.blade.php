@@ -29,7 +29,7 @@
                         <div class="col-lg-6 col-12">
                             <div class="form-group">
                                 <label for="userpassword">User Password</label>
-                                <input type="text" name="user_password" id="userpassword" class="applicant-input">
+                                <input type="password" name="user_password" id="userpassword" class="applicant-input">
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">

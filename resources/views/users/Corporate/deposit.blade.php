@@ -19,7 +19,7 @@
        
    </div>
    <div class="tab-content">
-        <div class="deposit-detail content">
+        <div class="deposit-detail local_banking content">
             <h4>Enter details:</h4>
             <form action="{{ route('deposit.payment') }}" method="post">
                 @csrf
@@ -44,6 +44,54 @@
                 </div>
             </form>     
         </div> 
+        <div class="visa deposit-detail content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 m-b-1 m-t-2">
+                        <h5><b>Bank Name</b>: United Bank of Africa</h5>
+                    </div>
+                    <div class="col-lg-12 m-b-1 m-t-2">
+                        <h5><b>Account Name</b>: EvokeEdge Limited</h5>
+                    </div>
+                    <div class="col-lg-12 m-b-1 m-t-2">
+                        <h5><b>Account Number</b>: 3004158137</h5>
+                    </div>
+                    <div class="col-lg-12 m-b-1 m-t-2">
+                        <h5><b>Swift Code</b>: UNAFNGLA</h5>
+                    </div>
+                    <div class="col-lg-12 m-b-1 m-t-2">
+                        <h5><b>Bank Address</b>: 57 Marina, Lagos Island, Lagos, Nigeria.</h5>
+                    </div>
+                    <div class="col-lg-12 m-b-1 m-t-2">
+                        <h5><b>Account Currency</b>: USD</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
       
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('.tabs .tab');
+    const content = document.querySelectorAll('.tab-content .content');
+
+    tabs.forEach(function(tab, index) {
+        tab.addEventListener('click', function() {
+            tabs.forEach(function(tab) {
+                tab.classList.remove('active');
+            });
+
+            content.forEach(function(content) {
+                content.style.display = 'none';
+            });
+
+            tab.classList.add('active');
+            content[index].style.display = 'block';
+        });
+    });
+});
+
+        </script>
+    @endpush
 @endsection

@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-lg-12 col-12 p-t-2">
                         <label for="student_routing_number">School Routing Number (For US & Canada Only)*</label>
-                        <input type="text" name="routing_number" id="student_routing_number" class="applicant-input" required>
+                        <input type="text" name="routing_number" id="student_routing_number" class="applicant-input" >
                     </div>
                     <div class="col-lg-12 col-12 p-t-2">
                         <label for="student_id_number">Student ID Number*</label>

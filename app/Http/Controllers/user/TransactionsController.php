@@ -17,7 +17,7 @@ class TransactionsController extends Controller
 
         foreach ($tuitionpayment as $tuitionpayments) {
             $transaction = [
-                'date' => $tuitionpayments->created_at->diffforHumans(),
+                'date' => $tuitionpayments->created_at->format('Y-m-d h:i:s A'),
                 'type' => 'Tuition Payment School Portal',
                 'reference'=> $tuitionpayments->user->referrence_id,
                 'amount' => $tuitionpayments->amount,
@@ -28,7 +28,7 @@ class TransactionsController extends Controller
 
         foreach ($tuitionpaymentwire as $tuitionpaymentwires) {
             $transaction = [
-                'date' => $tuitionpaymentwires->created_at->diffforHumans(),
+                'date' => $tuitionpaymentwires->created_at->format('Y-m-d h:i:s A'),
                 'type' => 'Tuition Payment Wire Transfer ',
                 'reference'=> $tuitionpaymentwires->user->referrence_id,
                 'amount' => $tuitionpaymentwires->amount,

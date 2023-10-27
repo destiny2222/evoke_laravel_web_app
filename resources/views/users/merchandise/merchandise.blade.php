@@ -13,7 +13,7 @@
                     <h2 class="">
                         Merchandise Payments
                     </h2>
-                    <h5>Provide your payment instruments.</h5>
+                    <h5>Provide your payment instruction.</h5>
                 </div>
            </div>
        </div>
@@ -70,13 +70,13 @@
                                 <div class="col-lg-6 col-12 ">
                                     <div class="form-group">
                                         <label>SWIFT/BIC code*</label>
-                                        <input type="text" name="bank_swift_code" class="applicant-input" required>  
+                                        <input type="text"  name="bank_swift_code" class="applicant-input" required>  
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-12 ">
                                     <div class="form-group">
-                                        <label>Routine Number (U.S & CAD only) *</label>
-                                        <input type="number" name="bank_route_number" class="applicant-input" required>  
+                                        <label>Routing  Number (U.S & CAD only) *</label>
+                                        <input type="number" name="bank_route_number" class="applicant-input" >  
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-12 ">
@@ -106,7 +106,7 @@
                                 <div class="col-lg-6 col-12 ">
                                     <div class="form-group">
                                         <label>Postcode*</label>
-                                        <input type="text" name="postcode" class="applicant-input" required>  
+                                        <input type="number" name="postcode" class="applicant-input" required>  
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-12 ">

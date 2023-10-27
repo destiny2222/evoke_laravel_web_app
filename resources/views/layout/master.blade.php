@@ -584,6 +584,69 @@
 @stack('script')
 @stack('scripts')
 <script>
+    // Get all the list items
+const listItems = document.querySelectorAll('.card-payment');
+
+// Add a click event listener to each list item
+listItems.forEach(listItem => {
+listItem.addEventListener('click', function() {
+// Find the radio button within this list item
+const radioButton = this.querySelector('input[type="radio"]');
+
+// If the radio button is not checked, check it; otherwise, uncheck it
+radioButton.checked = !radioButton.checked;
+
+// Remove "active" class from all list items
+listItems.forEach(li => {
+  li.classList.remove('active');
+});
+
+// Add "active" class to the clicked list item
+this.classList.add('active');
+});
+});
+
+</script>
+<script>
+
+    var next = document.querySelector('.next');
+    var slide_one = document.querySelector('.slide-one');
+    var slide_two = document.querySelector('.slide-two');
+
+    var email = document.querySelector('.total-amount')
+    // var nameText = document.getElementById('name')
+    var back_btn = document.getElementById('back')
+    var msg = document.querySelector('.msg')
+    var msg2 = document.querySelector('.msg2')
+
+    // var container_item_2 = document.querySelector('.container-item-2')
+    
+    next.addEventListener('click', function () {
+        if (email.value == "") {
+            msg.textContent = 'Enter a valid email address, phone number, or Skype name.'
+        } else {
+            msg.textContent = ""
+            // nameText.textContent = email.value
+            slide_one.classList.add('slide-one-toggle')
+            slide_two.classList.add('slide-two-toggle')
+        }
+    })
+    back_btn.addEventListener('click', function () {
+        slide_one.classList.remove('slide-one-toggle')
+        slide_two.classList.remove('slide-two-toggle')
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var amount = parseFloat(document.querySelector('input[name="amount"]').value);
+        var serviceCharge = parseFloat(document.querySelector('input[name="serviceCharge"]').value);
+        var total = amount + serviceCharge;
+        document.getElementById('total').value = total;
+    });
+
+
+   
+</script>
+<script>
     // Get the tab elements
     const tabs = document.querySelectorAll('.tab');
     const tabContents = document.querySelectorAll('.content');
@@ -602,5 +665,220 @@
 });
 </script>
 <script src="{{ asset('password.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+    var options = {
+          series: [
+          {
+            type: 'rangeArea',
+            name: 'Team B Range',
+        
+            data: [
+              {
+                x: 'Jan',
+                y: [1100, 1900]
+              },
+              {
+                x: 'Feb',
+                y: [1200, 1800]
+              },
+              {
+                x: 'Mar',
+                y: [900, 2900]
+              },
+              {
+                x: 'Apr',
+                y: [1400, 2700]
+              },
+              {
+                x: 'May',
+                y: [2600, 3900]
+              },
+              {
+                x: 'Jun',
+                y: [500, 1700]
+              },
+              {
+                x: 'Jul',
+                y: [1900, 2300]
+              },
+              {
+                x: 'Aug',
+                y: [1000, 1500]
+              }
+            ]
+          },
+        
+          {
+            type: 'rangeArea',
+            name: 'Team A Range',
+            data: [
+              {
+                x: 'Jan',
+                y: [3100, 3400]
+              },
+              {
+                x: 'Feb',
+                y: [4200, 5200]
+              },
+              {
+                x: 'Mar',
+                y: [3900, 4900]
+              },
+              {
+                x: 'Apr',
+                y: [3400, 3900]
+              },
+              {
+                x: 'May',
+                y: [5100, 5900]
+              },
+              {
+                x: 'Jun',
+                y: [5400, 6700]
+              },
+              {
+                x: 'Jul',
+                y: [4300, 4600]
+              },
+              {
+                x: 'Aug',
+                y: [2100, 2900]
+              }
+            ]
+          },
+        
+          {
+            type: 'line',
+            name: 'Team B Median',
+            data: [
+              {
+                x: 'Jan',
+                y: 1500
+              },
+              {
+                x: 'Feb',
+                y: 1700
+              },
+              {
+                x: 'Mar',
+                y: 1900
+              },
+              {
+                x: 'Apr',
+                y: 2200
+              },
+              {
+                x: 'May',
+                y: 3000
+              },
+              {
+                x: 'Jun',
+                y: 1000
+              },
+              {
+                x: 'Jul',
+                y: 2100
+              },
+              {
+                x: 'Aug',
+                y: 1200
+              },
+              {
+                x: 'Sep',
+                y: 1800
+              },
+              {
+                x: 'Oct',
+                y: 2000
+              }
+            ]
+          },
+          {
+            type: 'line',
+            name: 'Team A Median',
+            data: [
+              {
+                x: 'Jan',
+                y: 3300
+              },
+              {
+                x: 'Feb',
+                y: 4900
+              },
+              {
+                x: 'Mar',
+                y: 4300
+              },
+              {
+                x: 'Apr',
+                y: 3700
+              },
+              {
+                x: 'May',
+                y: 5500
+              },
+              {
+                x: 'Jun',
+                y: 5900
+              },
+              {
+                x: 'Jul',
+                y: 4500
+              },
+              {
+                x: 'Aug',
+                y: 2400
+              },
+              {
+                x: 'Sep',
+                y: 2100
+              },
+              {
+                x: 'Oct',
+                y: 1500
+              }
+            ]
+          }
+        ],
+          chart: {
+          height: 350,
+          type: 'rangeArea',
+          animations: {
+            speed: 500
+          }
+        },
+        colors: ['#d4526e', '#33b2df', '#d4526e', '#33b2df'],
+        dataLabels: {
+          enabled: false
+        },
+        fill: {
+          opacity: [0.24, 0.24, 1, 1]
+        },
+        forecastDataPoints: {
+          count: 2
+        },
+        stroke: {
+          curve: 'straight',
+          width: [0, 0, 2, 2]
+        },
+        legend: {
+          show: true,
+        //   customLegendItems: ['Team B', 'Team A'],
+          inverseOrder: true
+        },
+        title: {
+        //   text: 'Range Area with Forecast Line (Combo)'
+        },
+        markers: {
+          hover: {
+            sizeOffset: 5
+          }
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chartbar"), options);
+        chart.render();
+</script>
 </html>
     

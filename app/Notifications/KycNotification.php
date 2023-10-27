@@ -10,15 +10,16 @@ use Illuminate\Notifications\Notification;
 class KycNotification extends Notification
 {
     use Queueable;
-
+    public $kyc;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($kyc)
     {
         //
+        $this->kyc = $kyc;
     }
 
     /**
@@ -43,8 +44,7 @@ class KycNotification extends Notification
         return (new MailMessage)
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!')
-                    ->markdown('email.approve');
+                    ->markdown('email.approve',['kyc'=>$this->kyc]);
     }
 
     /**

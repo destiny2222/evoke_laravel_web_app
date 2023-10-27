@@ -41,6 +41,7 @@ Route::prefix('admin')->name('admin.')->group(function (){
     Route::get('/send-mail', [PageController::class, 'emailPage'])->name('send-mail-page');
     Route::get('/send-mail/create', [PageController::class, 'sendMail'])->name('send-mail-create');
     Route::post('/send-mail/store', [PageController::class, 'storeMail'])->name('send-mail-store');
+    // Route::get('/send-mail/{emailmail}/show', [PageController::class, 'mailShow'])->name('send-mail-show');
     Route::delete('/send-mail/{id}/delete/', [PageController::class, 'mailDelete'])->name('send-mail-delete');
 
 
@@ -83,9 +84,9 @@ Route::prefix('admin')->name('admin.')->group(function (){
 
     // TransactionCharge
     Route::get('/transaction-charge', [PageController::class, 'TransactionCharges'])->name('transaction-charge-page');
-    Route::get('/transaction-charge/create', [PageController::class, 'TransactionchargesCreate'])->name('transaction-charge-create');
+    // Route::get('/transaction-charge/create', [PageController::class, 'TransactionchargesCreate'])->name('transaction-charge-create');
     Route::post('/transaction-charge/store', [PageController::class, 'TransactionchargesStore'])->name('transaction-charge-store');
-    Route::put('/transaction-charge/{id}/update', [PageController::class, 'TransactionChargesUpdate'])->name('transaction-charge-update');
+    // Route::put('/transaction-charge/{id}/update', [PageController::class, 'TransactionChargesUpdate'])->name('transaction-charge-update');
     Route::delete('/transaction-charge/{id}/delete', [PageController::class, 'TransactionChargesDelete'])->name('transaction-charge-delete');
 
     Route::resource('kyc', KycContainer::class);
@@ -97,7 +98,9 @@ Route::prefix('admin')->name('admin.')->group(function (){
 
     // Enable features
     Route::get('Features', [PageController::class, 'enableLogging'])->name('features-page');
+    Route::get('Baggage', [PageController::class, 'baggageView'])->name('baggage-page');
     Route::post('Features/update', [PageController::class, 'updateService'])->name('update-features');
+    Route::post('Baggage/update', [PageController::class, 'baggage'])->name('update-baggage');
 
 
     Route::get('optimize',function (){

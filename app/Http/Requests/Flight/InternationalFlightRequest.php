@@ -62,6 +62,7 @@ class InternationalFlightRequest extends FormRequest
             'passenger_lastname_onpassport' => $this->passenger_lastname_onpassport,
             'passenger_gender_onpassport' => $this->passenger_gender_onpassport,
             'date_of_birth' => $this->date_of_birth,
+            'passenger_phone' => $this->passenger_phone,
             'passenger_email' => $this->passenger_email,
 
         ]);

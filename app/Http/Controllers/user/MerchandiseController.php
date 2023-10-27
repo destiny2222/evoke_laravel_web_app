@@ -4,27 +4,40 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Merchandise\MerchandiseRequest;
+use App\Models\Admin;
 use App\Models\Merchandise;
 use App\Models\TransactionCharges;
 use App\Models\UserWallet;
+use App\Notifications\MerchandiseNotification;
+use App\Notifications\PaymentMadeNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MerchandiseController extends Controller
 {
 
+    public function Merchandise() {
+        return view('users.merchandise.merchandise');
+    }
+
+
     public function MerchandisePay(){
         $merchandise = Merchandise::where('user_id', auth()->user()->id)->latest()->first();
-        $charge = TransactionCharges::all();
-        foreach($charge as $charges)
-        $chargesAmount =  $charges->merchant_charge_amount + $merchandise->amount;
+        // dd($merchandise->user->name);
+        $charge = TransactionCharges::select('merchant_charge_amount')->first();
+        
+        // 
+        $totalprecentage = ($charge->merchant_charge_amount / 100) * $merchandise->amount;
+
+        $Totalamount = $merchandise->amount + $totalprecentage;
         if ($merchandise) {
             $merchandise->update([
-                'total_amount'=>$chargesAmount,
+                'total_amount'=>$Totalamount,
             ]);
         }
-        return view('users.merchandise.pay', compact('merchandise', 'charges'));
+        return view('users.merchandise.pay', compact('merchandise', 'charge'));
     }
     public function merchandiseStore(MerchandiseRequest $request){
         if ($request->createMerhance()) {
@@ -61,21 +74,24 @@ class MerchandiseController extends Controller
                 $payment->save();   
             }
 
+            $users = $payment->user;
+            if($users){
+                $admin = Admin::where('id', 1)->first();
+                $admin->notify(new MerchandiseNotification($users));
+            }else{
+                Alert::error('An error occurred');
+                return back();
+            }
+
             return redirect()->route('initiator-page')->with('success', 'Payment Successful');
 
-        } elseif ($selectedPaymentMethod == 'debit') {
-
-            $requestData = [
-                'key3' => 'value3',
-                'key4' => 'value4',
-            ];
-        } elseif ($selectedPaymentMethod == 'visa') {
+        }elseif ($selectedPaymentMethod == 'visa') {
             $requestData = [
                 'amount' => $totalamount->total_amount,
                 'email' => auth()->user()->email,
                 'payment_options'=> "card, bank, ussd,bank transfer",
                 'tx_ref' => $reference,
-                'currency' => "NGN",
+                'currency' => "USD",
                 'redirect_url' => route('merchandise-cellback'),
 
                 'customer' => [
@@ -123,7 +139,16 @@ class MerchandiseController extends Controller
                 $payment = Merchandise::where('user_id', auth()->user()->id)->latest()->first();
                 $payment->paid = 1;
                 $payment->payment_method = $paymentData['payment_method'];
-                $payment->save();   
+                $payment->save();  
+                
+                $users = $payment->user;
+                if($users){
+                    $admin = Admin::where('id', 1)->first();
+                    $admin->notify(new MerchandiseNotification($users));
+                }else{
+                    Alert::error('An error occurred');
+                    return back();
+                }
                
                 // Clear the session data after using it
                 $request->session()->forget('pay_merchandise');

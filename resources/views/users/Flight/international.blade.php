@@ -32,7 +32,7 @@
                                 <input type="radio"
                                     id="Netflix"
                                     name="round_trip"
-                                    value="Netflix" class="open">
+                                    value="" class="open">
                                 <label onclick="()" for="Netflix">Round Trip</label>
                             </div>
                         
@@ -83,7 +83,7 @@
                             <select name="baggage_weight" class="applicant-input" id="" required>
                                 <option selected >Economy (checked baggage)</option>
                                 @if ($baggages)
-                                 <option value="{{ $baggages->baggage  }}">{{ $baggages->baggage  }}</option>
+                                 <option value="{{ $baggages->baggage  }}">{{ $baggages->baggage  }}Kg</option>
                                 @endif
                             </select>
                         </div>
@@ -136,7 +136,7 @@
                             <input type="phone" name="passenger_phone" class="applicant-input" required>
                         </div>
                         <div class="col-lg-12 text-end">
-                            <input type="submit" id="nextPageCustomer"  class="submit-form w-50 w-100" value="Proceed to payment">
+                            <input type="submit" id="nextPageCustomer"  class="submit-form w-50 w-100" value="Submit">
                         </div>
                     </div>   
                 </form>

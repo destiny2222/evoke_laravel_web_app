@@ -21,7 +21,7 @@
         <div class="text-end mb-3">
             <a href="javascript:void()" data-bs-toggle="modal"
             data-bs-target="#modalTop" class="btn  btn-primary btn-wave">
-                Add Charges
+                Add/Change Charge
             </a>
         </div>
     </div>
@@ -59,11 +59,11 @@
                                     </td>
                                     <td>
                                         <div class="hstack gap-2 fs-15">
-                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $charges->id }}">
+                                        {{-- <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $charges->id }}">
                                             <i class="ri-edit-line align-middle  d-inline-block"></i>
                                             Edit
-                                          </button>
-                                        <form action="{{ route('admin.send-mail-delete', $charges->id) }}" method="post">
+                                          </button> --}}
+                                        <form action="{{ route('admin.transaction-charge-delete', $charges->id) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-sm btn-danger btn-wave">
@@ -74,7 +74,6 @@
                                         
                                     </td>
                                 </tr>
-                                @include('admin.Charges.edit')
                                 @endforeach
                             </tbody>
                         </table>

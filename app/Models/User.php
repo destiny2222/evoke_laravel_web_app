@@ -43,6 +43,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Kyc::class);
     }
 
+    public function corporate(){
+        return $this->hasMany(CorporateService::class);
+    }
+
 
     public function isKYCApproved()
     {

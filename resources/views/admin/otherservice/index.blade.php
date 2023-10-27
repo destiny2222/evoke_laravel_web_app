@@ -35,6 +35,7 @@
                                     <th scope="">Amount</th>
                                     <th scope="col">Deposit</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Time</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -72,6 +73,9 @@
                                         @else
                                           <span class="badge bg-danger-transparent">Pending</span>
                                         @endif
+                                    </td>
+                                    <td>
+                                        {{ $otherservices->created_at->format('Y-m-d h:i:s A')  }}
                                     </td>
                                     <td>
                                         <div class="d-flex">

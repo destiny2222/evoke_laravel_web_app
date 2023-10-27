@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Baggage\UpdateRequest as BaggageUpdateRequest;
 use App\Http\Requests\Charge\ChargesRequest;
 use App\Http\Requests\Setting\UpdateRequest;
 use App\Mail\Email;
+use App\Models\Baggage;
 use App\Models\EmailMail;
 use App\Models\Post;
 use App\Models\Services;
@@ -43,6 +45,16 @@ class PageController extends Controller
 
     public function sendMail(){
         return view('admin.emails.create');
+    }
+
+    public function mailShow($id){
+        $sendmail  = EmailMail::find($id);
+        if($sendmail){
+            return view('admin.emails.show',compact('sendmail'));
+        }else{
+            Alert::error('Page not found');
+            return back();
+        }
     }
 
 
@@ -231,52 +243,55 @@ class PageController extends Controller
 
 
     public function TransactionchargesStore(ChargesRequest $request){
-          if ($request->createCharge()) {
-            Alert::success('Transaction charges have been created successfully');
-            return redirect()->route('admin.transaction-charge-page');
-          }
-          Alert::error('Transaction charges have not been created successfully');
-          return back();
-    }
-
-
-    public function TransactionChargesEdit($id){
-        try {
-            $charge = TransactionCharges::find($id);
-            return view('admin.Charges.edit',['charge' => $charge]);
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
-            Alert::error('Something went wrong');
-            return back();
+        if(TransactionCharges::count()){
+            TransactionCharges::first()->update($request->validated());
+        }else{
+            TransactionCharges::create($request->validated());
+            // Alert::success('Transaction charges have been created successfully');
+            // return redirect()->route('admin.transaction-charge-page');
         }
+        Alert::success('Updated Sucessfully');
+        return back();
     }
 
 
-    public function TransactionChargesUpdate(Request $request, $id){
-            $charge = TransactionCharges::find($id);
-            if ($charge) {
-                $charge->update([
-                    'flights_charge_amount'=>$request->flights_charge_amount,
-                    'tuition_charge_amount'=>$request->tuition_charge_amount,
-                    'visa_charge_amount'=>$request->visa_charge_amount,
-                    'corporate_charge_amount'=>$request->corporate_charge_amount,
-                    'merchant_charge_amount'=>$request->merchant_charge_amount,
-                    'bdc_charge'=>$request->bdc_charge
-                ]);
-                Alert::info('Updated Successfully');
-                return redirect()->route('admin.transaction-charge-page');
-            }
-            Alert::error('Something went wrong');
-            return back();
-    }
+    // public function TransactionChargesEdit($id){
+    //     try {
+    //         $charge = TransactionCharges::find($id);
+    //         return view('admin.Charges.edit',['charge' => $charge]);
+    //     } catch (\Exception $exception) {
+    //         Log::error($exception->getMessage());
+    //         Alert::error('Something went wrong');
+    //         return back();
+    //     }
+    // }
 
 
-    public function TransactionChargesDelete($id){
-        $charge = TransactionCharges::find($id);
-        $charge->delete();
-        Alert::success('Charge', 'Deleted Successfully');
-        return redirect()->route('admin.transaction-charge-page');
-    }
+    // public function TransactionChargesUpdate(Request $request, $id){
+    //         $charge = TransactionCharges::find($id);
+    //         if ($charge) {
+    //             $charge->update([
+    //                 'flights_charge_amount'=>$request->flights_charge_amount,
+    //                 'tuition_charge_amount'=>$request->tuition_charge_amount,
+    //                 'visa_charge_amount'=>$request->visa_charge_amount,
+    //                 'corporate_charge_amount'=>$request->corporate_charge_amount,
+    //                 'merchant_charge_amount'=>$request->merchant_charge_amount,
+    //                 'bdc_charge'=>$request->bdc_charge
+    //             ]);
+    //             Alert::info('Updated Successfully');
+    //             return redirect()->route('admin.transaction-charge-page');
+    //         }
+    //         Alert::error('Something went wrong');
+    //         return back();
+    // }
+
+
+    // public function TransactionChargesDelete($id){
+    //     $charge = TransactionCharges::find($id);
+    //     $charge->delete();
+    //     Alert::success('Charge', 'Deleted Successfully');
+    //     return redirect()->route('admin.transaction-charge-page');
+    // }
 
 
     // Enable logging
@@ -295,6 +310,24 @@ class PageController extends Controller
         Alert::success('Updated Sucessfully');
         return back();
     }
+
+    public function baggageView(){
+        $baggage = Baggage::first();
+        return view('admin.baggage.index', compact('baggage'));
+    }
+
+    public function baggage(\App\Http\Requests\Baggage\UpdateRequest $request){
+        if(Baggage::count()){
+            Baggage::first()->update($request->validated());
+        }else{
+            Baggage::create($request->validated());
+        }
+        Alert::success('Updated Sucessfully');
+        return back();
+    }
+
+
+
 
 
 }

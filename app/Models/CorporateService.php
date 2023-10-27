@@ -9,6 +9,7 @@ class CorporateService extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'name',
         'bank_name',
@@ -16,7 +17,9 @@ class CorporateService extends Model
         'bank_account_number',
         'amount',
         'bank_swift_code',
-        'user_id'
+        'user_id',
+        'paid',
+        'total_amount'
     ];
 
     public function user(){

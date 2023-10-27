@@ -11,14 +11,16 @@ class TransctionNotification extends Notification
 {
     use Queueable;
 
+    public  $users;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($users)
     {
         //
+        $this->users = $users;
     }
 
     /**
@@ -29,8 +31,16 @@ class TransctionNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
+
+    public function toDatabase($notifiable){
+        return [
+            'message' => 'A user has interacted with the OtherService Payment Service.',
+            'user_name' => $this->users->name, 
+        ];
+    }
+
 
     /**
      * Get the mail representation of the notification.
@@ -42,8 +52,9 @@ class TransctionNotification extends Notification
     {
         return (new MailMessage)
                     ->line('The introduction to the notification.')
+                    ->line('User: ' . $this->users->name)
                     ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->markdown('mail.otherservice',['users' => $this->users]);
     }
 
     /**

@@ -14,7 +14,7 @@
                         </span>
                         Other Services Payments 
                     </h2>
-                    <h5>Provide your payment instruments.</h5>
+                    <h5>Provide your payment intructionss.</h5>
                 </div>
            </div>
        </div>
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-lg-6 col-12 ">
                                     <div class="form-group">
-                                        <label>Routine Number (US & CAD only)*</label>
+                                        <label>Routing  Number (US & CAD only)*</label>
                                         <input type="number" name="route_number" class="applicant-input">
                                     </div>
                                 </div>

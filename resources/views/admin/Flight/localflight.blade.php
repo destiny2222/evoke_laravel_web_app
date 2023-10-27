@@ -40,6 +40,7 @@
                                     <th scope="col">Nationality</th>
                                     <th scope="col">Phone Number</th>
                                     <th scope="col">Email Address</th>
+                                    <th scope="col">Time</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -52,16 +53,39 @@
                                     <td>{{  $localflights['airport_location_to'] }}</td>
                                     <td>{{  $localflights['flight_date'] }}</td>
                                     <td>{{  $localflights['flight_class'] }}</td>
-                                    <td>{{  $localflights['adult'] }}</td>
-                                    <td>{{  $localflights['child'] }}</td>
                                     <td>
-                                        {{  $localflights['infant']  }}
+                                        @if ($localflights['adult'] == null)
+                                          no specify
+                                        @else
+                                          {{  $localflights['adult'] }}
+                                        @endif
                                     </td>
                                     <td>
-                                        {{  $localflights['on_way']  }}
+                                        @if ($localflights['child'] == null)
+                                          no specify
+                                        @else
+                                          {{  $localflights['child'] }}</td>
+                                        @endif
+                                    <td>
+                                        @if ($localflights['infant'] == null)
+                                          no specify
+                                        @else
+                                            {{  $localflights['infant']  }}
+                                        @endif
                                     </td>
                                     <td>
-                                        {{  $localflights['round_trip']  }}
+                                        @if ($localflights['on_way'] == null)
+                                            no specify
+                                        @else
+                                           {{  $localflights['on_way']  }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($localflights['round_trip'] == null)
+                                           no specify
+                                        @else
+                                           {{  $localflights['round_trip']  }}
+                                        @endif
                                     </td>
                                     <td>
                                         {{  $localflights['gender']  }}
@@ -73,6 +97,7 @@
                                     <th>{{  $localflights['nationality'] }}</th>
                                     <th>{{  $localflights['phone'] }}</th>
                                     <th>{{  $localflights['email'] }}</th>
+                                    <th>{{  $localflights->created_at->format('Y-m-d h:i:s A') }}</th>
                                     <td>
                                         <form action="{{   route('admin.Local-delete', $localflights->id) }}" method="post">
                                             @csrf

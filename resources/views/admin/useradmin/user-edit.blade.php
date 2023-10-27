@@ -85,7 +85,7 @@
                           </span>
                         @enderror
                     </div>
-                    <div class="col-12 mb-3">
+                    {{-- <div class="col-12 mb-3">
                         <label class="form-label" for="basic-default-fullname">{{ __('State') }}</label>
                         <input type="text" value="{{ $user->state }}" name="state" class="form-control @error('state') is-invalid @enderror" id="basic-default-fullname"/>
                         @error('state')
@@ -102,7 +102,7 @@
                              {{ $message }}
                           </span>
                         @enderror
-                    </div>
+                    </div> --}}
                     <div class="mb-3">
                         <label for="formFile" hidden class="form-label">Upload Popfile Image</label>
                         <input class="form-control" hidden value="{{ $user->image }}" name="image" type="file" id="formFile" />

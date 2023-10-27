@@ -5,12 +5,15 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VisaFee\VisaApplcationRequest;
+use App\Models\Admin;
 use App\Models\TransactionCharges;
 use App\Models\UserWallet;
 use App\Models\VisaApplication;
+use App\Notifications\VisaNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use RealRashid\SweetAlert\Facades\Alert;
 use Unicodeveloper\Paystack\Facades\Paystack;
 
 class VisaApplicationController extends Controller
@@ -19,14 +22,20 @@ class VisaApplicationController extends Controller
 
     public function usPay(){
         $visaApplication = VisaApplication::where('user_id', auth()->user()->id)->latest()->first();
-        $charge = TransactionCharges::all();
-        $charges =  $charge->sum('visa_charge_amount') + $visaApplication->visa_fee_amount;
+        $charge = TransactionCharges::select('visa_charge_amount')->first();
+
+        
+        //  
+        $totalprecentage = ($charge->visa_charge_amount / 100) * $visaApplication->visa_fee_amount;
+
+        // dd($totalprecentage);
+        $totalprecentages = $visaApplication->visa_fee_amount + $totalprecentage;
         if ($visaApplication) {
             $visaApplication->update([
-                'total_charge'=>$charges,
+                'total_charge'=>$totalprecentages,
             ]);
         }
-        return view('users.Visa.us_visa_payment',compact('visaApplication','charge'));
+        return view('users.visa.us_visa_payment',compact('visaApplication','charge'));
     }
 
     public function storeApplication(VisaApplcationRequest $request)
@@ -44,7 +53,7 @@ class VisaApplicationController extends Controller
         $authnication = getenv('SECRET_KEY');
         
         // Get the selected payment method from the form submission
-        $selectedPaymentMethod = $request->input('payment_option');
+        $selectedPaymentMethod = $request->input('paymentMethod');
         $totalamount = $request->input('total');
         $requestData = [];
         if ($selectedPaymentMethod == 'balance') {
@@ -62,22 +71,23 @@ class VisaApplicationController extends Controller
                 $payment->paid = 1;
                 $payment->save();   
             }
-
+            $users = $payment->user;
+            if($users){
+                $admin = Admin::where('id', 1)->first();
+                $admin->notify(new VisaNotification($users));
+            }else{
+                Alert::error('An error occurred');
+                return back();
+            }
             return redirect()->route('initiator-page')->with('success', 'Payment Successful');
 
-        } elseif ($selectedPaymentMethod == 'debit') {
-
-            $requestData = [
-                'key3' => 'value3',
-                'key4' => 'value4',
-            ];
         } elseif ($selectedPaymentMethod == 'payment') {
             $requestData = [
                 'amount' => $totalamount,
                 'email' => auth()->user()->email,
                 'payment_options'=> "card, bank, ussd,bank transfer",
                 'tx_ref' => $reference,
-                'currency' => "NGN",
+                'currency' => "USD",
                 'redirect_url' => route('paystack.webhook'),
 
                 'customer' => [
@@ -123,8 +133,16 @@ class VisaApplicationController extends Controller
             if ($paymentData) {
                 $payment = VisaApplication::where('user_id', auth()->user()->id)->latest()->first();
                 $payment->paid = 1;
-                $payment->save();   
-               
+                $payment->save(); 
+                  
+                $users = $payment->user;
+                if($users){
+                    $admin = Admin::where('id', 1)->first();
+                    $admin->notify(new VisaNotification($users));
+                }else{
+                    Alert::error('An error occurred');
+                    return back();
+                }
                 // Clear the session data after using it
                 $request->session()->forget('visa_application');
                 return redirect()->route('initiator-page')->with('success', 'Payment payed successful');
@@ -137,4 +155,31 @@ class VisaApplicationController extends Controller
             return redirect()->route('pay-page')->with('error', 'Payment failed');
         }
     }
+    
+    
+       public function redirect(Request $request)
+    {
+        $redirectPage = $request->input('redirect_page');
+        // Check if a valid page is selected
+        if (!empty($redirectPage)) {
+            // Decode the URL before redirection
+            $decodedRedirectPage = urldecode($redirectPage);
+            return redirect()->to($decodedRedirectPage);
+        }
+        return redirect()->route('visa-page')->with('error', 'Please select a valid page.');
+    }
+    
+       public function Vise(){
+      return  view('users.visa.vise_fee');
+   }
+
+ 
+
+   public function CanadaVisa(){
+        return view('users.visa.canada_visa');
+   }
+
+   public function UsVisa(){
+      return view('users.visa.us_visa');
+   }
 }

@@ -30,6 +30,7 @@
                                 <th scope="col">Status</th>
                                 <th scope="col">Data Sign</th>
                                 <th scope="col">{{ __('Approve Status')  }}</th>
+                                <th scope="col">Time</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -101,6 +102,7 @@
                                        <span class="badge bg-success">Approved</span>
                                     @endif
                                 </td>
+                                <td>{{  $events->created_at->format('Y-m-d h:i:s A') }}</td>
                                 <td>
                                     <div class="hstack d-flex gap-2 ">
                                         <a href="{{ route('admin.kyc.edit', $events->id) }}" class="fs-14 lh-1" >

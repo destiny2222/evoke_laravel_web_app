@@ -34,7 +34,8 @@
                                     <th scope="col">Email</th>
                                     <th scope="col">Subject</th>
                                     <th scope="col">Message</th>
-                                    {{-- <th scope="col">Action</th> --}}
+                                    <th scope="col">Time</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody> 
@@ -47,16 +48,26 @@
                                     <td>
                                         {{  $mail['message']  }}
                                     </td>
-                                    {{-- <td>
-                                        <form action="{{ route('admin.send-mail-delete', $mail->id) }}" method="post">
+                                    <td>
+                                        {{  $mail->created_at->format('Y-m-d h:i:s A') }}
+                                    </td>
+                                    <td>
+                                        <div class="d-flex gap-3">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModalScrollable3{{ $mail->id }}">
+                                            View Mail
+                                        </button>
+                                        {{-- <form action="{{ route('admin.send-mail-delete', $mail->id) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-sm btn-danger btn-wave">
                                                 <i class="ri-delete-bin-line align-middle  d-inline-block"></i>Delete
                                             </button>
-                                        </form>
-                                    </td> --}}
+                                        </form> --}}
+                                        </div>
+                                    </td>
                                 </tr>
+                                @include('admin.emails.show')
                                 @endforeach
                             </tbody>
                         </table>

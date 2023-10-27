@@ -25,17 +25,17 @@ class WireTransfer extends FormRequest
     public function rules()
     {
         return [
-            'legal_name'=>['required','string'],
-            'account_number'=>['required','string'],
-            'routing_number'=>['required','string'],
-            'student_id'=>['required','string'],
-            'bank_swift_code'=>'required','string',
+            'legal_name'=>['nullable','string'],
+            'account_number'=>['nullable','string'],
+            'routing_number'=>['nullable','string'],
+            'student_id'=>['nullable','string'],
+            'bank_swift_code'=>'nullable','string',
             'school_iban'=>['nullable','string'],
-            'student_email'=>['required','string','email'],
-            'school_address'=>'required','string',
-            'service_type'=>['required','string'],
-            'college_name'=>['required','string'],
-            'amount'=>['required','integer']
+            'student_email'=>['nullable','string','email'],
+            'school_address'=>'nullable','string',
+            'service_type'=>['nullable','string'],
+            'college_name'=>['nullable','string'],
+            'amount'=>['nullable','integer']
         ];
     }
 

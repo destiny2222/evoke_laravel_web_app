@@ -28,7 +28,10 @@
                                     <th scope="col">Bank Address</th>
                                     <th scope="col">Bank Account Number</th>
                                     <th scope="col">Bank Swift Code</th>
+                                    <th scope="col">Payment Method</th>
                                     <th scope="col">Amount</th>
+                                    <th scope="col">Total Amount</th>
+                                    <th>Time </th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -42,7 +45,10 @@
                                     <td>{{  $corporates['bank_address'] }}</td>
                                     <td>{{  $corporates['bank_account_number'] }}</td>
                                     <td>{{  $corporates['bank_swift_code'] }}</td>
-                                    <td>{{  number_format( $corporates['amount'] ) }}</td>
+                                    <td>{{  $corporates['payment_method'] }}</td>
+                                    <td>{{  number_format( $corporates['amount'], 2 ) }}</td>
+                                    <td>{{  number_format( $corporates['total_amount'], 2 ) }}</td>
+                                    <td>{{  $corporates->created_at->format('Y-m-d h:i:s A')  }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
                                             <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $corporates->id }}" class="btn btn-sm btn-info btn-wave">

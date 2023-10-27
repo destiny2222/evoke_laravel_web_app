@@ -5,12 +5,14 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\KycRequest;
 use App\Http\Requests\Tuition\WireTransfer;
+use App\Models\Admin;
 use App\Models\Kyc;
 use App\Models\Setting;
 use App\Models\TransactionCharges;
 use App\Models\TuitionPayment;
 use App\Models\TuitionPaymentWire;
 use App\Models\UserWallet;
+use App\Notifications\PaymentMadeNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -37,43 +39,15 @@ class PageController extends Controller
     }
 
 
-    public  function Corporate(){
-        return view('users.Corporate.corporate');
-    }
 
-
-    public function Merchandise() {
-        return view('users.merchandise.merchandise');
-    }
 
     public function OthersPayment() {
         $charges = TransactionCharges::where('other_service', 'id')->first();
         return view('users.otherservice.OthersPayment', compact('charges'));
     }
 
-   public function Vise(){
-      return  view('users.Visa.vise_fee');
-   }
 
- 
 
-   public function CanadaVisa(){
-        return view('users.Visa.canada_visa');
-   }
-
-   public function UsVisa(){
-      return view('users.Visa.us_visa');
-   }
-
-   public function Megamill(){
-      
-      return view('users.Corporate.mega_millions');
-   }
-
-   public function Powerball(){
-      
-      return view('users.Corporate.power_ball');
-   }
 
 
    public function deposit()
@@ -87,17 +61,7 @@ class PageController extends Controller
    }
    
 
-   public function redirect(Request $request)
-    {
-        $redirectPage = $request->input('redirect_page');
-        // Check if a valid page is selected
-        if (!empty($redirectPage)) {
-            // Decode the URL before redirection
-            $decodedRedirectPage = urldecode($redirectPage);
-            return redirect()->to($decodedRedirectPage);
-        }
-        return redirect()->route('visa-page')->with('error', 'Please select a valid page.');
-    }
+ 
 
     public  function storeKyc(KycRequest $request){
         try {
@@ -130,21 +94,25 @@ class PageController extends Controller
 
     public function tuitionpaymentView(){
         $pay = TuitionPayment::where('user_id', auth()->user()->id)->latest()->first();
-        $charge = TransactionCharges::all();
+        $charge = TransactionCharges::select('tuition_charge_amount')->first();
         $userbalance = UserWallet::where('user_id', auth()->user()->id)->get();
-        // calculate pay and charge  by adding both amount together
-        $totalPay = $pay->amount + $charge->sum('tuition_charge_amount');
+        // dd($charge);
+        
+
+
+        // calculate totalprecenage
+        $totalprecentage =  ($charge->tuition_charge_amount / 100) * $pay->amount;
+        // dd($totalprecentage);
+
+        $totalPay = $pay->amount + $totalprecentage;
         session(['totals' => [
             'amount' => $totalPay
         ]]);
   
-        foreach ($charge as $key => $charges) {
-            // dd($charges->tuition_charge_amount);
-        }
        
         return view('users.TuitionPayment.paymenttution', [
             'pay' => $pay,
-            'charges' => $charges,
+            'charges' => $charge,
             'totalPay'=>$totalPay,
             'userbalance' => $userbalance->sum('amount'),
         ]);
@@ -179,16 +147,19 @@ class PageController extends Controller
                 $pay->save();    
             }
             
+            $users = $pay->user;
+            if($users){
+                $admin = Admin::where('id', 1)->first();
+                $admin->notify(new PaymentMadeNotification($users));
+            }else{
+                return back()->with('An error occurred');
+            
+            }
+            
             return redirect()->route('initiator-page')->with('success', 'Payed Successfully');
 
 
-        } elseif ($selectedPaymentMethod == 'debit') {
-
-            $requestData = [
-                'key3' => 'value3',
-                'key4' => 'value4',
-            ];
-        } elseif ($selectedPaymentMethod == 'visa') {
+        }  elseif ($selectedPaymentMethod == 'visa') {
             $requestData = [
                 'amount' => $totalamount['amount'],
                 'email' => auth()->user()->email,
@@ -241,7 +212,16 @@ class PageController extends Controller
                 $pay = TuitionPayment::where('user_id', auth()->user()->id)->latest()->first();
                 $pay->amount = $paymentData['amount'];
                 $pay->paid = 1;
-                $pay->save();   
+                $pay->save();  
+                
+                $users = $pay->user;
+                if($users){
+                    $admin = Admin::where('id', 1)->first();
+                    $admin->notify(new PaymentMadeNotification($users));
+                }else{
+                    return back()->with('An error occurred');
+                
+                }
                
                 // Clear the session data after using it
                 $request->session()->forget('payment_visa');
@@ -335,20 +315,26 @@ class PageController extends Controller
 
 
     public function tuitionPaymentWireView(){
-        $wirefransfer = TuitionPaymentWire::where('user_id', auth()->user()->id)->latest()->first();
-        $charge = TransactionCharges::all();
+        $wiretransfer = TuitionPaymentWire::where('user_id', auth()->user()->id)->latest()->first();
+        $charge = TransactionCharges::select('tuition_charge_amount')->first();
         $userbalance = UserWallet::where('user_id', auth()->user()->id)->get()->sum('amount');
         // dd($userbalance);
-        // calculate pay and charge  by adding both amount together
-        $totalPay = $wirefransfer->amount + $charge->sum('tuition_charge_amount');
+
+        // calculate totalprecentage 
+        $totalprecentage = ($charge->tuition_charge_amount / 100) * $wiretransfer->amount;
+        $totalPay = $wiretransfer->amount + $totalprecentage;
+        
         session(['total' => [
             'amount' => $totalPay
         ]]);
   
-        foreach ($charge as $key => $charges) {
-            // dd($charges->tuition_charge_amount);
-        }
-        return view('users.TuitionPayment.paymentwire', compact('charges','totalPay', 'userbalance','wirefransfer'));
+
+        return view('users.TuitionPayment.paymentwire', [
+            'charges'=>$charge,
+            'totalPay'=>$totalPay,
+            'userbalance'=>$userbalance,
+            'wiretransfer'=>$wiretransfer
+        ]);
     }
 
 
@@ -378,15 +364,17 @@ class PageController extends Controller
                 $payment->paid = 1;
                 $payment->save();   
             }
+            $users = $payment->user;
+                if($users){
+                    $admin = Admin::where('id', 1)->first();
+                    $admin->notify(new PaymentMadeNotification($users));
+                }else{
+                    return back()->with('An error occurred');
+                
+                }
 
             return redirect()->route('initiator-page')->with('success', 'Payment Successful');
 
-        } elseif ($selectedPaymentMethod == 'debit') {
-
-            $requestData = [
-                'key3' => 'value3',
-                'key4' => 'value4',
-            ];
         } elseif ($selectedPaymentMethod == 'visa') {
             $requestData = [
                 'amount' => $totalamount['amount'],
@@ -442,6 +430,14 @@ class PageController extends Controller
                 $payment->paid = 1;
                 $payment->save();   
                
+                $users = $payment->user;
+                if($users){
+                    $admin = Admin::where('id', 1)->first();
+                    $admin->notify(new PaymentMadeNotification($users));
+                }else{
+                    return back()->with('An error occurred');
+                
+                }
                 // Clear the session data after using it
                 $request->session()->forget('payment_visa');
                 return redirect()->route('initiator-page')->with('success', 'Payment payed successful');

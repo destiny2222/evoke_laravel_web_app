@@ -37,7 +37,7 @@
                     }
 
                     .email_body ul li {
-                        color:rgba(=10, 46, 101, 0.8); font-weight:normal; font-size:16px; line-height:1.6; margin:20p=x 0 !important; list-style:disc !important; -webkit-font-smoothing:antialiase=d
+                        color:rgba(10, 46, 101, 0.8); font-weight:normal; font-size:16px; line-height:1.6; margin:20px 0 !important; list-style:disc !important; -webkit-font-smoothing:antialiase=d
                     }
 
                     .email_body ul li a {
@@ -49,7 +49,7 @@
                     }
 
                     img.email_image {
-                        height:auto !important; max-width:600px !important; wi=dth:100% !important
+                        height:auto !important; max-width:600px !important; width:100% !important
                     }
 
                     img.email_image.small {
@@ -69,7 +69,7 @@
                     }
 
                     .column_cell span.unsubscribe-text {
-                        font-size:10px; color:rgba(10, 46, 101, 0.5); margin-=top:0; line-height:1.5; margin-bottom:20px; display:inline-block !important; ma=x-width:70%
+                        font-size:10px; color:rgba(10, 46, 101, 0.5); margin-top:0; line-height:1.5; margin-bottom:20px; display:inline-block !important; ma=x-width:70%
                     }
 
                     .column_cell span.unsubscribe-text a {
@@ -77,7 +77,7 @@
                     }
 
                     .column_cell p {
-                        line-height:1.6; color:r=gba(10, 46, 101, 0.8); margin-top:0; margin-bottom:30px
+                        line-height:1.6; color:rgba(10, 46, 101, 0.8); margin-top:0; margin-bottom:30px
                     }
 
                     .column_cell p span {
@@ -92,7 +92,7 @@
                         font-weight:500; color:#e44d48
                     }
 
-                    .column_cell p.table-label, .c=olumn_cell p.table-data {
+                    .column_cell p.table-label, .column_cell p.table-data {
                         margin-top:20px; margin-bottom:20px
                     }
 
@@ -170,15 +170,17 @@
                     }
 
                     .column_cell h2 {
-                        font-size:18px; line-height:25px; font-weight:800; =margin-top:24px; margin-bottom:8px
+                        font-size:18px; line-height:25px; font-weight:800; margin-top:24px; margin-bottom:8px
                     }
 
                     .container {
-                        max-width:720px; margin:0 auto; =display:block; background-color:white
+                        max-width:720px; margin:0 auto; display:block; 
+                        /* background-color:white */
                     }
 
                     body {
-                        font-family:"BR Firma CW", 'Googl=e Sans', -apple-system, BlinkMacSystemFont, ' Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; background-color:=#F1F3F5; margin:0; color:#233858
+                        font-family:"BR Firma CW", 'Googl=e Sans', -apple-system, BlinkMacSystemFont, ' Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+                        background-color:#F1F3F5 !important; margin:0; color:#233858
                     }
 
                     .column_cell p.weekly-summary__data {
@@ -192,7 +194,7 @@
                     .weekly-summary__card {
                         height:60px; padding:20px 15px 15px 1=5px; background-color:#0067f5; color:white; 
                         border-radius:4px; text-align:center; 
-                        -webkit-box-shadow:4px 6px 12px 0 rgba(0, 0, 0, 0.1); box-shadow:0 4px 12px 0=rgba(0, 0, 0, 0.1)
+                        -webkit-box-shadow:4px 6px 12px 0 rgba(0, 0, 0, 0.1); box-shadow:0 4px 12px 0rgba(0, 0, 0, 0.1)
                     }
 
                     .weekly-summary__card-item {
@@ -537,7 +539,7 @@
                         height:114px
                     }
 
-                    =.chart__bar-77 {
+                 .chart__bar-77 {
                         height:115.5px
                     }
 
@@ -681,6 +683,12 @@
                         width:100%; min-width:100%
                     }
 
+
+                    .email_table{
+                        padding: 10px 30px;
+                        text-align: center;
+                    }
+
                     .email_body {
                         font-size:0 !important; line-height:100%; text-align:center; padding-left:8px; padding-right:8px
                     }
@@ -690,15 +698,15 @@
                     }
 
                     .email_container, .email_row, .col_1, .col_2, .col_3 {
-                        font-size:0; display:inline-block; width:100%; min-width:100%; min-width=:0 !important; vertical-align:top
+                        font-size:0; display:inline-block; width:100%; min-width:100%; min-width:0 !important; vertical-align:top
                     }
 
                     .email_container {
-                        max-width:660px; margin:0=auto; text-align:center
+                        max-width:660px; margin:0 auto; text-align:center
                     }
 
                     .content_cell {
-                        width:100%; min-width:100%; min-width:0= !important; font-size:0; text-align:center; vertical-align:top
+                        width:100%; min-width:100%; min-width:0 !important; font-size:0; text-align:center; vertical-align:top
                     }
 
                     .column_cell {
@@ -706,11 +714,11 @@
                     }
 
                     .jumbotron_cell {
-                        padding=-top:32px; vertical-align:top; border-radius:3px; background-position:50% 0; background-repeat:no-repeat; border:0
+                        padding-top:32px; vertical-align:top; border-radius:3px; background-position:50% 0; background-repeat:no-repeat; border:0
                     }
 
                     .jumbotron_cell--no-padding {
-                        padding-left=:0; padding-right:0
+                        padding-left:0; padding-right:0
                     }
 
                     .jumbotron_b {
@@ -809,7 +817,7 @@
                         color:#74bb7e
                     }
 
-                    .i=nfo_b {
+                    .info_b {
                         border-color:#596c82
                     }
 
@@ -1036,68 +1044,21 @@
                         max-height:0 !important; display:none !important;
                          mso-hide:all !important; overflow:hidden !important; font-size:0 !important
                     }
+                    body{
+                        background-color: #F1F3F5 !important;
+                    }
     </style>
 </head>
 
 <body style="font-family: &#39;BR Firma CW&#39;, &#39;Google Sans&#39;,=-apple-system, BlinkMacSystemFont, &#39;Segoe
     UI&#39;, Roboto, Oxygen, Ubu=ntu, Cantarell, &#39;Open Sans&#39;, &#39;Helvetica Neue&#39;,
-    sans-serif; background-color: #F1F3F5; color: #233858; margin: 0;" bgcolor="#F1F3F5">
-    
+    sans-serif; background-color: #F1F3F5 !important; color: #233858; margin: 0;" bgcolor="#F1F3F5">
+   
     <div class="root">
-        <div class="container mt_11" style="max-width: 720px; display: bloc=k; background-color: rgb(255, 255, 255); margin: 0
+        <div class="container mt_11" style="max-width: 720px; display: block; margin: 0
             auto;">
-            <table role="presentation" class="email_table" width="100%" border="0" cellspacing="0"
-                cellpadding="0" style="width: 100%; min-wid=th: 100%;">
-                <tbody>
-                    <tr>
-                        <td class="email_body tc pte_lg px" style="font-size: 0 !im=portant; line-height: 100%;
-                            text-align: center; padding-left: 16px; padding=-right: 16px; padding-top: 36px;"
-                            align="center">
-                            <div class="email_container" style="font-size: 0; display: inline-block; width: 100%;
-                                min-width: 0 !important; vertical-align: top;max-width: 660px; text-align: center;
-                                margin: 0 auto;" align="center">
-                                <table role="presentation" class="column" width="100%" border=" 0"
-                                cellspacing="0" cellpadding="0" style="width: 100%; min-width: 100%; padding:50px 0px 50px;">
-                                <tbody>
-                                    <tr>
-                                        <td class="column_cell content-area logo_mark tl" style="width: 100%;
-                                            min-width: 100%; padding-left: px; padding-right: px; vertical-align:
-                                            top; text-align: center;" align="center" valign="top">
-                                            <a href="https://evokeedgelimited.com/"
-                                                style="font-family: &#39;BR Firma CW&#39;, &#39;Google Sans&#39;,
-                                                sans-serif; -webkit-font-smoothing: antialiased; color: #233858;
-                                                text-decoration: underline;">
-                                                <img src="https://evokeedgelimited.com/assets/img/black-logo.png" style="width: 129px; height: auto; max-width: 200px;" />
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                                <table role="presentation" class="hr_rl" align="center" width="97%"
-                                    border="0" cellspacing="0" cellpadding="0" style="display: table;
-                                    margin-left: auto; margin-right: auto;">
-                                    <tbody>
-                                        <tr>
-                                            <td class="hr_ep pb bb" style="font-size: 0; line-height: 1px;
-                                                mso-line-height-rule: exactly; min-height: 1px; overflow: hidden;
-                                                height: 2px; background-color: transparent !important;
-                                                padding-bottom:24px; border-bottom-width: 1px; border-bottom-color:
-                                                rgba(60,60,60,0.07);border-bottom-style: solid;" bgcolor="transparent
-                                                !important">
-                                                EvokeEdge  Limited
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <table role="presentation" class="email_table" width="100%" border="0" cellspacing="0"
-                cellpadding="0" style="width: 100%; min-wid=th: 100%;">
+            <table role="presentation" class="email_table"  width="100%" border="0" cellspacing="0"
+                cellpadding="0" style="width: 100%; min-width: 100%;">
                 <tbody>
                     <tr>
                         <td class="email_body" style="font-size: 0 !important; line-height: 100%; text-align:
@@ -1107,7 +1068,7 @@
                                 margin: 0 auto;" align="center">
                                 <table role="presentation" class="column jumbotron_b" width"100%" border="0"
                                     cellspacing="0" cellpadding="0" style="width: 100%; min-width: 100%;
-                                    border-radius: 6px; border: 2px solid transparent;">
+                                    border-radius: 6px;">
                                     <tbody>
                                         <tr>
                                             <td class="column_cell tl content-area jumbotron_cell" style="width:
@@ -1115,10 +1076,7 @@
                                                 vertical-align: top; padding-top: 32px; border-radius: 3px; text-align:
                                                 left; background: no-repeat 50%; border: 0;" align="left"
                                                 valign="top">
-                                                <p style="font-size: 16px; font-family: &#39;BR Firma CW&#39;,
-                                                    &#39;Google Sans&#39;, sans-serif; -webkit-font-smoothing:
-                                                    antialiased; line-height: 1.6; color: rgba(10,46,101,0.8);
-                                                    margin-top: 0; margin-bottom: 30px;"></p>
+                                               
                                                 <h1 style="color: #233858; font-size: 24px; line-height: 36px;
                                                     font-weight: 800; font-family: &#39;BR Firma CW&#39;, &#39;Google
                                                     Sans&#39;, -apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;,
@@ -1144,30 +1102,63 @@
                     </tr>
                 </tbody>
             </table>
-
-            
+          
         </div>
        
+       
         <!-- footer -->
-        <table role="presentation" class="email_table" width="100%" border="0" cellspacing="0"
-            cellpadding="0" style="width: 100%; min-width: 100%;">
-            <tbody>  
+        <div class="email_container" style="font-size: 0; display: inline-block; width: 100%;
+                                min-width: 0 !important; vertical-align: top;max-width: 660px; text-align: center;
+                                margin: 0 auto;" align="center">
+            <table role="presentation" class="column" width="100%" border=" 0"
+                cellspacing="0" cellpadding="0" style="width: 100%; min-width: 100%; padding:50px 0px 50px;">
+                <tbody>
+                    <tr>
+                        <td class="column_cell content-area logo_mark tl" style="width: 100%;
+                            min-width: 100%; padding-left: px; padding-right: px; vertical-align:
+                            top; text-align: center;" align="center" valign="top">
+                            <a href="https://evokeedgelimited.com/"
+                                style="font-family: &#39;BR Firma CW&#39;, &#39;Google Sans&#39;,
+                                sans-serif; -webkit-font-smoothing: antialiased; color: #233858;
+                                text-decoration: underline;">
+                                <img src="https://evokeedgelimited.com/assets/img/black-logo.png" style="width: 129px; height: auto; max-width: 200px;" />
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table role="presentation" class="email_table" width="100%" border="0" cellspacing="0"
+                cellpadding="0" style="width: 100%; min-width: 100%;text-align:center;">
+                <tbody>  
+                    <tr>
+                        <td class="column_cell jumbotron_cell tc" align="center" valign="top">
+                            <p style="font-size: 16px; font-family: &#39;BR Firma CW&#39;,
+                                &#39;Google Sans&#39;, sans-serif; -webkit-font-smoothing:
+                                antialiased; line-height: 1.6; color: rgba(10,46,101,0.8);
+                                margin-top: 0; margin-bottom: 30px;text-align:center'">
+                               © 2023 EvokeEdge Limited. All Rights Reserved
+                           </p>
+                        </td>
+                    </tr>
                 <tr>
-                    <td class="column_cell jumbotron_cell tc" style="width: 100%; min-width: 100%; padding-left:
-                        8px; padding-right: 8px; vertical-align: top; padding-top: 32px; border-radius: 3px;
-                        text-align: center; background: no-repeat 50%; border: 0;" align="center" valign="top">
-                        <p class="promo-text" style="font-size: 12px; font-family: &#39;BR Firma CW&#39;,
-                            &#39;Google Sans&#39;, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.6;
-                            color: rgba(10,46,101,0.8);margin-top: 0; margin-bottom: 20px; padding-top: 20px;
-                            border-top-width: 1px; border-top-color: rgba(60,60,60,0.07); border-top-style: solid;">
-                             Thanks,
-                             {{ config('app.name') }}
+                    <td>
+                        <p style="font-size: 16px; font-family: &#39;BR Firma CW&#39;,
+                            &#39;Google Sans&#39;, sans-serif; -webkit-font-smoothing:
+                            antialiased; line-height: 1.6; color: rgba(10,46,101,0.8);
+                            margin-top: 0; margin-bottom: 30px;">
+                            <b>CONFIDENTIALITY NOTICE:</b> 
+                            This email and any accompanying attachments contain confidential and privileged 
+                            information intended solely for the intended recipient(s). 
+                            if you have received this email in error, please promptly notify us and delete the 
+                            email and any attachments from your records. unauthorized printing, copying, distribution, 
+                            or disclosure of any part of this email or its attachments is strictly prohibited. your 
+                            compliance in maintaining the confidentiality of this communication is required.
                         </p>
                     </td>
                 </tr>
-               
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>    
     </div>
 </body>
 </html>    

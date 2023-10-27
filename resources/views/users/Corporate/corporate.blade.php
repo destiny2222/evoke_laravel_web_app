@@ -43,7 +43,7 @@
                     
                                 <div class="col-lg-6 col-12 m-b-4 p-t-2">
                                     <label class="form-label" for="exampleInputSwift">Swift Code</label>
-                                    <input type="number" class="applicant-input" name="bank_swift_code" id="exampleInputSwift" placeholder="code">
+                                    <input type="text" class="applicant-input" name="bank_swift_code" id="exampleInputSwift" placeholder="code">
                                 </div>
                     
                                 <div class="col-lg-6 col-12 m-b-4 p-t-2">

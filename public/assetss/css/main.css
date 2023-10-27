@@ -30835,7 +30835,12 @@ input[type="checkbox"]:focus{
 .card-payment{
   border: 2px solid #4285f4;
   padding: 15px  30px;
+  width: 100%;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.card-payment label{
+  padding-top:2px;
 }
 
 .form-check {
@@ -30923,6 +30928,14 @@ ul.radio-buttons-w3-agileits li {
 input[type="radio"] {
   cursor: pointer;
   outline: none !important;
+}
+
+#chartbar{
+  padding: 2rem;
+  border: 1px solid #f3f3f3;
+  background-color: #f3f3f3;
+  border-radius: 1rem;
+  box-shadow: 0 0 16px rgba(225, 225, 225, 0.8);
 }
 
 @media screen and (max-width: 768px) {

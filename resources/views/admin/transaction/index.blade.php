@@ -29,6 +29,7 @@
                                 <th>Date</th>
                                 <th>Amount</th>
                                 <th>Status</th>
+                                <th>Time</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -47,6 +48,9 @@
                                     @else
                                       <span class="badge bg-label-success me-1">Approved</span>
                                     @endif
+                                </td>
+                                <td>
+                                    {{ $transactions->created_at->format('Y-m-d h:i:s A') }}
                                 </td>
                                 <td>
                                     <div class="dropdown">

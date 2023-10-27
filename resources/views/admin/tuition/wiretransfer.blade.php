@@ -35,6 +35,7 @@
                                     <th scope="col">Amount</th>
                                     <th scope="col">Deposit</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Time</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -75,6 +76,7 @@
                                           <span class="badge bg-danger-transparent">Pending</span>
                                         @endif
                                     </td>
+                                    <td>{{  $tuitions->created_at->format('Y-m-d h:i:s A')  }}</td>
                                     <td>
                                         <div class="d-flex">
                                             <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $tuitions->id }}" class="btn btn-sm btn-info btn-wave">

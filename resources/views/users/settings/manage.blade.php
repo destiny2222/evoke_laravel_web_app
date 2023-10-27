@@ -26,7 +26,7 @@
                     @foreach ($transactions as $transaction)
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
-                            <td>{{ $transaction['date'] }}</td>
+                            <td style="font-size: 11px"><b>{{ $transaction['date'] }}</b></td>
                             <td>{{ $transaction['reference'] }}</td>
                             <td>{{ $transaction['type'] }}</td>
                             <td>{{ $transaction['amount'] }}</td>

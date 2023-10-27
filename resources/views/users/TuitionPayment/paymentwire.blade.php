@@ -10,19 +10,19 @@
                         <h2>Application Fee</h2>
                         <span class='msg' style="color: red; font-size: 13px;"></span>
                         <br>
-                        <p>Amount: ${{  number_format( $wirefransfer->amount) }}  </p>
-                        <p>Service Charge: {{ number_format($charges->tuition_charge_amount) }}% </p>
+                        <p>Amount: ${{  number_format( $wiretransfer->amount, 2) }}  </p>
+                        <p>Service Charge: {{ $charges->tuition_charge_amount }}% </p>
                         <p>
                             Total amount: 
-                            ${{  number_format($totalPay)  }}
+                            ${{  number_format($totalPay, 2)  }}
                         </p>
                         <div>
                             <button type="button"  class="submit-form w-100 next">Confirm and Continue</button>
                         </div>
                     </div>
-                    <input type="text" name="amount" value="{{  number_format( $wirefransfer->amount) }}" hidden id="">
-                    <input type="text" name="total" class="total-amount" id="" value="{{  number_format($totalPay)  }}"  hidden> 
-                    <input type="text" name="serviceCharge" hidden value="{{ number_format($charges->tuition_charge_amount) }}"  hidden  id="">
+                    <input type="text" name="amount" value="{{  number_format( $wiretransfer->amount, 2) }}" hidden id="">
+                    <input type="text" name="total" class="total-amount" id="" value="{{  number_format($totalPay, 2)  }}"  hidden> 
+                    <input type="text" name="serviceCharge" hidden value="{{ $charges->tuition_charge_amount }}"  hidden  id="">
                     <div class="slide-two">
                         <span class='msg2' style="color: red; font-size: 13px;"></span><br>
                         <p id='back'><i class="fa fa-arrow-left"></i> <span id='name' style="color: #383838;"></span></p><br>
@@ -35,26 +35,26 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <ul class="card-payment-ul">
-                                        <li  class="card-payment m-b-1" style="display: flex;">
-                                            <h4>Make payment with Balance: </h4>
+                                        <li class="card-payment d-flex gap-3 m-b-1">
+                                            <input id="payment_method_balance" type="radio" class="input-radio" name="paymentMethod" value="balance">
+                                            <label class="" for="payment_method_balance">
+                                                 Make payment with Balance: ${{ number_format(auth()->user()->userwallet->amount,2 ) }}
+                                            </label>
                                         </li>
-                                        <li class="card-payment m-b-1" style="display: flex;">
-                                            <img src="{{ asset('assets/img/local.jpg') }}" alt="">   
-                                            <h4>Local online <br> banking </h4>
-                                        </li>
-                                        <li class="card-payment m-b-1" style="display: flex;">
-                                            <img width="100" src="{{ asset('visa.png') }}" alt="">  
+                                        {{-- <li class="card-payment d-flex m-b-1">
+                                            <input id="payment_method_local" type="radio" class="input-radio" name="paymentMethod" value="debit">
+                                            <label class="" for="payment_method_local">
+                                                DIRECT BANK TRANSFER
+                                            </label>
+                                        </li> --}}
+                                        <li class="card-payment m-b-1">
+                                            <input id="payment_method_paystack" type="radio" class="input-radio" name="paymentMethod" value="visa">
+                                            <label class="" for="payment_method_paystack">
+                                                <img width="100" src="{{ asset('visa.png') }}" alt="">
+                                            </label>  
                                         </li>
                                     </ul>
-                                </div>
-                                <div class="col-lg-12">
-                                    <h4 class="mb-3">Choose payment method</h4>
-                                     <select name="paymentMethod" class="form-control" id="">
-                                        <option selected>Select</option>
-                                        <option value="balance">Balance</option>
-                                        <option value="debit">Local online banking</option>
-                                        <option value="visa">Visa</option>
-                                     </select>
+                                    
                                 </div>
                                 <div class="col-lg-12 col-12 text-center">
                                     <input type="submit" value="Proceed to payment" class="submit-form  w-100">
@@ -66,50 +66,4 @@
             </form>
         </div>
     </div>
-
-<script>
-
-    var next = document.querySelector('.next');
-    var slide_one = document.querySelector('.slide-one');
-    var slide_two = document.querySelector('.slide-two');
-
-    var email = document.querySelector('.total-amount')
-    // var nameText = document.getElementById('name')
-    var back_btn = document.getElementById('back')
-    var msg = document.querySelector('.msg')
-    var msg2 = document.querySelector('.msg2')
-
-    // var container_item_2 = document.querySelector('.container-item-2')
-    
-    next.addEventListener('click', function () {
-        if (email.value == "") {
-            msg.textContent = 'Enter a valid email address, phone number, or Skype name.'
-        } else {
-            msg.textContent = ""
-            // nameText.textContent = email.value
-            slide_one.classList.add('slide-one-toggle')
-            slide_two.classList.add('slide-two-toggle')
-        }
-    })
-    back_btn.addEventListener('click', function () {
-        slide_one.classList.remove('slide-one-toggle')
-        slide_two.classList.remove('slide-two-toggle')
-    });
-
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     var amount = parseFloat(document.querySelector('input[name="amount"]').value);
-    //     var serviceCharge = parseFloat(document.querySelector('input[name="serviceCharge"]').value);
-    //     var total = amount + serviceCharge;
-    //     document.getElementById('total').value = total;
-    // });
-
-
-    document.querySelector('form').addEventListener('submit', function(event) {
-      var selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-      document.querySelector('input[name="paymentMethod"]').value = selectedPaymentMethod;
-    });
- 
-
-   
-</script>
 @endsection
