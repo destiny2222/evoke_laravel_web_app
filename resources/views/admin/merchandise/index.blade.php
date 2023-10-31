@@ -91,7 +91,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{  $merchandiser->created_at->format('Y-m-d h:i:s A') }}
+                                        {{  $merchandiser->created_at->format('m-d-y h:s A') }}
                                     </td>
                                     <td>
                                         <div class="d-flex">

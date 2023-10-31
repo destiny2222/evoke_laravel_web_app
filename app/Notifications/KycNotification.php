@@ -44,7 +44,7 @@ class KycNotification extends Notification
         return (new MailMessage)
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
-                    ->markdown('email.approve',['kyc'=>$this->kyc]);
+                    ->markdown('email.approve',['kycs'=>$this->kyc]);
     }
 
     /**

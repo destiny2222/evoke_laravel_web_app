@@ -11,8 +11,6 @@ class Kyc extends Model
     use HasFactory;
 
     protected $fillable = [
-       'firstname',
-       'lastname',
        'gender',
        'marital_status',
        'date_birth',
@@ -20,13 +18,7 @@ class Kyc extends Model
        'permenant_address',
        'street_address',
        'street_address_2',
-       'city',
-       'zipcode',
-       'state',
-       'country',
        'status',
-       'phone',
-       'email',
        'proof_of_address',
        'documents',
        'decleration_firstname',

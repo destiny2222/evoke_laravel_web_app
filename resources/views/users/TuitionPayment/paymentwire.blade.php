@@ -11,7 +11,7 @@
                         <span class='msg' style="color: red; font-size: 13px;"></span>
                         <br>
                         <p>Amount: ${{  number_format( $wiretransfer->amount, 2) }}  </p>
-                        <p>Service Charge: {{ $charges->tuition_charge_amount }}% </p>
+                        <p>EvokeEdge Service fee: {{ $charges->tuition_charge_amount }}% </p>
                         <p>
                             Total amount: 
                             ${{  number_format($totalPay, 2)  }}

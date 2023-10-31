@@ -82,7 +82,7 @@
                                     </td>
                                     <th>{{  $internationalflights['passenger_email'] }}</th>
                                     <th>{{  $internationalflights['passenger_phone'] }}</th>
-                                    <th>{{  $internationalflights->created_at->format('Y-m-d h:i:s A') }}</th>
+                                    <th>{{  $internationalflights->created_at->format('m-d-y h:s A') }}</th>
                                     <td>
                                         <form action="{{   route('admin.international-delete', $internationalflights->id) }}" method="post">
                                             @csrf

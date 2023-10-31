@@ -63,13 +63,13 @@
                                 <div class="col-lg-12 col-12 mb-3">
                                     <div class="form-group">
                                         <label for="date">Date of Birth</label>
-                                        <input type="date" id="date" name="date_birth" class="applicant-input" required>
+                                        <input type="date" id="date" name="date_birth" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-12 mb-3">
                                     <div class="form-group">
                                         <label for="nationality">3. Nationality</label>
-                                        <select id="nationality" name="nationality" class="applicant-input @error('nationality') is-valid @enderror" required>
+                                        <select id="nationality" name="nationality" class="form-control @error('nationality') is-valid @enderror" required>
                                             <option selected>Select Country</option>
                                             <option value="Afghanistan">Afghanistan</option>
                                             <option value="Albania">Albania</option>
@@ -317,27 +317,27 @@
                             <div class="form-group row">
                                 <div class="col-lg-12 col-12 mb-4">
                                     <label>Street Address</label>
-                                    <input type="text" name="street_address" class="applicant-input" required>
+                                    <input type="text" name="street_address" class="form-control" required>
                                 </div>
                                 <div class="col-lg-12 col-12 mb-4">
                                     <label>Street Address Line 2</label>
-                                    <input type="text" name="street_address_2" class="applicant-input" required>
+                                    <input type="text" name="street_address_2" class="form-control" required>
                                 </div>
                                 {{-- <div class="col-lg-6 col-12 mb-4">
                                     <label>City</label>
-                                    <input type="text" name="city" class="applicant-input" required>
+                                    <input type="text" name="city" class="form-control" required>
                                 </div>
                                 <div class="col-lg-6 col-12 mb-4">
                                     <label>State / Province</label>
-                                    <input type="text" name="state" class="applicant-input" required>
+                                    <input type="text" name="state" class="form-control" required>
                                 </div>
                                 <div class="col-lg-6 col-12 mb-4">
                                     <label>Postal / Zip Code</label>
-                                    <input type="number" name="zipcode" class="applicant-input" required>
+                                    <input type="number" name="zipcode" class="form-control" required>
                                 </div>
                                 <div class="col-lg-6 col-12 mb-4">
                                     <label>Country</label>
-                                    <select name="country" class="applicant-input @error('country') is-valid @enderror" required>
+                                    <select name="country" class="form-control @error('country') is-valid @enderror" required>
                                         <option selected>Select Country</option>
                                         <option value="Afghanistan">Afghanistan</option>
                                         <option value="Albania">Albania</option>
@@ -638,7 +638,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="col-lg-12 col-12 mb-4">
+                                {{-- <div class="col-lg-12 col-12 mb-4">
                                     <div class="header-input header-input-one">
                                         <h2 class="text-white">Proof of Address</h2>
                                         <p>Utility Bill or Bank Statement</p>
@@ -651,7 +651,7 @@
                                         </label>
                                     </div>
                                     <div id="signature-preview"></div>
-                                </div>
+                                </div> --}}
                                 <div class="col-lg-12 col-12 mb-4">
                                     <div class="header-input header-input-one">
                                         <h2>D. Declaration</h2>
@@ -667,7 +667,7 @@
                                     <h4>Date Signed</h4>
                                     <div class="row">
                                         <div class="col-lg-12 col-12">
-                                            <input type="date" placeholder="Enter Date Sign" name="data_sign" class="applicant-input" required>
+                                            <input type="date" placeholder="Enter Date Sign" name="data_sign" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
@@ -689,56 +689,57 @@
         const preview = document.getElementById('file-preview');
 
         if (file) {
-            const reader = new FileReader();
+        const reader = new FileReader();
 
-            reader.onload = function() {
+        reader.onload = function() {
+            if (file.type === 'application/pdf') {
+                const iframe = document.createElement('iframe');
+                iframe.src = reader.result;
+                iframe.style.width = '100%';
+                iframe.style.height = '500px';
+                preview.innerHTML = '';
+                preview.appendChild(iframe);
+            } else {
                 const img = document.createElement('img');
                 img.src = reader.result;
                 img.style.maxWidth = '100%';
                 preview.innerHTML = '';
                 preview.appendChild(img);
             }
-
-            reader.readAsDataURL(file);
         }
+
+        reader.readAsDataURL(file);
+    }
     });
 
-    document.getElementById('sign').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        const preview = document.getElementById('signature-preview');
-
-        if (file) {
-            const reader = new FileReader();
-
-            reader.onload = function() {
-                const img = document.createElement('img');
-                img.src = reader.result;
-                img.style.maxWidth = '100%';
-                preview.innerHTML = '';
-                preview.appendChild(img);
-            }
-
-            reader.readAsDataURL(file);
-        }
-    });
     document.getElementById('statement').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        const preview = document.getElementById('statement-preview');
+    const file = e.target.files[0];
+    const preview = document.getElementById('statement-preview');
 
-        if (file) {
-            const reader = new FileReader();
+    if (file) {
+        const reader = new FileReader();
 
-            reader.onload = function() {
+        reader.onload = function() {
+            if (file.type === 'application/pdf') {
+                const iframe = document.createElement('iframe');
+                iframe.src = reader.result;
+                iframe.style.width = '100%';
+                iframe.style.height = '500px';
+                preview.innerHTML = '';
+                preview.appendChild(iframe);
+            } else {
                 const img = document.createElement('img');
                 img.src = reader.result;
                 img.style.maxWidth = '100%';
                 preview.innerHTML = '';
                 preview.appendChild(img);
             }
-
-            reader.readAsDataURL(file);
         }
-    });
+
+        reader.readAsDataURL(file);
+    }
+});
+
 </script>
-@include('layout.message')
+@include('partials.message')
 </html>   

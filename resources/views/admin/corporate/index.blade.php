@@ -48,7 +48,7 @@
                                     <td>{{  $corporates['payment_method'] }}</td>
                                     <td>{{  number_format( $corporates['amount'], 2 ) }}</td>
                                     <td>{{  number_format( $corporates['total_amount'], 2 ) }}</td>
-                                    <td>{{  $corporates->created_at->format('Y-m-d h:i:s A')  }}</td>
+                                    <td>{{  $corporates->created_at->format('m-d-y h:s A')  }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
                                             <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $corporates->id }}" class="btn btn-sm btn-info btn-wave">

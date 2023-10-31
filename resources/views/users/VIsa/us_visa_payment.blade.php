@@ -58,7 +58,7 @@
                             <span class='msg' style="color: red; font-size: 13px;"></span>
                             <br>
                             <p>Amount: ${{ number_format($visaApplication->visa_fee_amount, 2) }} </p>
-                            <p>Service Charge: {{ $charge->visa_charge_amount }}%</p>
+                            <p>EvokeEdge Service fee: {{ $charge->visa_charge_amount }}%</p>
                             <p>Total amount: <span >${{ number_format( $visaApplication->total_charge, 2) }}</span></p>
                         @endif
                         <div>

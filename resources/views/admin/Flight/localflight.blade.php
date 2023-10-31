@@ -97,7 +97,7 @@
                                     <th>{{  $localflights['nationality'] }}</th>
                                     <th>{{  $localflights['phone'] }}</th>
                                     <th>{{  $localflights['email'] }}</th>
-                                    <th>{{  $localflights->created_at->format('Y-m-d h:i:s A') }}</th>
+                                    <th>{{  $localflights->created_at->format('m-d-y h:s A') }}</th>
                                     <td>
                                         <form action="{{   route('admin.Local-delete', $localflights->id) }}" method="post">
                                             @csrf

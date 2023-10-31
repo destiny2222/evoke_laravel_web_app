@@ -49,7 +49,7 @@
                                         {{  $mail['message']  }}
                                     </td>
                                     <td>
-                                        {{  $mail->created_at->format('Y-m-d h:i:s A') }}
+                                        {{  $mail->created_at->format('m-d-y h:s A') }}
                                     </td>
                                     <td>
                                         <div class="d-flex gap-3">

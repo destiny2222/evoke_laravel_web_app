@@ -41,7 +41,7 @@
 
 
 <!-- Start Signup Area -->
-<section class="signup-area">
+<section class="signup-area" style="overflow-y: scroll;">
     <div class="row m-0">
         <div class="col-lg-6 col-md-12 p-0 d-none d-md-block">
             <div class="signup-image">

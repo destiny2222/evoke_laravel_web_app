@@ -50,7 +50,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    {{ $transactions->created_at->format('Y-m-d h:i:s A') }}
+                                    {{ $transactions->created_at->format('m-d-y h:s A') }}
                                 </td>
                                 <td>
                                     <div class="dropdown">

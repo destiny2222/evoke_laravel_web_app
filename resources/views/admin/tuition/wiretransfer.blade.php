@@ -76,7 +76,7 @@
                                           <span class="badge bg-danger-transparent">Pending</span>
                                         @endif
                                     </td>
-                                    <td>{{  $tuitions->created_at->format('Y-m-d h:i:s A')  }}</td>
+                                    <td>{{  $tuitions->created_at->format('m-d-y h:s A')  }}</td>
                                     <td>
                                         <div class="d-flex">
                                             <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $tuitions->id }}" class="btn btn-sm btn-info btn-wave">

@@ -69,7 +69,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{  $tuitions->created_at->format('Y-m-d h:i:s A') }}
+                                        {{  $tuitions->created_at->format('m-d-y h:s A') }}
                                     </td>
                                     <td>
                                         <div class="d-flex">

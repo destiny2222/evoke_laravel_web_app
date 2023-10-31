@@ -30938,6 +30938,10 @@ input[type="radio"] {
   box-shadow: 0 0 16px rgba(225, 225, 225, 0.8);
 }
 
+.apexcharts-canvas{
+  z-index: 0;
+}
+
 @media screen and (max-width: 768px) {
   #display-inline{
     width: 100%;

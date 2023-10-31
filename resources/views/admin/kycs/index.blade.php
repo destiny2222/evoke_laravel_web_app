@@ -42,14 +42,22 @@
                                 <td scope="row">
                                     <div class="d-flex align-items-center">
                                         <span class="avatar me-2 avatar-rounded">
-                                            <img src="{{ asset('storage/kyc/'.$events->documents) }}" alt="img" class="fullscreen-img" />
+                                            @if(pathinfo($events->documents, PATHINFO_EXTENSION) == 'pdf')
+                                              <iframe src="{{ asset('storage/kyc/'.$events->documents) }}" style="width:60px; height:50px;"></iframe>
+                                            @else
+                                              <img src="{{ asset('storage/kyc/'.$events->documents) }}" alt="img" class="fullscreen-img" />
+                                            @endif
                                         </span>
                                     </div>
                                 </td>
                                 <td scope="row">
                                     <div class="d-flex align-items-center">
                                         <span class="avatar me-2 avatar-rounded">
-                                            <img src="{{ asset('storage/kyc/proof/'.$events->proof_of_address) }}" alt="img" class="fullscreen-img" />
+                                            @if(pathinfo($events->proof_of_address, PATHINFO_EXTENSION) == 'pdf')
+                                            <iframe src="{{ asset('storage/kyc/proof/'.$events->proof_of_address) }}" style="width:60px; height:50px;"></iframe>
+                                            @else
+                                                <img src="{{ asset('storage/kyc/proof/'.$events->proof_of_address) }}" alt="img" class="fullscreen-img" />
+                                            @endif
                                         </span>
                                     </div>
                                 </td>                                                           
@@ -90,7 +98,15 @@
                                     <span>{{ $events->country  }}</span>
                                 </td> --}}
                                 <td>
-                                    <span>{{ $events->status  }}</span>
+                                    @if ($events->status == 'resident_individual')
+                                       <span>Resident Individual</span>
+                                    @elseif ($events->status == 'none_resident')
+                                       <span>Non Resident</span>
+                                    @elseif ($events->status == 'foreign')
+                                      <span>Foreign</span>
+                                    @else
+                                      <span>Not specify</span>
+                                    @endif
                                 </td>
                                 <td>
                                     <span>{{ $events->data_sign  }}</span>
@@ -102,7 +118,7 @@
                                        <span class="badge bg-success">Approved</span>
                                     @endif
                                 </td>
-                                <td>{{  $events->created_at->format('Y-m-d h:i:s A') }}</td>
+                                <td>{{  $events->created_at->format('m-d-y h:s A') }}</td>
                                 <td>
                                     <div class="hstack d-flex gap-2 ">
                                         <a href="{{ route('admin.kyc.edit', $events->id) }}" class="fs-14 lh-1" >

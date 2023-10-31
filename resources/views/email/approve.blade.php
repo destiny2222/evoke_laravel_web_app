@@ -1082,7 +1082,7 @@
                                                     Sans&#39;, -apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;,
                                                     Roboto, Oxygen, Ubuntu, Cant=arell, &#39;Open Sans&#39;,
                                                     &#39;Helvetica Neue&#39;, sans-serif !important; margin: 32px 0
-                                                    14px; padding: 0;"><b>Hello {{ $kys->kyc->firstname }},</b>
+                                                    14px; padding: 0;"><b>Hello {{ $kycs->user->name }},</b>
                                                 </h1>
                                                 
                                                 <p style="font-size: 16px; font-family: &#39;BR Firma CW&#39;,

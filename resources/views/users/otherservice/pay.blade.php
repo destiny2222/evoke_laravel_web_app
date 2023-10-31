@@ -11,7 +11,7 @@
                         <span class='msg' style="color: red; font-size: 13px;"></span>
                         <br>
                         <p>Amount: ${{  number_format($otherservice->amount, 2) }} </p>
-                        <p>Service Charge: {{ $charge->other_service }}%</p>
+                        <p>EvokeEdge Service fee: {{ $charge->other_service }}%</p>
                         <p>Total amount: <span >${{ number_format($otherservice->total_amount, 2 )  }}</span></p>
                         <div>
                             <button type="button"  class="submit-form w-100 next">Confirm and Continue</button>
