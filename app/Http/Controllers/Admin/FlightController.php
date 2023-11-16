@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class FlightController extends Controller
 {
+    public function __construct(){
+        $this->middleware('checkAdminRole:administration')->only('update');
+    }
     
     public function LocalFLight(){
         $localflight = LocalFlight::paginate(10);

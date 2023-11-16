@@ -12,6 +12,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ManagementController extends Controller
 {
+    public function __construct(){
+        $this->middleware('checkAdminRole:administration')->only('update');
+    }
+    
     public function UserManagement(){
         $user = User::orderBy('id', 'desc')->paginate(6);
         return view('admin.useradmin.user',[

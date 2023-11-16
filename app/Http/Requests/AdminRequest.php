@@ -35,12 +35,17 @@ class AdminRequest extends FormRequest
     }
     public function authenticate()
     {
-        $adminuser = Admin::where('email', $this->field)->orWhere('phone',$this->field)->first();
-        if (!$adminuser || !Hash::check($this->password,$adminuser->password )){
+        $adminusers = Admin::where('email', $this->field)->orWhere('phone',$this->field)->get();
+        foreach ($adminusers as $adminuser) {
+            if (!$adminuser || Hash::check($this->password, $adminuser->password)) {
+                // dd($adminuser);
+                Auth::guard('admin')->login($adminuser);
+                return;
+            }
             throw ValidationException::withMessages([
                 'field'=>'The data does not match with what we have in our database'
             ]);
         }
-        Auth::guard('admin')->login($adminuser);
+        
     }
 }

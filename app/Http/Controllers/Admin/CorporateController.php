@@ -9,6 +9,9 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class CorporateController extends Controller
 {
+    public function __construct(){
+        $this->middleware('checkAdminRole:administration')->only('update');
+    }
     public function corporatePage(){
         $corporate = CorporateService::paginate(10);
         return view('admin.corporate.index', compact('corporate'));

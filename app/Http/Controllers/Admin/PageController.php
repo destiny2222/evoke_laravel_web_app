@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Baggage\UpdateRequest as BaggageUpdateRequest;
 use App\Http\Requests\Charge\ChargesRequest;
 use App\Http\Requests\Setting\UpdateRequest;
+use App\Http\Requests\StoreAdminRequest;
 use App\Mail\Email;
 use App\Models\Baggage;
 use App\Models\EmailMail;
@@ -26,6 +27,9 @@ use function PHPSTORM_META\map;
 
 class PageController extends Controller
 {
+    public function __construct(){
+        $this->middleware('checkAdminRole:administration')->only('update');
+    }
     
     public function detailPost(Post $post)
     {
@@ -327,6 +331,8 @@ class PageController extends Controller
     }
 
 
+
+    
 
 
 

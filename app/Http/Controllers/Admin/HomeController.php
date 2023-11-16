@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAdminRequest;
 use App\Models\Admin;
 use App\Models\CorporateService;
 use App\Models\LocalFlight;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
@@ -21,11 +23,13 @@ class HomeController extends Controller
     //
     public function __construct() {
         $this->middleware('admin');
+        $this->middleware('checkAdminRole:administration')->only('update');
     }
 
 
     public function home(){
-        $admin = Admin::where('id', 1)->first();
+
+        $admin = Auth::guard('admin')->user();
         $user_count = User::count();
         $localflight = LocalFlight::count();
         $visafee = VisaApplication::count();
@@ -107,7 +111,7 @@ class HomeController extends Controller
 
     public function profile()
     {
-        $admin = Admin::where('id', 1)->first();
+        $admin = Auth::guard('admin')->user();
         // dd($admin);
         return view('admin.profile', compact('admin'));
     }
@@ -131,6 +135,9 @@ class HomeController extends Controller
         }
     }
 
+
+
+
     public function validatepassword(Request  $request)
     {
         $this->validate($request, [
@@ -138,7 +145,7 @@ class HomeController extends Controller
             'new_password' => ['required', 'string'],
         ]);
         # check for current password match
-        $adminpassword = Admin::where('id', 1)->first();
+        $adminpassword = Auth::guard('admin')->user();
         if (password_verify($request->current_password, $adminpassword->password)) {
             # if true
             if ($request->new_password == $request->Confirm_password) {

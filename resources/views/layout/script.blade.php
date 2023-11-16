@@ -25,10 +25,36 @@
  <!-- Chartjs Chart JS -->
  <script src="/vendors/assets/libs/chart.js/chart.min.js"></script>
  <!-- CRM-Dashboard -->
- <script src="/vendors/assets/js/crm-dashboard.js"></script>
+ {{-- <script src="/vendors/assets/js/crm-dashboard.js"></script> --}}
  <!-- Custom-Switcher JS -->
  <script src="/vendors/assets/js/custom-switcher.min.js"></script>
  <!-- Custom JS -->
+ <!-- Add this script at the end of your HTML, after the theme switcher code -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Check if there is a saved theme preference in localStorage
+    const savedTheme = localStorage.getItem("theme");
+
+    // If a theme is saved, apply it; otherwise, use the default
+    if (savedTheme) {
+      document.body.classList.add(savedTheme);
+    }
+
+    // Listen for changes in the theme switcher and update localStorage
+    const themeSwitcherInputs = document.querySelectorAll('input[name="theme-style"]');
+    themeSwitcherInputs.forEach(function (input) {
+      input.addEventListener("change", function () {
+        const selectedTheme = this.id.replace("switcher-", "");
+        document.body.className = ""; // Remove all existing classes
+        document.body.classList.add(selectedTheme);
+
+        // Save the selected theme to localStorage
+        localStorage.setItem("theme", selectedTheme);
+      });
+    });
+  });
+</script>
+
  <script src="/vendors/assets/js/custom.js"></script>
  <script src="/vendors/assets/js/blog-create.js"></script> <!-- Custom JS -->
  <script>

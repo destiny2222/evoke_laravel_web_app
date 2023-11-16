@@ -71,5 +71,6 @@ class Kernel extends HttpKernel
         'admin.logged-in'=>AdminLogged::class,
         'checkkyc'=>VerifyKYC::class,
         'checkBanned' => CheckBanned::class,
+        'checkAdminRole' => \App\Http\Middleware\CheckAdminRole::class,
     ];
 }

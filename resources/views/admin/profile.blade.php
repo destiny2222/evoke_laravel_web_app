@@ -30,6 +30,10 @@
                                 <a class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page"
                                     href="#account-settings" aria-selected="true">Account Settings</a>
                             </li>
+                            <li class="nav-item m-1">
+                                <a class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page" href="#email-settings"
+                                  aria-selected="true">Create An Account</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="card-body">
@@ -126,6 +130,59 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="tab-pane p-0" id="email-settings" role="tabpanel">
+                                @if ($admin->role_as == 'administrator')
+                                <form action="{{ route('admin.register') }}" method="POST" class="p-4">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-12 mb-2">
+                                          <label for="fullname"  class="form-label">Full Name</label>
+                                          <input type="text" name="name" class="form-control"
+                                              id="fullname" placeholder="Name" />
+                                        </div>
+                                        <div class="col-md-12 mb-2">
+                                          <label for="email"  class="form-label">Email</label>
+                                          <input type="text" name="email" class="form-control"
+                                              id="email" placeholder="Email Address" />
+                                        </div>
+                                        <div class="col-md-12 mb-2">
+                                          <label for="phone"  class="form-label">Phone Number</label>
+                                          <input type="text" name="phone" class="form-control"
+                                              id="phone" placeholder="Phone Number" />
+                                        </div>
+                                        <div class="col-md-12 mb-2">
+                                          <label for="phone"  class="form-label">Role</label>
+                                          <select name="role_as" id="" class="form-control">
+                                               <option value="" selected>Select</option>
+                                               <option value="administrator">Administrator</option>
+                                               <option value="employee">Employee</option>
+                                               <option value="staff">Staff</option>
+                                          </select>
+                                        </div>
+                                        <div class="col-md-12 mb-2">
+                                            <label for="newpassword" class="form-label">Password</label>
+                                            <input type="password" name="password" class="form-control" id="newpassword"
+                                                placeholder="Password" />
+                                        </div>
+                                        <div class="col-md-12 mb-4">
+                                            <label for="confirm-password" class="form-label">Confirm
+                                                Password</label>
+                                            <input type="password" name="confirm_password" class="form-control"
+                                                id="confirm-password" placeholder="Confirm PAssword" />
+                                        </div>
+                                        <div class="col-md-12 mb-0">
+                                            <div class="text-center">
+                                                <button type="submit" class="btn btn-primary m-1">Create Account</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                @else
+                                    <div class="p-3">
+                                        <h5>You are permitted to create an account as an {{ $admin->role_as }}</h5>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

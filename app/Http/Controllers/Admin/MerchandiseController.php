@@ -9,6 +9,9 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class MerchandiseController extends Controller
 {
+  public function __construct(){
+    $this->middleware('checkAdminRole:administration')->only('update');
+}
     public function indexMerchandise(){
         $merchandise = Merchandise::paginate(10);
         return view('admin.merchandise.index', compact('merchandise'));

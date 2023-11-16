@@ -9,6 +9,9 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class OtherServiceController extends Controller
 {
+    public function __construct(){
+        $this->middleware('checkAdminRole:administration')->only('update');
+    }
     public function otherServicepage(){
         $otherservice = OtherService::orderBy('id', 'desc')->paginate(10);
         return view('admin.otherservice.index', compact('otherservice'));
